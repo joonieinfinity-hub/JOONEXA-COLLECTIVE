@@ -92,4 +92,5 @@ export enum Page {
   WORK = 'work',
   PRICING = 'pricing',
   CONTACT = 'contact',
+  CREATOR_NETWORK = 'creator-network',
 }

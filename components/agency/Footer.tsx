@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from '../../types';
 import { Instagram, Twitter, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface FooterProps {
   onPageChange: (page: Page) => void;
@@ -10,6 +10,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   const currentYear = new Date().getFullYear();
   const [siteData, setSiteData] = React.useState<any>(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     fetch('/api/site')
@@ -17,6 +18,11 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
       .then(data => setSiteData(data))
       .catch(err => console.error("Error fetching site data:", err));
   }, []);
+
+  const handleNavClick = (page: Page, path: string) => {
+    onPageChange(page);
+    navigate(path);
+  };
 
   return (
     <footer className="bg-white border-t border-accent-rose/10 py-24 px-6">
@@ -52,12 +58,13 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           <div>
             <h4 className="text-charcoal font-bold mb-6 uppercase tracking-widest text-xs font-sans">Navigation</h4>
             <ul className="space-y-4">
-              <li><button onClick={() => onPageChange(Page.HOME)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Home</button></li>
-              <li><button onClick={() => onPageChange(Page.ABOUT)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">About</button></li>
-              <li><button onClick={() => onPageChange(Page.SERVICES)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Services</button></li>
-              <li><button onClick={() => onPageChange(Page.WORK)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Work</button></li>
-              <li><button onClick={() => onPageChange(Page.PRICING)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Pricing</button></li>
-              <li><button onClick={() => onPageChange(Page.CONTACT)} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Contact</button></li>
+              <li><button onClick={() => handleNavClick(Page.HOME, '/')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Home</button></li>
+              <li><button onClick={() => handleNavClick(Page.ABOUT, '/about')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">About</button></li>
+              <li><button onClick={() => handleNavClick(Page.SERVICES, '/#services')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Services</button></li>
+              <li><button onClick={() => handleNavClick(Page.WORK, '/work')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Work</button></li>
+              <li><button onClick={() => handleNavClick(Page.CREATOR_NETWORK, '/creator-network')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Creator Network</button></li>
+              <li><button onClick={() => handleNavClick(Page.PRICING, '/pricing')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Pricing</button></li>
+              <li><button onClick={() => handleNavClick(Page.CONTACT, '/contact')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Contact</button></li>
             </ul>
           </div>
 

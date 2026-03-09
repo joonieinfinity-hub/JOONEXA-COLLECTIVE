@@ -49,6 +49,7 @@ const App: React.FC = () => {
     else if (path === '/work') setCurrentPage(Page.WORK);
     else if (path === '/pricing') setCurrentPage(Page.PRICING);
     else if (path === '/contact') setCurrentPage(Page.CONTACT);
+    else if (path === '/creator-network') setCurrentPage(Page.CREATOR_NETWORK);
     
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -113,6 +114,7 @@ const App: React.FC = () => {
               <Route path="/work/:slug" element={<CaseStudyPage />} />
               <Route path="/pricing" element={<Pricing onPageChange={handlePageChange} />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/creator-network" element={<CreatorNetwork />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/studio-edit" 
