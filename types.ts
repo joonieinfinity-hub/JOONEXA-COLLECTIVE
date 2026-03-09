@@ -58,6 +58,7 @@ export interface Project {
   result: string;
   image: string;
   slug: string;
+  type?: string;
   caseStudy?: CaseStudy;
   seo?: {
     title: string;

@@ -1,0 +1,48 @@
+{
+  "pricing": [
+    {
+      "id": "1",
+      "name": "Starter",
+      "price": "₹25,000+",
+      "description": "For smaller brands looking to establish their digital presence.",
+      "features": [
+        "Campaign Strategy",
+        "Influencer Outreach",
+        "Basic Analytics",
+        "Monthly Report",
+        "Standard Support"
+      ],
+      "cta": "Choose Starter"
+    },
+    {
+      "id": "2",
+      "name": "Growth",
+      "price": "₹75,000+",
+      "description": "Our most popular plan for brands ready to scale aggressively.",
+      "features": [
+        "Full Campaign Strategy",
+        "Influencer Collaborations",
+        "Social Media Growth Plan",
+        "Campaign Analytics",
+        "Priority Support",
+        "Weekly Updates"
+      ],
+      "cta": "Book a Strategy Call"
+    },
+    {
+      "id": "3",
+      "name": "Scale",
+      "price": "₹1,50,000+",
+      "description": "Full marketing partnership for established brands.",
+      "features": [
+        "Complete Marketing Strategy",
+        "Influencer Campaign Management",
+        "Website Optimization",
+        "Conversion Strategy",
+        "Advanced Reporting",
+        "Dedicated Account Manager"
+      ],
+      "cta": "Contact Us"
+    }
+  ]
+}

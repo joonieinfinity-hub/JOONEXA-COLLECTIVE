@@ -1,60 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { PricingTier, Page } from '../../types';
 
 interface PricingProps {
   onPageChange: (page: Page) => void;
 }
 
-const PRICING_DATA: PricingTier[] = [
-  {
-    id: '1',
-    name: 'Starter',
-    price: '₹25,000+',
-    description: 'For smaller brands looking to establish their digital presence.',
-    features: [
-      'Campaign Strategy',
-      'Influencer Outreach',
-      'Basic Analytics',
-      'Monthly Report',
-      'Standard Support',
-    ],
-    cta: 'Choose Starter',
-  },
-  {
-    id: '2',
-    name: 'Growth',
-    price: '₹75,000+',
-    description: 'Our most popular plan for brands ready to scale aggressively.',
-    features: [
-      'Full Campaign Strategy',
-      'Influencer Collaborations',
-      'Social Media Growth Plan',
-      'Campaign Analytics',
-      'Priority Support',
-      'Weekly Updates',
-    ],
-    cta: 'Choose Growth',
-  },
-  {
-    id: '3',
-    name: 'Scale',
-    price: '₹1,50,000+',
-    description: 'Full marketing partnership for established brands.',
-    features: [
-      'Complete Marketing Strategy',
-      'Influencer Campaign Management',
-      'Website Optimization',
-      'Conversion Strategy',
-      'Advanced Reporting',
-      'Dedicated Account Manager',
-    ],
-    cta: 'Contact Us',
-  },
-];
-
 const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
+  const [pricingData, setPricingData] = React.useState<PricingTier[]>([]);
+
+  React.useEffect(() => {
+    fetch('/api/pricing')
+      .then(res => res.json())
+      .then(data => setPricingData(data.pricing || []))
+      .catch(err => console.error("Error fetching pricing data:", err));
+  }, []);
+
   return (
     <section id="pricing" className="py-32 px-6 bg-bg-soft">
       <div className="max-w-7xl mx-auto">
@@ -88,7 +50,7 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          {PRICING_DATA.map((tier, index) => (
+          {pricingData.map((tier, index) => (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
@@ -140,13 +102,9 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
 
               <button 
                 onClick={() => onPageChange(Page.CONTACT)}
-                className={`w-full py-5 rounded-full font-bold transition-all duration-500 font-sans shadow-lg ${
-                  index === 1 
-                    ? 'bg-accent-rose text-white hover:bg-accent-teal shadow-accent-rose/20' 
-                    : 'bg-accent-teal text-white hover:bg-accent-rose shadow-accent-teal/20'
-                }`}
+                className="w-full btn-primary"
               >
-                {tier.cta}
+                {tier.cta} <ArrowRight className="w-4 h-4" />
               </button>
             </motion.div>
           ))}

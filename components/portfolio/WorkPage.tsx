@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project, ProjectCategory } from '../../types';
-import { PROJECTS_DATA } from '../../data/projects';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../SEO';
 
@@ -17,11 +16,34 @@ const CATEGORIES = [
 
 const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.projects || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching projects:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProjects = useMemo(() => {
-    if (activeCategory === 'all') return PROJECTS_DATA;
-    return PROJECTS_DATA.filter(p => p.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === 'all') return projects;
+    return projects.filter(p => p.category === activeCategory);
+  }, [activeCategory, projects]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg-soft">
+        <Loader2 className="w-12 h-12 text-deep-teal animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="pt-32 pb-24 px-6 min-h-screen">
@@ -67,10 +89,10 @@ const WorkPage: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + idx * 0.05 }}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 flex items-center gap-2 font-sans ${
+              className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 flex items-center gap-2 font-sans hover:scale-[1.05] ${
                 activeCategory === cat.id 
-                  ? 'bg-accent-teal text-white shadow-lg shadow-accent-teal/20' 
-                  : 'bg-white text-charcoal border border-charcoal/5 hover:border-accent-teal/30'
+                  ? 'bg-deep-teal text-white shadow-xl shadow-deep-teal/20' 
+                  : 'bg-white text-charcoal border border-charcoal/5 hover:border-deep-teal/30 hover:text-deep-teal'
               }`}
             >
               <span>{cat.icon}</span>
@@ -104,14 +126,19 @@ const WorkPage: React.FC = () => {
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                      <div className="bg-white text-charcoal px-8 py-4 rounded-full font-bold text-sm transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 font-sans">
+                      <div className="btn-primary">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
-                    <div className="absolute top-6 left-6">
+                    <div className="absolute top-6 left-6 flex flex-col gap-2">
                       <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
                         {project.category}
                       </span>
+                      {project.type && (
+                        <span className="bg-accent-rose/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[10px] font-bold shadow-sm font-sans uppercase tracking-widest">
+                          {project.type}
+                        </span>
+                      )}
                     </div>
                   </div>
                   

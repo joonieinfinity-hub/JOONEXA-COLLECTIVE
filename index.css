@@ -7,6 +7,7 @@
   --color-accent: #E8A9A9;
   --color-accent-rose: #E8A9A9;
   --color-accent-teal: #2F7F7F;
+  --color-deep-teal: #1A5F5F;
   --color-bg-soft: #FAFAFA;
   --color-charcoal: #1C1C1E;
   --color-muted: #6B6B6B;
@@ -23,6 +24,51 @@
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: #0f766e !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 12px 22px !important;
+    font-weight: 500 !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #115e59 !important;
+    transform: scale(1.03) !important;
+  }
+
+  .btn-secondary {
+    background-color: transparent !important;
+    border: 2px solid #0f766e !important;
+    color: #0f766e !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: none !important;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: #0f766e !important;
+    color: white !important;
+    transform: scale(1.03) !important;
   }
 }
 

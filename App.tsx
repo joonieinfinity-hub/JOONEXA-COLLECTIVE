@@ -26,11 +26,16 @@ import CustomCursor from './components/CustomCursor';
 // New Pages
 import WorkPage from './components/portfolio/WorkPage';
 import CaseStudyPage from './components/portfolio/CaseStudyPage';
+import StudioEdit from './components/portfolio/StudioEdit';
 import Login from './components/admin/Login';
-import Dashboard from './components/admin/Dashboard';
-import ProtectedRoute from './components/admin/ProtectedRoute';
+import { Navigate } from 'react-router-dom';
 
 import SEO from './components/SEO';
+
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('isFounderAuthenticated') === 'true';
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.HOME);
@@ -78,9 +83,9 @@ const App: React.FC = () => {
           <h2 className="text-4xl md:text-6xl font-display font-bold text-charcoal mb-8 tracking-tight">Ready to <span className="text-accent-rose italic">grow?</span></h2>
           <button 
             onClick={() => handlePageChange(Page.CONTACT)}
-            className="bg-accent-teal text-white px-12 py-5 rounded-full text-xl font-bold hover:bg-accent-rose transition-all duration-500 shadow-lg shadow-accent-teal/20 font-sans"
+            className="btn-primary text-xl"
           >
-            Let's Talk
+            Contact Us
           </button>
         </motion.div>
       </div>
@@ -110,10 +115,10 @@ const App: React.FC = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route 
-                path="/admin" 
+                path="/studio-edit" 
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <StudioEdit />
                   </ProtectedRoute>
                 } 
               />

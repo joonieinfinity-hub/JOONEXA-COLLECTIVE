@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
 
             <button 
               onClick={scrollToForm}
-              className="lg:hidden flex items-center gap-2 text-accent-rose font-bold text-sm uppercase tracking-widest mb-12 hover:opacity-80 transition-opacity font-sans"
+              className="lg:hidden flex items-center gap-2 text-accent-rose font-bold text-sm uppercase tracking-widest mb-12 hover:text-deep-teal hover:scale-[1.05] transition-all font-sans"
             >
               Scroll to Form
               <ChevronDown size={16} />
@@ -167,13 +167,7 @@ const Contact: React.FC = () => {
 
                 <motion.button 
                   type="submit"
-                  whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: '0 0 25px rgba(47, 127, 127, 0.2)',
-                    backgroundColor: 'var(--color-accent-rose)'
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-accent-teal text-white py-5 rounded-2xl font-bold text-lg border border-transparent transition-all duration-500 flex items-center justify-center gap-3 font-sans"
+                  className="w-full btn-primary"
                 >
                   Send Message
                   <Send className="w-5 h-5" />

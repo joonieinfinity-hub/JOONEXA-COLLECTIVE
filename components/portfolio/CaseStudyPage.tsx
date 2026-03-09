@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PROJECTS_DATA } from '../../data/projects';
+import { Project } from '../../types';
 import { 
   ArrowLeft, 
+  ArrowRight,
   Calendar, 
   Smartphone, 
   Clock, 
@@ -14,7 +15,8 @@ import {
   Share2, 
   Target,
   CheckCircle2,
-  ChevronRight
+  ChevronRight,
+  Loader2
 } from 'lucide-react';
 import SEO from '../SEO';
 
@@ -32,10 +34,30 @@ const iconMap: Record<string, any> = {
 
 const CaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
   
-  const project = useMemo(() => 
-    PROJECTS_DATA.find(p => p.slug === slug), 
-  [slug]);
+  useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        const found = (data.projects as Project[]).find(p => p.slug === slug);
+        setProject(found || null);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching project:", err);
+        setLoading(false);
+      });
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg-soft">
+        <Loader2 className="w-12 h-12 text-deep-teal animate-spin" />
+      </div>
+    );
+  }
 
   if (!project || !project.caseStudy) {
     return <Navigate to="/work" replace />;
@@ -71,12 +93,19 @@ const CaseStudyPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Link to="/work" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors font-sans font-bold text-sm uppercase tracking-widest">
+              <Link to="/work" className="inline-flex items-center gap-2 text-white/80 hover:text-white hover:scale-[1.05] mb-8 transition-all font-sans font-bold text-sm uppercase tracking-widest">
                 <ArrowLeft className="w-4 h-4" /> Back to Work
               </Link>
-              <span className="bg-accent-teal text-white px-4 py-2 rounded-xl text-xs font-bold mb-6 inline-block font-sans">
-                {project.category}
-              </span>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="bg-accent-teal text-white px-4 py-2 rounded-xl text-xs font-bold inline-block font-sans">
+                  {project.category}
+                </span>
+                {project.type && (
+                  <span className="bg-white/20 backdrop-blur-md text-white border border-white/20 px-4 py-2 rounded-xl text-xs font-bold inline-block font-sans">
+                    {project.type}
+                  </span>
+                )}
+              </div>
               <h1 className="text-4xl md:text-7xl font-display font-bold text-white mb-6 leading-tight max-w-4xl">
                 {project.projectName}
               </h1>
@@ -244,16 +273,16 @@ const CaseStudyPage: React.FC = () => {
             <Link 
               to="/contact"
               data-cursor="Let's Talk"
-              className="bg-accent-teal text-white px-12 py-5 rounded-full text-xl font-bold hover:bg-accent-rose transition-all duration-500 shadow-lg shadow-accent-teal/20 font-sans"
+              className="btn-primary text-xl"
             >
-              Start Your Project
+              Start Your Project <ArrowRight className="w-5 h-5" />
             </Link>
             <Link 
               to="/work"
               data-cursor="Portfolio"
-              className="bg-white text-charcoal border border-charcoal/10 px-12 py-5 rounded-full text-xl font-bold hover:border-accent-teal transition-all duration-500 font-sans"
+              className="btn-secondary text-xl"
             >
-              View More Work
+              View More Work <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </div>

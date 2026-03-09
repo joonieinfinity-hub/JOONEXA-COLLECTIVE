@@ -80,9 +80,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
           ))}
           <button 
             onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-            className="bg-accent-teal text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-accent-rose transition-all duration-500 shadow-lg shadow-accent-teal/10 font-sans"
+            className="btn-primary text-sm"
           >
-            Start a Project
+            Start Your Project
           </button>
         </div>
 
@@ -118,9 +118,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             ))}
             <button 
               onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-              className="mt-4 bg-accent-teal text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-accent-rose transition-colors duration-500 font-sans"
+              className="mt-4 btn-primary text-lg"
             >
-              Start a Project
+              Start Your Project
             </button>
           </motion.div>
         )}

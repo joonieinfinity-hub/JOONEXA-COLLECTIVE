@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Page } from '../../types';
-import { PROJECTS_DATA } from '../../data/projects';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -10,6 +9,15 @@ interface WorkProps {
 }
 
 const Work: React.FC<WorkProps> = ({ onPageChange }) => {
+  const [projects, setProjects] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => setProjects(data.projects || []))
+      .catch(err => console.error("Error fetching projects:", err));
+  }, []);
+
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">
       <div className="max-w-7xl mx-auto">
@@ -23,14 +31,14 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
           <Link 
             to="/work"
             onClick={() => onPageChange(Page.WORK)}
-            className="text-charcoal px-8 py-3 rounded-full border border-charcoal/10 hover:bg-accent-rose hover:text-white hover:border-accent-rose transition-all duration-500 font-bold text-sm font-sans"
+            className="btn-secondary text-sm"
           >
-            View All Projects
+            View All Projects <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {PROJECTS_DATA.slice(0, 4).map((project, index) => (
+          {projects.slice(0, 4).map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
@@ -47,12 +55,22 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                    <span className="bg-white text-charcoal px-8 py-3 rounded-full font-bold text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 font-sans flex items-center gap-2">
-                      View Case Study <ArrowRight className="w-4 h-4" />
-                    </span>
+                    <div className="absolute top-6 left-6 flex flex-col gap-2">
+                      <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
+                        {project.category}
+                      </span>
+                      {project.type && (
+                        <span className="bg-accent-rose/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[10px] font-bold shadow-sm font-sans uppercase tracking-widest">
+                          {project.type}
+                        </span>
+                      )}
+                    </div>
+                    <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                      <span className="btn-primary">
+                        View Case Study <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
-                </div>
                 <div className="flex justify-between items-start gap-4">
                   <div>
                     <h3 className="text-2xl font-display font-bold text-charcoal mb-2 tracking-tight">{project.projectName}</h3>
