@@ -9,7 +9,7 @@ const NICHES = [
     description: "Skincare, makeup, and self-care experts.",
     icon: Sparkles,
     color: "#FF8B7C",
-    visual: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const NICHES = [
     description: "Gadgets, software, and future innovation.",
     icon: Monitor,
     color: "#7C8BFF",
-    visual: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const NICHES = [
     description: "Home decor, productivity, and daily life.",
     icon: Coffee,
     color: "#FFD77C",
-    visual: "https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=1000&auto=format&fit=crop"
   }
 ];
 

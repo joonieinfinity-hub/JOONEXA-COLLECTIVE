@@ -4,6 +4,8 @@ import { Page } from '../../types';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
+import ProjectMedia from './ProjectMedia';
+
 interface WorkProps {
   onPageChange: (page: Page) => void;
 }
@@ -17,6 +19,10 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
       .then(data => setProjects(data.projects || []))
       .catch(err => console.error("Error fetching projects:", err));
   }, []);
+
+  const handleVideoGenerated = (projectId: string, videoUrl: string) => {
+    setProjects(prev => prev.map(p => p.id === projectId ? { ...p, video: videoUrl } : p));
+  };
 
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">
@@ -49,13 +55,14 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
             >
               <Link to={`/work/${project.slug}`}>
                 <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-8 border border-black/5 shadow-lg shadow-black/5">
-                  <img 
-                    src={project.image} 
-                    alt={project.brandName}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
+                  <ProjectMedia 
+                    image={project.image}
+                    video={project.video}
+                    brandName={project.brandName}
+                    projectId={project.id}
+                    onVideoGenerated={(url) => handleVideoGenerated(project.id, url)}
                   />
-                    <div className="absolute top-6 left-6 flex flex-col gap-2">
+                    <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
                       <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
                         {project.category}
                       </span>
@@ -65,8 +72,8 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
                         </span>
                       )}
                     </div>
-                    <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
-                      <span className="btn-primary">
+                    <div className="absolute inset-0 bg-charcoal/20 flex items-end justify-start p-8 backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
+                      <span className="btn-primary pointer-events-none">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>

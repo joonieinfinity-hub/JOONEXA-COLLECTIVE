@@ -57,6 +57,7 @@ export interface Project {
   description: string;
   result: string;
   image: string;
+  video?: string;
   slug: string;
   type?: string;
   caseStudy?: CaseStudy;
