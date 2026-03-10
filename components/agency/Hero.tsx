@@ -79,7 +79,12 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             Connecting Brands with <br />
             <span className="relative inline-block">
               <span className="text-accent-teal italic">Authentic</span>
-              <div className={`absolute -bottom-2 left-0 w-full h-1 rounded-full ${isDarkMode ? 'bg-accent-teal/30' : 'bg-accent-rose/30'}`} />
+              <motion.div 
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                className={`absolute -bottom-2 left-0 w-full h-1 rounded-full origin-left ${isDarkMode ? 'bg-accent-teal/30' : 'bg-accent-rose/30'}`} 
+              />
             </span>
             {' '}
             <div className="h-[1.2em] inline-flex items-center overflow-hidden align-bottom">
@@ -96,7 +101,23 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                 </motion.span>
               </AnimatePresence>
             </div>
-            {' '}Creators
+            {' '}
+            <motion.span
+              custom={2}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: (i: number) => ({
+                  opacity: 1,
+                  y: 0,
+                  transition: { delay: 0.5 + i * 0.2, duration: 0.8, ease: "easeOut" }
+                })
+              }}
+              initial="hidden"
+              animate="visible"
+              className="inline-block italic"
+            >
+              Creators
+            </motion.span>
           </h1>
 
           <motion.p 
