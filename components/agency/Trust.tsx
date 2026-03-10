@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUp, TrendingUp, Users, MessageSquare, Heart } from 'lucide-react';
 
 const Trust: React.FC = () => {
   const brands = [
@@ -34,42 +35,112 @@ const Trust: React.FC = () => {
 
           <div className="relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative z-10 bg-white p-8 rounded-[2.5rem] border border-accent-rose/10 shadow-2xl shadow-accent-rose/5"
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 bg-white p-4 rounded-3xl shadow-2xl shadow-accent-rose/10 border border-black/5 aspect-[4/3.8]"
             >
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-accent-rose" />
-                  <div className="w-3 h-3 rounded-full bg-accent-teal/30" />
-                  <div className="w-3 h-3 rounded-full bg-bg-soft" />
+                <div className="flex items-center justify-between px-2 pt-2 pb-4">
+                    <div>
+                        <h3 className="font-bold text-charcoal text-lg">Influencer Campaign Dashboard</h3>
+                        <p className="text-xs text-muted">Project: <span className="font-semibold text-accent-rose">"Aura Launch"</span></p>
+                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-muted/60">Live</div>
                 </div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-muted/40 font-sans">Analytics Dashboard</div>
-              </div>
-              
-              <div className="space-y-6">
-                <div className="h-4 w-3/4 bg-bg-soft rounded-full" />
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="h-20 bg-accent-rose/5 rounded-2xl" />
-                  <div className="h-20 bg-accent-teal/5 rounded-2xl" />
-                  <div className="h-20 bg-accent-rose/5 rounded-2xl" />
+
+                <div className="grid grid-cols-3 gap-3 h-[calc(100%-4rem)]">
+                    {/* KPIs */}
+                    <div className="col-span-1 space-y-3">
+                        <motion.div initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} transition={{delay: 0.3}} className="bg-gray-50 p-3 rounded-xl border border-black/5">
+                            <div className="flex items-center gap-2">
+                                <TrendingUp className="w-4 h-4 text-accent-teal"/>
+                                <p className="text-[10px] text-muted font-bold uppercase tracking-wider">ROI</p>
+                            </div>
+                            <p className="text-2xl font-semibold text-charcoal mt-1">6.2x</p>
+                        </motion.div>
+                        <motion.div initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} transition={{delay: 0.4}} className="bg-gray-50 p-3 rounded-xl border border-black/5">
+                            <div className="flex items-center gap-2">
+                                <Users className="w-4 h-4 text-accent-rose"/>
+                                <p className="text-[10px] text-muted font-bold uppercase tracking-wider">Impressions</p>
+                            </div>
+                            <p className="text-2xl font-semibold text-charcoal mt-1">12.7M</p>
+                        </motion.div>
+                        <motion.div initial={{opacity: 0, x: -20}} whileInView={{opacity: 1, x: 0}} transition={{delay: 0.5}} className="bg-gray-50 p-3 rounded-xl border border-black/5">
+                            <div className="flex items-center gap-2">
+                                <Heart className="w-4 h-4 text-accent-teal"/>
+                                <p className="text-[10px] text-muted font-bold uppercase tracking-wider">Eng. Rate</p>
+                            </div>
+                            <p className="text-2xl font-semibold text-charcoal mt-1">8.9%</p>
+                        </motion.div>
+                    </div>
+                    
+                    {/* Top Influencers */}
+                    <div className="col-span-2 bg-gray-50 rounded-2xl p-4 border border-black/5">
+                        <p className="text-sm font-bold text-charcoal mb-3">Top Performers</p>
+                        <div className="space-y-3">
+                            {[
+                                { name: 'Elena Rodriguez', img: 'influencer1', metric: '1.2x ROI' },
+                                { name: 'Sam Chen', img: 'influencer2', metric: '1.5M Reach' },
+                                { name: 'Aisha Khan', img: 'influencer3', metric: '12.3% Eng.' },
+                                { name: 'Marcus Cole', img: 'influencer4', metric: '98k Likes' },
+                            ].map((p, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.6 + i * 0.15 }}
+                                    className="flex items-center justify-between"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <img src={`https://picsum.photos/seed/${p.img}/40/40`} alt={p.name} className="w-8 h-8 rounded-full object-cover border-2 border-white" referrerPolicy="no-referrer" />
+                                        <p className="text-sm font-medium text-charcoal">{p.name}</p>
+                                    </div>
+                                    <p className={`text-xs font-bold ${i % 2 === 0 ? 'text-accent-teal' : 'text-accent-rose'}`}>{p.metric}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Content Section */}
+                     <div className="col-span-full bg-gray-50 rounded-2xl p-4 border border-black/5">
+                        <p className="text-sm font-bold text-charcoal mb-3">Campaign Content</p>
+                        <div className="grid grid-cols-3 gap-3">
+                            {[ 'post1', 'post2', 'post3' ].map((post, i) => (
+                                <motion.div 
+                                    key={i}
+                                    initial={{opacity: 0, y: 20}} 
+                                    whileInView={{opacity: 1, y: 0}} 
+                                    transition={{delay: 1 + i * 0.15}}
+                                    className="aspect-square bg-gray-200 rounded-lg relative overflow-hidden"
+                                >
+                                    <img src={`https://picsum.photos/seed/${post}/200/200`} className="absolute inset-0 w-full h-full object-cover" alt={`Post ${i+1}`} referrerPolicy="no-referrer" />
+                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
+                                        <div className="flex items-center justify-end gap-2 text-white">
+                                            <div className="flex items-center gap-1"><Heart className="w-3 h-3"/><p className="text-xs font-bold">{Math.floor(Math.random() * 8 + 2)}k</p></div>
+                                            <div className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/><p className="text-xs font-bold">{Math.floor(Math.random() * 400 + 50)}</p></div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-                <div className="h-32 bg-bg-soft rounded-2xl relative overflow-hidden">
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-accent-teal/5" />
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '100%' }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="absolute bottom-0 left-0 h-1/2 bg-accent-rose/10 border-t-2 border-accent-rose" 
-                  />
-                </div>
-              </div>
             </motion.div>
             
-            {/* Decorative Elements */}
-            <div className="absolute -top-12 -right-12 w-48 h-48 bg-accent-rose/5 blur-3xl rounded-full" />
-            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-accent-teal/5 blur-3xl rounded-full" />
+            <motion.div 
+                initial={{ opacity: 0, y: 50, x: 50 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true }}
+                className="absolute -top-12 -right-12 w-48 h-48 bg-accent-rose/10 blur-3xl rounded-full -z-10" 
+            />
+            <motion.div 
+                initial={{ opacity: 0, y: -50, x: -50 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-16 -left-16 w-64 h-64 bg-accent-teal/10 blur-3xl rounded-full -z-10" 
+            />
           </div>
         </div>
 
