@@ -9,7 +9,7 @@ const NICHES = [
     description: "Skincare, makeup, and self-care experts.",
     icon: Sparkles,
     color: "#FF8B7C",
-    visual: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=1000&auto=format=fit=crop"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const NICHES = [
     description: "Streetwear, luxury, and sustainable style.",
     icon: Camera,
     color: "#8B7CFF",
-    visual: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format=fit=crop"
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const NICHES = [
     description: "Adventure, luxury stays, and hidden gems.",
     icon: Map,
     color: "#7CFF8B",
-    visual: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000&auto=format=fit=crop"
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const NICHES = [
     description: "Gadgets, software, and future innovation.",
     icon: Monitor,
     color: "#7C8BFF",
-    visual: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format=fit=crop"
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ const NICHES = [
     description: "Wellness, training, and healthy living.",
     icon: Heart,
     color: "#FF7C8B",
-    visual: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format=fit=crop"
   },
   {
     id: 6,
@@ -49,7 +49,7 @@ const NICHES = [
     description: "Home decor, productivity, and daily life.",
     icon: Coffee,
     color: "#FFD77C",
-    visual: "https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?q=80&w=1000&auto=format&fit=crop"
+    visual: "https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?q=80&w=1000&auto=format=fit=crop"
   }
 ];
 
