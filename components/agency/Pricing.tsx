@@ -45,11 +45,11 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
             transition={{ delay: 0.2 }}
             className="text-xl text-muted max-w-2xl mx-auto leading-relaxed font-sans"
           >
-            Transparent pricing designed to scale with your brand. No hidden fees, just results.
+            Positioned to scale with your brand. We focus on value-driven partnerships that deliver measurable impact.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {pricingData.map((tier, index) => (
             <motion.div
               key={tier.id}
@@ -79,12 +79,21 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
               </div>
               
               <div className="mb-10">
-                <span className={`text-5xl font-display font-bold tracking-tighter ${index === 1 ? 'text-white' : 'text-charcoal'}`}>
-                  {tier.price}
-                </span>
-                <span className={`text-sm ml-2 font-sans ${index === 1 ? 'text-white/40' : 'text-muted'}`}>
-                  / project
-                </span>
+                <div className="flex items-baseline gap-1">
+                  {tier.price !== 'Custom' && (
+                    <span className={`text-sm font-sans ${index === 1 ? 'text-white/40' : 'text-muted'}`}>
+                      Starting from
+                    </span>
+                  )}
+                  <span className={`text-5xl font-display font-bold tracking-tighter ${index === 1 ? 'text-white' : 'text-charcoal'}`}>
+                    {tier.price === 'Custom' ? 'Custom Pricing' : tier.price}
+                  </span>
+                </div>
+                {tier.subtext && (
+                  <p className={`text-xs mt-2 font-sans ${index === 1 ? 'text-white/40' : 'text-muted'}`}>
+                    {tier.subtext}
+                  </p>
+                )}
               </div>
 
               <div className="flex-1 mb-12">
@@ -102,13 +111,23 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
 
               <button 
                 onClick={() => onPageChange(Page.CONTACT)}
-                className="w-full btn-primary"
+                className={`w-full ${index === 1 ? 'btn-primary' : 'btn-secondary'}`}
               >
                 {tier.cta} <ArrowRight className="w-4 h-4" />
               </button>
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-16 text-muted text-sm font-sans italic"
+        >
+          "Every brand is different. Final pricing is customized based on campaign scope and influencer tiers."
+        </motion.p>
       </div>
     </section>
   );

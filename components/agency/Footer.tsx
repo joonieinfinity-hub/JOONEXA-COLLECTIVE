@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page } from '../../types';
-import { Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Instagram, Linkedin, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface FooterProps {
@@ -44,14 +44,14 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
-              {siteData?.socials?.twitter && (
-                <a href={siteData.socials.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
-                  <Twitter className="w-5 h-5" />
-                </a>
-              )}
               {siteData?.socials?.linkedin && (
                 <a href={siteData.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
                   <Linkedin className="w-5 h-5" />
+                </a>
+              )}
+              {siteData?.contactEmail && (
+                <a href={`mailto:${siteData.contactEmail}`} className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
+                  <Mail className="w-5 h-5" />
                 </a>
               )}
             </div>
@@ -73,7 +73,11 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           <div>
             <h4 className="text-charcoal font-bold mb-6 uppercase tracking-widest text-xs font-sans">Contact</h4>
             <ul className="space-y-4">
-              <li className="text-muted text-sm font-sans">{siteData?.contactEmail || 'hello@joonexa-collective.com'}</li>
+              <li className="text-muted text-sm font-sans">
+                <a href={`mailto:${siteData?.contactEmail || 'rimi@joonexa-collective.com'}`} className="hover:text-accent-rose transition-colors">
+                  {siteData?.contactEmail || 'rimi@joonexa-collective.com'}
+                </a>
+              </li>
               <li className="text-muted text-sm font-sans">Founder: {siteData?.founder || 'Rimi'}</li>
               <li className="text-muted text-sm font-sans">© {currentYear} {siteData?.name || 'Joonexa Collective'}</li>
             </ul>

@@ -75,6 +75,7 @@ export interface PricingTier {
   description: string;
   features: string[];
   cta: string;
+  subtext?: string;
 }
 
 export interface Testimonial {

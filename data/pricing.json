@@ -2,47 +2,45 @@
   "pricing": [
     {
       "id": "1",
-      "name": "Starter",
-      "price": "₹25,000+",
-      "description": "For smaller brands looking to establish their digital presence.",
+      "name": "Starter Campaign",
+      "price": "$800",
+      "description": "Best for small brands testing influencer marketing",
       "features": [
-        "Campaign Strategy",
-        "Influencer Outreach",
-        "Basic Analytics",
-        "Monthly Report",
-        "Standard Support"
+        "Influencer sourcing (5–10 creators)",
+        "Campaign concept support",
+        "Basic campaign coordination",
+        "Performance summary"
       ],
-      "cta": "Choose Starter"
+      "cta": "Discuss Your Campaign"
     },
     {
       "id": "2",
-      "name": "Growth",
-      "price": "₹75,000+",
-      "description": "Our most popular plan for brands ready to scale aggressively.",
+      "name": "Growth Campaign",
+      "price": "$2,000",
+      "description": "Best for scaling brand visibility",
       "features": [
-        "Full Campaign Strategy",
-        "Influencer Collaborations",
-        "Social Media Growth Plan",
-        "Campaign Analytics",
-        "Priority Support",
-        "Weekly Updates"
+        "Influencer sourcing (10–25 creators)",
+        "Campaign strategy",
+        "Outreach & negotiations",
+        "Campaign coordination",
+        "Performance tracking"
       ],
       "cta": "Book a Strategy Call"
     },
     {
       "id": "3",
-      "name": "Scale",
-      "price": "₹1,50,000+",
-      "description": "Full marketing partnership for established brands.",
+      "name": "Brand Partnership Program",
+      "price": "Custom",
+      "description": "Best for long-term influencer partnerships",
       "features": [
-        "Complete Marketing Strategy",
-        "Influencer Campaign Management",
-        "Website Optimization",
-        "Conversion Strategy",
-        "Advanced Reporting",
-        "Dedicated Account Manager"
+        "End-to-end influencer campaign management",
+        "Influencer sourcing & vetting",
+        "Negotiation & contracts",
+        "Content planning",
+        "Analytics & reporting"
       ],
-      "cta": "Contact Us"
+      "cta": "Request a Custom Plan",
+      "subtext": "Flexible packages based on campaign scale."
     }
   ]
 }

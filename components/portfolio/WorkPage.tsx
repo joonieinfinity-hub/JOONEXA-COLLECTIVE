@@ -46,11 +46,18 @@ const WorkPage: React.FC = () => {
   }
 
   return (
-    <div className="pt-32 pb-24 px-6 min-h-screen">
+    <div className="pt-32 pb-24 px-6 min-h-screen relative overflow-hidden">
       <SEO 
         title="Our Work | Portfolio"
         description="Explore our portfolio of successful influencer marketing campaigns and high-conversion web designs. See how we help brands grow."
       />
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-[10%] -left-[10%] w-[40%] h-[40%] bg-accent-rose/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-accent-teal/5 blur-[120px] rounded-full" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-20">
@@ -111,57 +118,68 @@ const WorkPage: React.FC = () => {
         {/* Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-12"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95 },
+                  visible: { opacity: 1, y: 0, scale: 1 }
+                }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative"
               >
                 <Link to={`/case-studies/${project.slug}`} className="block">
-                  <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden mb-8 border border-black/5 shadow-xl shadow-black/5 group-hover:shadow-2xl group-hover:shadow-accent-teal/5 transition-all duration-700">
+                  <div className="relative aspect-[16/11] rounded-[3.5rem] overflow-hidden mb-10 border border-black/5 shadow-2xl shadow-black/5 group-hover:shadow-accent-rose/20 transition-all duration-700">
                     <img 
                       src={project.image} 
                       alt={project.projectName}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px] z-10">
-                      <div className="btn-case-study transform scale-90 group-hover:scale-100 transition-transform duration-500">
+                    <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-charcoal/60 group-hover:backdrop-blur-[4px] z-10">
+                      <div className="btn-case-study transform scale-90 group-hover:scale-100 transition-all duration-500">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
-                    <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
-                      <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
+                    <div className="absolute top-8 left-8 flex flex-col gap-3 z-20">
+                      <span className="bg-white/90 backdrop-blur-md text-charcoal px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg font-sans">
                         {project.category}
                       </span>
                       {project.type && (
-                        <span className="bg-accent-rose/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[10px] font-bold shadow-sm font-sans uppercase tracking-widest">
+                        <span className="bg-accent-rose/90 backdrop-blur-md text-white px-5 py-2.5 rounded-2xl text-[9px] font-black shadow-lg font-sans uppercase tracking-[0.2em]">
                           {project.type}
                         </span>
                       )}
                     </div>
                   </div>
                   
-                  <div className="px-4">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <p className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-1 font-sans">{project.brandName}</p>
-                        <h3 className="text-3xl font-display font-bold text-charcoal tracking-tight group-hover:text-accent-teal transition-colors duration-300">
+                  <div className="px-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex-1">
+                        <p className="text-accent-teal text-xs font-black uppercase tracking-[0.2em] mb-2 font-sans">{project.brandName}</p>
+                        <h3 className="text-4xl lg:text-5xl font-display font-bold text-charcoal tracking-tight group-hover:text-accent-rose transition-colors duration-500 leading-tight">
                           {project.projectName}
                         </h3>
                       </div>
-                      <div className="bg-accent-rose/10 text-accent-rose px-4 py-2 rounded-xl text-xs font-bold font-sans">
+                      <div className="bg-accent-rose/10 text-accent-rose px-5 py-2.5 rounded-2xl text-[10px] font-black font-sans uppercase tracking-widest border border-accent-rose/20">
                         {project.result}
                       </div>
                     </div>
-                    <p className="text-muted text-sm leading-relaxed max-w-md font-sans">
+                    <p className="text-muted text-lg leading-relaxed max-w-xl font-sans opacity-80 group-hover:opacity-100 transition-opacity duration-500">
                       {project.description}
                     </p>
                   </div>
@@ -169,6 +187,35 @@ const WorkPage: React.FC = () => {
               </motion.div>
             ))}
           </AnimatePresence>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-40 text-center p-20 rounded-[4rem] bg-charcoal text-white relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent-rose rounded-full blur-[100px]" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent-teal rounded-full blur-[100px]" />
+          </div>
+          
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-7xl font-display font-bold mb-8 leading-tight">
+              Ready to be our next <br />
+              <span className="text-accent-rose italic">success</span> story?
+            </h2>
+            <p className="text-white/60 text-xl mb-12 max-w-2xl mx-auto font-sans">
+              Let's collaborate to build something that truly resonates with your audience and drives real growth.
+            </p>
+            <Link 
+              to="/contact" 
+              className="btn-primary py-5 px-10 text-xl shadow-2xl shadow-accent-rose/20"
+            >
+              Start Your Journey <ArrowRight className="w-6 h-6" />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>

@@ -120,7 +120,7 @@ const CaseStudyPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2">
               <div className="mb-16">
-                <h2 className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-4 font-sans">Project Overview</h2>
+                <h2 className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-4 font-sans">Campaign Overview</h2>
                 <p className="text-2xl md:text-3xl font-display font-bold text-charcoal leading-relaxed">
                   {project.description}
                 </p>
@@ -130,7 +130,7 @@ const CaseStudyPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-display font-bold text-charcoal mb-4 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-accent-rose/10 flex items-center justify-center text-accent-rose text-sm">01</span>
-                    The Problem
+                    Objectives
                   </h3>
                   <p className="text-muted text-lg leading-relaxed font-sans">
                     {caseStudy.problem}
@@ -140,7 +140,7 @@ const CaseStudyPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-display font-bold text-charcoal mb-4 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-accent-rose/10 flex items-center justify-center text-accent-rose text-sm">02</span>
-                    Our Strategy
+                    Influencer Strategy
                   </h3>
                   <p className="text-muted text-lg leading-relaxed font-sans">
                     {caseStudy.strategy}
@@ -151,7 +151,7 @@ const CaseStudyPage: React.FC = () => {
 
             <div className="lg:col-span-1">
               <div className="bg-white p-10 rounded-[2.5rem] border border-charcoal/5 shadow-xl shadow-black/5 sticky top-32">
-                <h3 className="text-lg font-display font-bold text-charcoal mb-8 border-b border-charcoal/5 pb-4">Details</h3>
+                <h3 className="text-lg font-display font-bold text-charcoal mb-8 border-b border-charcoal/5 pb-4">Campaign Details</h3>
                 <div className="space-y-8">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-muted/50 mb-2 font-sans">Brand</p>
@@ -181,7 +181,7 @@ const CaseStudyPage: React.FC = () => {
       {/* Execution Section */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-16 text-center font-sans">Execution & Implementation</h2>
+          <h2 className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-16 text-center font-sans">Campaign Execution</h2>
           
           <div className="space-y-32">
             {caseStudy.execution.map((step, idx) => (
@@ -231,7 +231,7 @@ const CaseStudyPage: React.FC = () => {
           <div className="text-center mb-20">
             <span className="text-accent-rose text-xs font-bold uppercase tracking-widest mb-4 inline-block font-sans">The Results</span>
             <h2 className="text-4xl md:text-7xl font-display font-bold tracking-tight mb-8">
-              Measurable <span className="text-accent-teal italic">Growth</span>
+              Measurable <span className="text-accent-teal italic">Results</span>
             </h2>
           </div>
 
