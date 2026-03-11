@@ -73,13 +73,14 @@ const ServiceCard: React.FC<{ service: Service; index: number; onPageChange: (pa
       style={{ y }}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ 
         opacity: { duration: 0.8 },
         y: { duration: 0.8, ease: "easeOut" }
       }}
       onClick={() => onPageChange(Page.SERVICES)}
-      className="group p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white hover:bg-white hover:border-accent-rose/30 hover:shadow-2xl hover:shadow-accent-rose/5 transition-all duration-500 cursor-pointer relative z-10"
+      className="group p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white hover:bg-white hover:border-accent-rose/40 hover:shadow-[0_30px_60px_-12px_rgba(232,169,169,0.15)] transition-all duration-500 cursor-pointer relative z-10"
     >
       <div className="w-14 h-14 rounded-2xl bg-accent-rose/10 flex items-center justify-center mb-8 group-hover:bg-accent-rose group-hover:text-white transition-all duration-500">
         <Icon className="w-7 h-7 text-accent-rose group-hover:text-white transition-all duration-500" />

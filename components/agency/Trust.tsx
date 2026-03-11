@@ -99,7 +99,7 @@ const Trust: React.FC = () => {
 
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-6 mb-10">
-                <div className="p-6 rounded-[2rem] bg-gradient-to-br from-white to-bg-soft border border-charcoal/5 relative overflow-hidden group shadow-sm">
+                <div className="p-6 rounded-[2rem] bg-gradient-to-br from-white to-bg-soft border border-charcoal/5 relative overflow-hidden group shadow-sm hover-lift">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                     <Users className="w-12 h-12 text-accent-teal" />
                   </div>
@@ -111,7 +111,7 @@ const Trust: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                <div className="p-6 rounded-[2rem] bg-gradient-to-br from-white to-bg-soft border border-charcoal/5 relative overflow-hidden group shadow-sm">
+                <div className="p-6 rounded-[2rem] bg-gradient-to-br from-white to-bg-soft border border-charcoal/5 relative overflow-hidden group shadow-sm hover-lift">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                     <Zap className="w-12 h-12 text-accent-rose" />
                   </div>
@@ -270,7 +270,7 @@ const Trust: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-2xl md:text-3xl font-display font-bold tracking-tighter text-charcoal hover:text-accent-teal transition-all cursor-default hover:scale-110"
+                className="text-2xl md:text-3xl font-display font-bold tracking-tighter text-charcoal hover:text-accent-teal transition-all cursor-default hover-lift"
               >
                 {brand}
               </motion.div>

@@ -34,7 +34,7 @@
     border-radius: 22px !important;
     padding: 12px 28px !important;
     font-weight: 600 !important;
-    transition: all 0.25s ease !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -47,8 +47,8 @@
   
   .btn-primary:hover {
     background-color: #A95C6B !important;
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(190, 106, 122, 0.25), 0 10px 10px -5px rgba(190, 106, 122, 0.1) !important;
   }
 
   .btn-case-study {
@@ -57,7 +57,7 @@
     border-radius: 22px !important;
     padding: 12px 28px !important;
     font-weight: 600 !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -70,8 +70,8 @@
 
   .btn-case-study:hover {
     background-color: #BE6A7A !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(190, 106, 122, 0.4) !important;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 30px rgba(232, 169, 169, 0.4) !important;
   }
 
   .btn-muted-rose {
@@ -153,5 +153,13 @@
 
   .highlight-rose:hover::after {
     height: 60%;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-2xl;
   }
 }

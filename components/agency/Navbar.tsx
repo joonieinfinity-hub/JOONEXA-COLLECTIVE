@@ -71,11 +71,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             <button
               key={link.page}
               onClick={() => handleLinkClick(link.page, link.path)}
-              className={`text-sm font-medium tracking-wide uppercase transition-all hover:text-accent-rose font-sans ${
+              className={`text-sm font-medium tracking-wide uppercase transition-all hover:text-accent-rose font-sans relative group ${
                 currentPage === link.page ? 'text-charcoal' : 'text-muted'
               }`}
             >
               {link.name}
+              <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-accent-rose transition-transform duration-300 origin-left ${
+                currentPage === link.page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+              }`} />
             </button>
           ))}
           <button 

@@ -89,14 +89,21 @@ const WorkPage: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + idx * 0.05 }}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 flex items-center gap-2 font-sans hover:scale-[1.05] ${
+              className={`px-8 py-4 rounded-2xl text-sm font-black transition-all duration-500 flex items-center gap-3 font-sans hover:scale-[1.05] relative overflow-hidden group ${
                 activeCategory === cat.id 
-                  ? 'bg-accent-rose text-white shadow-xl shadow-accent-rose/20' 
+                  ? 'text-white shadow-2xl shadow-accent-rose/30' 
                   : 'bg-white text-charcoal border border-charcoal/5 hover:border-accent-rose/30 hover:text-accent-rose'
               }`}
             >
-              <span>{cat.icon}</span>
-              {cat.label}
+              {activeCategory === cat.id && (
+                <motion.div 
+                  layoutId="active-filter-bg"
+                  className="absolute inset-0 bg-gradient-to-br from-accent-rose to-[#BE6A7A] z-0"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{cat.icon}</span>
+              <span className="relative z-10 uppercase tracking-widest">{cat.label}</span>
             </motion.button>
           ))}
         </div>
