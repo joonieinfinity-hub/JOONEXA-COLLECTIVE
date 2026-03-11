@@ -53,7 +53,7 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
               transition={{ delay: index * 0.1 }}
               className="group cursor-pointer"
             >
-              <Link to={`/work/${project.slug}`}>
+              <Link to={`/case-studies/${project.slug}`}>
                 <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-8 border border-black/5 shadow-lg shadow-black/5">
                   <ProjectMedia 
                     image={project.image}
@@ -73,7 +73,7 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
                       )}
                     </div>
                     <div className="absolute inset-0 bg-charcoal/20 flex items-end justify-start p-8 backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
-                      <span className="btn-primary pointer-events-none">
+                      <span className="btn-case-study pointer-events-none">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>

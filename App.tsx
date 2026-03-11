@@ -111,7 +111,7 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />
               <Route path="/work" element={<WorkPage />} />
-              <Route path="/work/:slug" element={<CaseStudyPage />} />
+              <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
               <Route path="/pricing" element={<Pricing onPageChange={handlePageChange} />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/creator-network" element={<CreatorNetwork />} />

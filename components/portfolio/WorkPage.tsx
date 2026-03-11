@@ -117,7 +117,7 @@ const WorkPage: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="group relative"
               >
-                <Link to={`/work/${project.slug}`} className="block">
+                <Link to={`/case-studies/${project.slug}`} className="block">
                   <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden mb-8 border border-black/5 shadow-xl shadow-black/5 group-hover:shadow-2xl group-hover:shadow-accent-teal/5 transition-all duration-700">
                     <img 
                       src={project.image} 
@@ -126,7 +126,7 @@ const WorkPage: React.FC = () => {
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
-                      <div className="btn-primary">
+                      <div className="btn-case-study">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>

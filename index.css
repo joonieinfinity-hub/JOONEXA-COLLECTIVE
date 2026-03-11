@@ -51,6 +51,51 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   }
 
+  .btn-case-study {
+    background-color: #1A5F5F !important;
+    color: white !important;
+    border-radius: 22px !important;
+    padding: 12px 28px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border: none !important;
+    box-shadow: 0 4px 14px 0 rgba(26, 95, 95, 0.39) !important;
+    cursor: pointer;
+    font-family: var(--font-sans);
+  }
+
+  .btn-case-study:hover {
+    background-color: #2F7F7F !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(47, 127, 127, 0.4) !important;
+  }
+
+  .btn-muted-rose {
+    background-color: transparent !important;
+    color: #E8A9A9 !important;
+    border: 1px solid #E8A9A9 !important;
+    border-radius: 22px !important;
+    padding: 12px 28px !important;
+    font-weight: 500 !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-family: var(--font-sans);
+  }
+
+  .btn-muted-rose:hover {
+    background-color: #E8A9A9 !important;
+    color: white !important;
+    transform: translateY(-2px);
+  }
+
   .btn-secondary {
     background-color: transparent !important;
     color: #BE6A7A !important;

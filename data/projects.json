@@ -2,105 +2,121 @@
   "projects": [
     {
       "id": "1",
-      "brandName": "Café Lumière",
-      "projectName": "Website Redesign for Café Lumière",
+      "brandName": "Verano",
+      "projectName": "Verano Dining Experience",
       "category": "Web Design",
       "serviceType": "Web Design & Development",
-      "description": "A complete digital overhaul for a boutique French café, focusing on high-end visuals and seamless reservation flow.",
+      "description": "A high-end digital experience for a Mediterranean dining concept.",
       "result": "+42% reservations",
       "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop",
       "video": "",
-      "slug": "cafe-lumiere-redesign",
-      "type": "Speculative Redesign",
+      "slug": "verano-dining-experience",
+      "type": "Client Project",
       "caseStudy": {
         "overview": {
           "industry": "Hospitality",
           "services": ["Web Design", "UI/UX Strategy", "SEO Optimization"]
         },
-        "problem": "Café Lumière had a dated website that didn't reflect their premium atmosphere, leading to low online engagement and a high bounce rate on their reservation page.",
-        "strategy": "We focused on \"Digital Elegance\" – using high-resolution lifestyle photography, a minimalist layout, and a simplified 3-click reservation system.",
+        "problem": "Verano needed a digital presence that matched their exquisite physical atmosphere.",
+        "strategy": "We focused on visual storytelling and a seamless booking process.",
         "execution": [
           {
             "title": "Visual Identity",
-            "content": "We captured the essence of the café through professional photography and a color palette inspired by Parisian mornings.",
+            "content": "Capturing the essence of Mediterranean luxury through photography.",
             "media": [
-              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "New website homepage design" }
+              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "Homepage Design" }
             ]
-          },
-          {
-            "title": "Reservation Flow",
-            "content": "Implemented a custom booking engine that reduced friction, resulting in a significant uplift in confirmed bookings."
           }
         ],
         "results": [
-          { "label": "Online Reservations", "value": "+42%", "icon": "Calendar" },
-          { "label": "Mobile Traffic", "value": "+65%", "icon": "Smartphone" },
-          { "label": "Average Session Duration", "value": "3m 45s", "icon": "Clock" }
+          { "label": "Reservations", "value": "+42%", "icon": "Calendar" }
         ]
       }
     },
     {
       "id": "2",
-      "brandName": "Aura Skincare",
-      "projectName": "Aura Skincare Growth Strategy",
-      "category": "Marketing Campaigns",
-      "serviceType": "Marketing Strategy & Social Growth",
-      "description": "Scaling a luxury skincare brand through targeted performance marketing and content strategy.",
+      "brandName": "Creator Studio",
+      "projectName": "Creator Growth Studio",
+      "category": "Influencer Campaigns",
+      "serviceType": "Influencer Marketing",
+      "description": "Empowering creators with data-driven growth strategies.",
       "result": "3.2x Engagement",
-      "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop",
-      "slug": "aura-skincare-growth",
+      "image": "https://images.unsplash.com/photo-1593642532400-2682810df593?q=80&w=2070&auto=format&fit=crop",
+      "slug": "creator-growth-studio",
       "type": "Client Project",
       "caseStudy": {
         "overview": {
-          "industry": "Beauty & Wellness",
-          "services": ["Performance Marketing", "Content Strategy", "Email Automation"]
+          "industry": "Creator Economy",
+          "services": ["Growth Strategy", "Content Optimization"]
         },
-        "problem": "Aura had a great product but struggled to reach their target demographic effectively, resulting in high CAC and low repeat purchase rates.",
-        "strategy": "We implemented a multi-channel funnel focusing on educational content and retargeting high-intent users.",
+        "problem": "Creators struggled to scale their audience consistently.",
+        "strategy": "Data-backed content pillars and engagement loops.",
         "execution": [
           {
-            "title": "Social Media Campaign",
-            "content": "Created a series of \"Science of Glow\" videos that educated users on ingredients while showcasing the product.",
-            "media": [
-              { "type": "image", "url": "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=1000&auto=format&fit=crop", "caption": "Campaign visual for Instagram" }
-            ]
+            "title": "Strategy Phase",
+            "content": "Analyzing audience behavior to identify growth opportunities."
           }
         ],
         "results": [
-          { "label": "Engagement Growth", "value": "3.2x", "icon": "TrendingUp" },
-          { "label": "Customer Acquisition Cost", "value": "-25%", "icon": "DollarSign" },
-          { "label": "Return on Ad Spend", "value": "4.5x", "icon": "BarChart" }
+          { "label": "Engagement", "value": "3.2x", "icon": "TrendingUp" }
         ]
       }
     },
     {
       "id": "3",
-      "brandName": "Velo Tech",
-      "projectName": "Velo Tech Influencer Launch",
-      "category": "Influencer Campaigns",
-      "serviceType": "Influencer Marketing",
-      "description": "Launching a new tech gadget through a network of 50+ micro-influencers in the productivity space.",
+      "brandName": "FlowMetrics",
+      "projectName": "FlowMetrics Dashboard",
+      "category": "Web Design",
+      "serviceType": "UI/UX Design",
+      "description": "A complex data visualization dashboard for enterprise analytics.",
       "result": "+220% Reach",
       "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
-      "slug": "velo-tech-influencer-launch",
+      "slug": "flowmetrics-dashboard",
       "type": "Client Project",
       "caseStudy": {
         "overview": {
-          "industry": "Consumer Electronics",
-          "services": ["Influencer Sourcing", "Campaign Management", "Content Creation"]
+          "industry": "Tech / SaaS",
+          "services": ["UI/UX Design", "Data Visualization"]
         },
-        "problem": "Velo Tech needed to build immediate trust and awareness for their new productivity tool in a crowded market.",
-        "strategy": "Leveraged authentic creators who actually use productivity tools, focusing on \"Day in the Life\" integrations.",
+        "problem": "Complex data was difficult for users to interpret.",
+        "strategy": "Simplifying information hierarchy and interactive charts.",
         "execution": [
           {
-            "title": "Creator Selection",
-            "content": "Vetted over 500 creators to find the perfect 50 who aligned with the brand's minimalist aesthetic."
+            "title": "UI Design",
+            "content": "Creating a clean, intuitive interface for data exploration."
           }
         ],
         "results": [
-          { "label": "Total Reach", "value": "2.5M+", "icon": "Users" },
-          { "label": "Organic Mentions", "value": "+220%", "icon": "Share2" },
-          { "label": "Conversion Rate", "value": "3.8%", "icon": "Target" }
+          { "label": "User Reach", "value": "+220%", "icon": "Users" }
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "brandName": "Aurielle",
+      "projectName": "Aurielle Skincare",
+      "category": "Marketing Campaigns",
+      "serviceType": "Brand Strategy",
+      "description": "Rebranding a luxury skincare line for a younger demographic.",
+      "result": "4.5x ROAS",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+      "slug": "aurielle-skincare",
+      "type": "Client Project",
+      "caseStudy": {
+        "overview": {
+          "industry": "Beauty",
+          "services": ["Branding", "Digital Marketing"]
+        },
+        "problem": "The brand felt outdated to the Gen Z market.",
+        "strategy": "Vibrant visuals and influencer-led storytelling.",
+        "execution": [
+          {
+            "title": "Rebranding",
+            "content": "New visual language and tone of voice."
+          }
+        ],
+        "results": [
+          { "label": "ROAS", "value": "4.5x", "icon": "BarChart" }
         ]
       }
     }

@@ -94,7 +94,7 @@ const CaseStudyPage: React.FC = () => {
               transition={{ delay: 0.5 }}
             >
               <Link to="/work" className="inline-flex items-center gap-2 text-white/80 hover:text-white hover:scale-[1.05] mb-8 transition-all font-sans font-bold text-sm uppercase tracking-widest">
-                <ArrowLeft className="w-4 h-4" /> Back to Work
+                <ArrowLeft className="w-4 h-4" /> Back to Portfolio
               </Link>
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="bg-accent-teal text-white px-4 py-2 rounded-xl text-xs font-bold inline-block font-sans">
@@ -280,7 +280,7 @@ const CaseStudyPage: React.FC = () => {
             <Link 
               to="/work"
               data-cursor="Portfolio"
-              className="btn-secondary text-xl"
+              className="btn-muted-rose text-xl"
             >
               View More Work <ArrowRight className="w-5 h-5" />
             </Link>

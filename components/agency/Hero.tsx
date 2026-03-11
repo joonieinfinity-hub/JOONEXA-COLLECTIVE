@@ -17,8 +17,33 @@ interface SiteData {
 
 const NICHES = ['Lifestyle', 'Tech', 'Fashion', 'Beauty', 'Travel', 'Wellness'];
 
+const TESTIMONIALS = [
+  {
+    id: '1',
+    quote: "Joonexa Collective transformed our digital presence. Their creator partnerships brought an authenticity we couldn't find elsewhere.",
+    name: "Sarah Jenkins",
+    title: "Marketing Director",
+    company: "Aura Skincare",
+  },
+  {
+    id: '2',
+    quote: "The strategic approach Rimi and her team took for our launch was flawless. Our ROI exceeded all expectations.",
+    name: "Marcus Thorne",
+    title: "CEO",
+    company: "Velo Tech",
+  },
+  {
+    id: '3',
+    quote: "Elegant design meets data-driven growth. Joonexa is the only agency we trust with our brand identity.",
+    name: "Elena Rossi",
+    title: "Founder",
+    company: "Luxe Living",
+  }
+];
+
 const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   const [nicheIndex, setNicheIndex] = useState(0);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -28,10 +53,18 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
       .then(data => setSiteData(data))
       .catch(err => console.error("Error fetching site data:", err));
 
-    const interval = setInterval(() => {
+    const nicheInterval = setInterval(() => {
       setNicheIndex((prev) => (prev + 1) % NICHES.length);
     }, 2500);
-    return () => clearInterval(interval);
+
+    const testimonialInterval = setInterval(() => {
+      setTestimonialIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(nicheInterval);
+      clearInterval(testimonialInterval);
+    };
   }, []);
 
   return (
@@ -156,6 +189,49 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
               View Our Work
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
+          </motion.div>
+
+          {/* Testimonial Carousel */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-16 max-w-xl mx-auto"
+          >
+            <div className={`relative px-8 py-6 rounded-3xl border transition-colors duration-700 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/40 border-accent-rose/10'}`}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={testimonialIndex}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <p className={`text-sm italic mb-4 leading-relaxed ${isDarkMode ? 'text-white/80' : 'text-charcoal/80'}`}>
+                    "{TESTIMONIALS[testimonialIndex].quote}"
+                  </p>
+                  <div className="flex flex-col items-center">
+                    <span className={`text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'text-accent-teal' : 'text-accent-rose'}`}>
+                      {TESTIMONIALS[testimonialIndex].name}
+                    </span>
+                    <span className={`text-[10px] font-medium mt-1 ${isDarkMode ? 'text-white/40' : 'text-muted/60'}`}>
+                      {TESTIMONIALS[testimonialIndex].title}, {TESTIMONIALS[testimonialIndex].company}
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Dots */}
+              <div className="flex justify-center gap-1.5 mt-4">
+                {TESTIMONIALS.map((_, i) => (
+                  <div 
+                    key={i}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === testimonialIndex ? (isDarkMode ? 'bg-accent-teal w-3' : 'bg-accent-rose w-3') : (isDarkMode ? 'bg-white/10' : 'bg-charcoal/10')}`}
+                  />
+                ))}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
 
