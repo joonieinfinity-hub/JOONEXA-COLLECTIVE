@@ -2,20 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { PricingTier, Page } from '../../types';
+import { pricing as pricingData } from '../../data/pricing.json';
 
 interface PricingProps {
   onPageChange: (page: Page) => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
-  const [pricingData, setPricingData] = React.useState<PricingTier[]>([]);
-
-  React.useEffect(() => {
-    fetch('/api/pricing')
-      .then(res => res.json())
-      .then(data => setPricingData(data.pricing || []))
-      .catch(err => console.error("Error fetching pricing data:", err));
-  }, []);
 
   return (
     <section id="pricing" className="py-32 px-6 bg-bg-soft">

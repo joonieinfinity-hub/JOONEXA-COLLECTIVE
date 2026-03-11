@@ -4,6 +4,7 @@ import { Project, ProjectCategory } from '../../types';
 import { ExternalLink, ArrowRight, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../SEO';
+import { projects as allProjects } from '../../data/projects.json';
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects', icon: '✨' },
@@ -16,21 +17,8 @@ const CATEGORIES = [
 
 const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  React.useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => {
-        setProjects(data.projects || []);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching projects:", err);
-        setLoading(false);
-      });
-  }, []);
+  const [projects, setProjects] = useState<Project[]>(allProjects);
+  const [loading, setLoading] = useState(false);
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === 'all') return projects;

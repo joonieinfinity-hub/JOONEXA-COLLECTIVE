@@ -5,24 +5,14 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 import ProjectMedia from './ProjectMedia';
+import { projects as allProjects } from '../../data/projects.json';
 
 interface WorkProps {
   onPageChange: (page: Page) => void;
 }
 
 const Work: React.FC<WorkProps> = ({ onPageChange }) => {
-  const [projects, setProjects] = React.useState<any[]>([]);
-
-  React.useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => setProjects(data.projects || []))
-      .catch(err => console.error("Error fetching projects:", err));
-  }, []);
-
-  const handleVideoGenerated = (projectId: string, videoUrl: string) => {
-    setProjects(prev => prev.map(p => p.id === projectId ? { ...p, video: videoUrl } : p));
-  };
+  const [projects, setProjects] = React.useState<any[]>(allProjects);
 
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">
@@ -60,7 +50,6 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
                     video={project.video}
                     brandName={project.brandName}
                     projectId={project.id}
-                    onVideoGenerated={(url) => handleVideoGenerated(project.id, url)}
                   />
                     <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
                       <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">

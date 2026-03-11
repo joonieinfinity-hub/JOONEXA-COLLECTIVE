@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
     { name: 'Home', page: Page.HOME, path: '/' },
     { name: 'About', page: Page.ABOUT, path: '/about' },
     { name: 'Services', page: Page.SERVICES, path: '/#services' },
-    { name: 'Work', page: Page.WORK, path: '/work' },
+    { name: 'Our Work', page: Page.WORK, path: '/our-work' },
     { name: 'Pricing', page: Page.PRICING, path: '/pricing' },
     { name: 'Contact', page: Page.CONTACT, path: '/contact' },
   ];

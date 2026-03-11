@@ -46,7 +46,7 @@ const App: React.FC = () => {
     const path = location.pathname;
     if (path === '/') setCurrentPage(Page.HOME);
     else if (path === '/about') setCurrentPage(Page.ABOUT);
-    else if (path === '/work') setCurrentPage(Page.WORK);
+    else if (path === '/our-work') setCurrentPage(Page.WORK);
     else if (path === '/pricing') setCurrentPage(Page.PRICING);
     else if (path === '/contact') setCurrentPage(Page.CONTACT);
     else if (path === '/creator-network') setCurrentPage(Page.CREATOR_NETWORK);
@@ -110,7 +110,7 @@ const App: React.FC = () => {
             <Routes location={location}>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />
-              <Route path="/work" element={<WorkPage />} />
+              <Route path="/our-work" element={<WorkPage />} />
               <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
               <Route path="/pricing" element={<Pricing onPageChange={handlePageChange} />} />
               <Route path="/contact" element={<Contact />} />
