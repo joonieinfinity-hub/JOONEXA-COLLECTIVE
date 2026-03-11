@@ -1,4 +1,3 @@
-
 {
   "projects": [
     {
@@ -12,14 +11,14 @@
       "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop",
       "video": "",
       "slug": "verano-dining-experience",
-      "type": "Speculative Redesign",
+      "type": "Client Project",
       "caseStudy": {
         "overview": {
           "industry": "Hospitality",
           "services": ["Web Design", "UI/UX Strategy", "SEO Optimization"]
         },
-        "problem": "Verano had a dated website that didn't reflect their premium atmosphere, leading to low online engagement and a high bounce rate on their reservation page.",
-        "strategy": "We focused on \"Digital Elegance\" – using high-resolution lifestyle photography, a minimalist layout, and a simplified 3-click reservation system.",
+        "problem": "Verano needed a digital presence that matched their exquisite physical atmosphere.",
+        "strategy": "We focused on visual storytelling and a seamless booking process.",
         "execution": [
           {
             "title": "Visual Identity",
@@ -36,13 +35,13 @@
     },
     {
       "id": "2",
-      "brandName": "Creator Growth Studio",
+      "brandName": "Creator Studio",
       "projectName": "Creator Growth Studio",
-      "category": "Marketing Campaigns",
-      "serviceType": "Marketing Strategy & Social Growth",
-      "description": "Scaling a luxury skincare brand through targeted performance marketing and content strategy.",
+      "category": "Influencer Campaigns",
+      "serviceType": "Influencer Marketing",
+      "description": "Empowering creators with data-driven growth strategies.",
       "result": "3.2x Engagement",
-      "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop",
+      "image": "https://images.unsplash.com/photo-1593642532400-2682810df593?q=80&w=2070&auto=format&fit=crop",
       "slug": "creator-growth-studio",
       "type": "Client Project",
       "caseStudy": {
@@ -50,8 +49,8 @@
           "industry": "Creator Economy",
           "services": ["Growth Strategy", "Content Optimization"]
         },
-        "problem": "Creator Growth Studio had a great product but struggled to reach their target demographic effectively, resulting in high CAC and low repeat purchase rates.",
-        "strategy": "We implemented a multi-channel funnel focusing on educational content and retargeting high-intent users.",
+        "problem": "Creators struggled to scale their audience consistently.",
+        "strategy": "Data-backed content pillars and engagement loops.",
         "execution": [
           {
             "title": "Strategy Phase",
@@ -67,9 +66,9 @@
       "id": "3",
       "brandName": "FlowMetrics",
       "projectName": "FlowMetrics Dashboard",
-      "category": "Influencer Campaigns",
-      "serviceType": "Influencer Marketing",
-      "description": "Launching a new tech gadget through a network of 50+ micro-influencers in the productivity space.",
+      "category": "Web Design",
+      "serviceType": "UI/UX Design",
+      "description": "A complex data visualization dashboard for enterprise analytics.",
       "result": "+220% Reach",
       "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
       "slug": "flowmetrics-dashboard",
@@ -79,8 +78,8 @@
           "industry": "Tech / SaaS",
           "services": ["UI/UX Design", "Data Visualization"]
         },
-        "problem": "FlowMetrics needed to build immediate trust and awareness for their new productivity tool in a crowded market.",
-        "strategy": "Leveraged authentic creators who actually use productivity tools, focusing on \"Day in the Life\" integrations.",
+        "problem": "Complex data was difficult for users to interpret.",
+        "strategy": "Simplifying information hierarchy and interactive charts.",
         "execution": [
           {
             "title": "UI Design",
@@ -96,38 +95,28 @@
       "id": "4",
       "brandName": "Aurielle",
       "projectName": "Aurielle Skincare",
-      "category": "Brand Growth",
-      "serviceType": "Brand Strategy & Development",
-      "description": "A complete digital overhaul for a boutique French café, focusing on high-end visuals and seamless reservation flow.",
-      "result": "+42% reservations",
-      "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop",
-      "video": "",
+      "category": "Marketing Campaigns",
+      "serviceType": "Brand Strategy",
+      "description": "Rebranding a luxury skincare line for a younger demographic.",
+      "result": "4.5x ROAS",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
       "slug": "aurielle-skincare",
-      "type": "Speculative Redesign",
+      "type": "Client Project",
       "caseStudy": {
         "overview": {
-          "industry": "Hospitality",
-          "services": ["Web Design", "UI/UX Strategy", "SEO Optimization"]
+          "industry": "Beauty",
+          "services": ["Branding", "Digital Marketing"]
         },
-        "problem": "Aurielle had a dated website that didn't reflect their premium atmosphere, leading to low online engagement and a high bounce rate on their reservation page.",
-        "strategy": "We focused on \"Digital Elegance\" – using high-resolution lifestyle photography, a minimalist layout, and a simplified 3-click reservation system.",
+        "problem": "The brand felt outdated to the Gen Z market.",
+        "strategy": "Vibrant visuals and influencer-led storytelling.",
         "execution": [
           {
-            "title": "Visual Identity",
-            "content": "We captured the essence of the café through professional photography and a color palette inspired by Parisian mornings.",
-            "media": [
-              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "New website homepage design" }
-            ]
-          },
-          {
-            "title": "Reservation Flow",
-            "content": "Implemented a custom booking engine that reduced friction, resulting in a significant uplift in confirmed bookings."
+            "title": "Rebranding",
+            "content": "New visual language and tone of voice."
           }
         ],
         "results": [
-          { "label": "Online Reservations", "value": "+42%", "icon": "Calendar" },
-          { "label": "Mobile Traffic", "value": "+65%", "icon": "Smartphone" },
-          { "label": "Average Session Duration", "value": "3m 45s", "icon": "Clock" }
+          { "label": "ROAS", "value": "4.5x", "icon": "BarChart" }
         ]
       }
     }

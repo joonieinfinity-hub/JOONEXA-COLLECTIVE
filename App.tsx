@@ -6,8 +6,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Link } from 'react-router-dom';
 import { Page } from './types';
+import { ArrowRight } from 'lucide-react';
 
 // Components
 import Navbar from './components/agency/Navbar';
@@ -40,13 +41,14 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.HOME);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Update current page based on location
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') setCurrentPage(Page.HOME);
     else if (path === '/about') setCurrentPage(Page.ABOUT);
-    else if (path === '/our-work') setCurrentPage(Page.WORK);
+    else if (path === '/work' || path.startsWith('/case-studies/')) setCurrentPage(Page.WORK);
     else if (path === '/pricing') setCurrentPage(Page.PRICING);
     else if (path === '/contact') setCurrentPage(Page.CONTACT);
     else if (path === '/creator-network') setCurrentPage(Page.CREATOR_NETWORK);
@@ -75,20 +77,67 @@ const App: React.FC = () => {
       <div id="work">
         <Work onPageChange={handlePageChange} />
       </div>
-      <div className="py-24 bg-soft-gradient flex justify-center border-y border-accent-rose/10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-charcoal mb-8 tracking-tight">Ready to <span className="text-accent-rose italic">grow?</span></h2>
-          <button 
-            onClick={() => handlePageChange(Page.CONTACT)}
-            className="btn-primary text-xl"
+      <div className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-[4rem] bg-charcoal p-12 md:p-24 text-center border border-white/5"
           >
-            Contact Us
-          </button>
-        </motion.div>
+            {/* Background Effects */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent-rose/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-teal/20 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+            
+            <div className="relative z-10 max-w-3xl mx-auto">
+              <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-accent-teal text-xs font-bold uppercase tracking-[0.3em] mb-6 inline-block font-sans"
+              >
+                Next Steps
+              </motion.span>
+              <h2 className="text-5xl md:text-8xl font-display font-bold text-white mb-12 tracking-tighter leading-none">
+                Ready to <span className="text-accent-rose italic">scale</span> your brand?
+              </h2>
+              <p className="text-white/60 text-lg md:text-xl mb-12 font-sans leading-relaxed">
+                Join our collective of visionary brands and creators. Let's build a digital presence that actually converts.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <button 
+                  onClick={() => {
+                    handlePageChange(Page.CONTACT);
+                    navigate('/contact');
+                  }}
+                  className="btn-primary text-xl py-6 px-12 group"
+                >
+                  Start Your Project
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-6 h-6" />
+                  </motion.div>
+                </button>
+                <button 
+                  onClick={() => {
+                    handlePageChange(Page.WORK);
+                    navigate('/work');
+                  }}
+                  className="bg-white/5 backdrop-blur-md text-white border border-white/10 px-12 py-6 rounded-2xl font-bold text-xl hover:bg-white/10 transition-all font-sans"
+                >
+                  View Case Studies
+                </button>
+              </div>
+            </div>
+
+            {/* Decorative Grid */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                 style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+            />
+          </motion.div>
+        </div>
       </div>
     </>
   );
@@ -110,7 +159,7 @@ const App: React.FC = () => {
             <Routes location={location}>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<About />} />
-              <Route path="/our-work" element={<WorkPage />} />
+              <Route path="/work" element={<WorkPage />} />
               <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
               <Route path="/pricing" element={<Pricing onPageChange={handlePageChange} />} />
               <Route path="/contact" element={<Contact />} />

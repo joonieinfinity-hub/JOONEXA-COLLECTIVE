@@ -5,14 +5,24 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 import ProjectMedia from './ProjectMedia';
-import { projects as allProjects } from '../../data/projects.json';
 
 interface WorkProps {
   onPageChange: (page: Page) => void;
 }
 
 const Work: React.FC<WorkProps> = ({ onPageChange }) => {
-  const [projects, setProjects] = React.useState<any[]>(allProjects);
+  const [projects, setProjects] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => setProjects(data.projects || []))
+      .catch(err => console.error("Error fetching projects:", err));
+  }, []);
+
+  const handleVideoGenerated = (projectId: string, videoUrl: string) => {
+    setProjects(prev => prev.map(p => p.id === projectId ? { ...p, video: videoUrl } : p));
+  };
 
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">
@@ -41,15 +51,16 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group cursor-pointer"
+              className="group"
             >
-              <Link to={`/case-studies/${project.slug}`}>
+              <Link to={`/case-studies/${project.slug}`} className="block">
                 <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-8 border border-black/5 shadow-lg shadow-black/5">
                   <ProjectMedia 
                     image={project.image}
                     video={project.video}
                     brandName={project.brandName}
                     projectId={project.id}
+                    onVideoGenerated={(url) => handleVideoGenerated(project.id, url)}
                   />
                     <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
                       <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
@@ -61,15 +72,15 @@ const Work: React.FC<WorkProps> = ({ onPageChange }) => {
                         </span>
                       )}
                     </div>
-                    <div className="absolute inset-0 bg-charcoal/20 flex items-end justify-start p-8 backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
-                      <span className="btn-case-study pointer-events-none">
+                    <div className="absolute inset-0 bg-charcoal/20 flex items-end justify-start p-8 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px] z-10">
+                      <div className="btn-case-study transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                         View Case Study <ArrowRight className="w-4 h-4" />
-                      </span>
+                      </div>
                     </div>
                   </div>
                 <div className="flex justify-between items-start gap-4">
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-charcoal mb-2 tracking-tight">{project.projectName}</h3>
+                    <h3 className="text-2xl font-display font-bold text-charcoal mb-2 tracking-tight group-hover:text-accent-teal transition-colors">{project.projectName}</h3>
                     <p className="text-muted text-sm font-medium uppercase tracking-widest font-sans">{project.brandName} • {project.category}</p>
                   </div>
                   <div className="bg-accent-teal/10 text-accent-teal px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap font-sans">

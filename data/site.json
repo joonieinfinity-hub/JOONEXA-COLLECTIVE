@@ -4,9 +4,11 @@
   "founder": "Rimi",
   "resumeUrl": "https://example.com/resume.pdf",
   "heroImage": "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2000&auto=format&fit=crop",
-  "contactEmail": "rimi@joonexa-collective.com",
+  "founderImage": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=1000&auto=format&fit=crop",
+  "contactEmail": "hello@joonexa-collective.com",
   "socials": {
-    "instagram": "https://instagram.com/joonexa",
-    "linkedin": "https://linkedin.com/company/joonexa"
+    "instagram": "https://www.instagram.com/joonexa/",
+    "linkedin": "https://www.linkedin.com/in/rimi-kalita-2a617a3a8",
+    "twitter": "https://twitter.com/joonexa"
   }
 }

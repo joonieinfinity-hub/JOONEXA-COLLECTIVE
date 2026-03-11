@@ -52,7 +52,7 @@
   }
 
   .btn-case-study {
-    background-color: #1A5F5F !important;
+    background-color: #E8A9A9 !important;
     color: white !important;
     border-radius: 22px !important;
     padding: 12px 28px !important;
@@ -63,15 +63,15 @@
     justify-content: center;
     gap: 0.6rem;
     border: none !important;
-    box-shadow: 0 4px 14px 0 rgba(26, 95, 95, 0.39) !important;
+    box-shadow: 0 4px 14px 0 rgba(232, 169, 169, 0.39) !important;
     cursor: pointer;
     font-family: var(--font-sans);
   }
 
   .btn-case-study:hover {
-    background-color: #2F7F7F !important;
+    background-color: #BE6A7A !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(47, 127, 127, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(190, 106, 122, 0.4) !important;
   }
 
   .btn-muted-rose {

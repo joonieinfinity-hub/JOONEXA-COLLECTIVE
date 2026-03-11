@@ -90,7 +90,7 @@ const About: React.FC = () => {
             <div className="md:col-span-1">
               <div className="aspect-square rounded-full overflow-hidden border-4 border-accent-rose/20 p-2">
                 <img 
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop" 
+                  src={siteData?.founderImage || "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=1000&auto=format&fit=crop"} 
                   alt={`${siteData?.founder || 'Rimi'} - Founder`}
                   className="w-full h-full object-cover rounded-full"
                   referrerPolicy="no-referrer"

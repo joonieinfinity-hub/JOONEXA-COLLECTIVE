@@ -4,6 +4,7 @@ import { Mail, User, Building, DollarSign, MessageSquare, Send, ChevronDown, Tar
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null);
+  const [siteData, setSiteData] = useState<any>(null);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -11,6 +12,13 @@ const Contact: React.FC = () => {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  React.useEffect(() => {
+    fetch('/api/site')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error("Error fetching site data:", err));
+  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -52,7 +60,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted/40 text-xs font-bold uppercase tracking-widest mb-1 font-sans">Business Email</p>
-                  <p className="text-charcoal font-medium font-sans">hello@joonexa.com</p>
+                  <p className="text-charcoal font-medium font-sans">{siteData?.contactEmail || 'hello@joonexa-collective.com'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -61,7 +69,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted/40 text-xs font-bold uppercase tracking-widest mb-1 font-sans">Founder Contact</p>
-                  <p className="text-charcoal font-medium font-sans">Rimi – Founder, Joonexa Collective</p>
+                  <p className="text-charcoal font-medium font-sans">{siteData?.founder || 'Rimi'} – Founder, {siteData?.name || 'Joonexa Collective'}</p>
                 </div>
               </div>
             </div>

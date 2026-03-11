@@ -4,7 +4,6 @@ import { Project, ProjectCategory } from '../../types';
 import { ExternalLink, ArrowRight, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../SEO';
-import { projects as allProjects } from '../../data/projects.json';
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects', icon: '✨' },
@@ -17,8 +16,21 @@ const CATEGORIES = [
 
 const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [projects, setProjects] = useState<Project[]>(allProjects);
-  const [loading, setLoading] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.projects || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching projects:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === 'all') return projects;
@@ -79,8 +91,8 @@ const WorkPage: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 flex items-center gap-2 font-sans hover:scale-[1.05] ${
                 activeCategory === cat.id 
-                  ? 'bg-deep-teal text-white shadow-xl shadow-deep-teal/20' 
-                  : 'bg-white text-charcoal border border-charcoal/5 hover:border-deep-teal/30 hover:text-deep-teal'
+                  ? 'bg-accent-rose text-white shadow-xl shadow-accent-rose/20' 
+                  : 'bg-white text-charcoal border border-charcoal/5 hover:border-accent-rose/30 hover:text-accent-rose'
               }`}
             >
               <span>{cat.icon}</span>
@@ -113,12 +125,12 @@ const WorkPage: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px]">
-                      <div className="btn-case-study">
+                    <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-charcoal/40 group-hover:backdrop-blur-[2px] z-10">
+                      <div className="btn-case-study transform scale-90 group-hover:scale-100 transition-transform duration-500">
                         View Case Study <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
-                    <div className="absolute top-6 left-6 flex flex-col gap-2">
+                    <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
                       <span className="bg-white/90 backdrop-blur-md text-charcoal px-4 py-2 rounded-xl text-xs font-bold shadow-sm font-sans">
                         {project.category}
                       </span>

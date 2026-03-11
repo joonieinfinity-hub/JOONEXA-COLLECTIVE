@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
     { name: 'Home', page: Page.HOME, path: '/' },
     { name: 'About', page: Page.ABOUT, path: '/about' },
     { name: 'Services', page: Page.SERVICES, path: '/#services' },
-    { name: 'Our Work', page: Page.WORK, path: '/our-work' },
+    { name: 'Work', page: Page.WORK, path: '/work' },
     { name: 'Pricing', page: Page.PRICING, path: '/pricing' },
     { name: 'Contact', page: Page.CONTACT, path: '/contact' },
   ];
@@ -99,29 +99,76 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-bg-soft flex flex-col items-center justify-center gap-8 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-bg-soft/98 backdrop-blur-2xl md:hidden flex flex-col"
           >
-            {navLinks.map((link) => (
-              <button
-                key={link.page}
-                onClick={() => handleLinkClick(link.page, link.path)}
-                className={`text-4xl font-display font-bold uppercase tracking-tight ${
-                  currentPage === link.page ? 'text-accent-rose' : 'text-charcoal'
-                }`}
+            {/* Close button area - to match navbar height */}
+            <div className="h-24 flex items-center justify-end px-6">
+              <button 
+                className="text-charcoal p-2 hover:text-accent-rose transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.name}
+                <X size={32} />
               </button>
-            ))}
-            <button 
-              onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-              className="mt-4 btn-primary text-lg"
+            </div>
+
+            <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6">
+              {navLinks.map((link, i) => (
+                <motion.button
+                  key={link.page}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ 
+                    delay: i * 0.08,
+                    type: "spring",
+                    damping: 20,
+                    stiffness: 100
+                  }}
+                  onClick={() => handleLinkClick(link.page, link.path)}
+                  className={`text-5xl font-display font-bold uppercase tracking-tighter py-3 px-8 w-full text-center transition-all active:scale-95 ${
+                    currentPage === link.page ? 'text-accent-rose' : 'text-charcoal hover:text-accent-teal'
+                  }`}
+                >
+                  {link.name}
+                </motion.button>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ delay: navLinks.length * 0.08 + 0.1 }}
+                className="mt-12 w-full max-w-xs"
+              >
+                <button 
+                  onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
+                  className="w-full btn-primary text-xl py-5 shadow-xl shadow-accent-rose/20"
+                >
+                  Start Your Project
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Mobile Menu Footer */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.6 }}
+              className="p-12 border-t border-charcoal/5 flex flex-col items-center gap-4"
             >
-              Start Your Project
-            </button>
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted/40 font-sans">
+                Joonexa Collective
+              </p>
+              <div className="flex gap-6">
+                <div className="w-1 h-1 rounded-full bg-accent-rose" />
+                <div className="w-1 h-1 rounded-full bg-accent-teal" />
+                <div className="w-1 h-1 rounded-full bg-charcoal/20" />
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

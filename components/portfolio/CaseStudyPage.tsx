@@ -19,7 +19,6 @@ import {
   Loader2
 } from 'lucide-react';
 import SEO from '../SEO';
-import { projects as allProjects } from '../../data/projects.json';
 
 const iconMap: Record<string, any> = {
   Calendar,
@@ -39,9 +38,17 @@ const CaseStudyPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    const found = allProjects.find(p => p.slug === slug);
-    setProject(found || null);
-    setLoading(false);
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        const found = (data.projects as Project[]).find(p => p.slug === slug);
+        setProject(found || null);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching project:", err);
+        setLoading(false);
+      });
   }, [slug]);
 
   if (loading) {
@@ -53,7 +60,7 @@ const CaseStudyPage: React.FC = () => {
   }
 
   if (!project || !project.caseStudy) {
-    return <Navigate to="/our-work" replace />;
+    return <Navigate to="/work" replace />;
   }
 
   const { caseStudy } = project;
@@ -86,8 +93,8 @@ const CaseStudyPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Link to="/our-work" className="inline-flex items-center gap-2 text-white/80 hover:text-white hover:scale-[1.05] mb-8 transition-all font-sans font-bold text-sm uppercase tracking-widest">
-                <ArrowLeft className="w-4 h-4" /> Back to Work
+              <Link to="/work" className="inline-flex items-center gap-2 text-white/80 hover:text-white hover:scale-[1.05] mb-8 transition-all font-sans font-bold text-sm uppercase tracking-widest">
+                <ArrowLeft className="w-4 h-4" /> Back to Portfolio
               </Link>
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="bg-accent-teal text-white px-4 py-2 rounded-xl text-xs font-bold inline-block font-sans">
@@ -271,7 +278,7 @@ const CaseStudyPage: React.FC = () => {
               Start Your Project <ArrowRight className="w-5 h-5" />
             </Link>
             <Link 
-              to="/our-work"
+              to="/work"
               data-cursor="Portfolio"
               className="btn-muted-rose text-xl"
             >
