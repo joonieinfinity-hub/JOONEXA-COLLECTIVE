@@ -17,7 +17,8 @@ import Hero from './components/agency/Hero';
 import Trust from './components/agency/Trust';
 import Services from './components/agency/Services';
 import Work from './components/agency/Work';
-import Pricing from './components/agency/Pricing';
+import PricingSection from './components/PricingSection';
+import CaseStudies from './components/CaseStudies';
 import Contact from './components/agency/Contact';
 import About from './components/agency/About';
 import HowItWorks from './components/agency/HowItWorks';
@@ -27,7 +28,6 @@ import CustomCursor from './components/CustomCursor';
 // New Pages
 import WorkPage from './pages/work';
 import CaseStudyPage from './pages/case-study/[slug]';
-import PricingSection from './components/PricingSection';
 import StudioEdit from './components/portfolio/StudioEdit';
 import Login from './components/admin/Login';
 import { Navigate } from 'react-router-dom';
@@ -62,26 +62,53 @@ const App: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const HomePage = () => (
-    <>
-      <SEO 
-        title="Joonexa Collective | Premium Influencer Marketing Agency"
-        description="Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi."
-      />
-      <Hero onPageChange={handlePageChange} />
-      <Trust />
-      <HowItWorks />
-      <div id="services">
-        <Services onPageChange={handlePageChange} />
-      </div>
-      <CreatorNetwork />
-      <div id="work">
-        <Work onPageChange={handlePageChange} />
-      </div>
-      <div id="pricing">
-        <PricingSection onPageChange={handlePageChange} />
-      </div>
-      <div className="py-32 px-6">
+  const HomePage = () => {
+    const [projects, setProjects] = useState<any[]>([]);
+
+    useEffect(() => {
+      fetch('/api/projects')
+        .then(res => res.json())
+        .then(data => setProjects(data.projects?.slice(0, 4) || []))
+        .catch(err => console.error("Error fetching projects:", err));
+    }, []);
+
+    return (
+      <>
+        <SEO 
+          title="Joonexa Collective | Premium Influencer Marketing Agency"
+          description="Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi."
+        />
+        <Hero onPageChange={handlePageChange} />
+        <Trust />
+        <HowItWorks />
+        <div id="services">
+          <Services onPageChange={handlePageChange} />
+        </div>
+        <CreatorNetwork />
+        <div id="work" className="py-32 px-6 bg-bg-soft">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+              <div className="max-w-2xl">
+                <span className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-4 inline-block font-sans">Featured Work</span>
+                <h2 className="text-4xl md:text-7xl font-display font-bold tracking-tight text-charcoal leading-tight">
+                  Selected <span className="text-accent-rose italic">Case</span> Studies
+                </h2>
+              </div>
+              <Link 
+                to="/work"
+                onClick={() => handlePageChange(Page.WORK)}
+                className="btn-secondary text-sm"
+              >
+                View All Projects <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <CaseStudies projects={projects} layout="featured" />
+          </div>
+        </div>
+        <div id="pricing">
+          <PricingSection onPageChange={handlePageChange} />
+        </div>
+        <div className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
@@ -144,7 +171,8 @@ const App: React.FC = () => {
         </div>
       </div>
     </>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-bg-soft text-charcoal selection:bg-accent-rose selection:text-white">

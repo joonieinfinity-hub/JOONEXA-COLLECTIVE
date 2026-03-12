@@ -144,7 +144,7 @@ const Work: React.FC = () => {
                 onClick={() => setSearchQuery('')}
                 className="absolute right-5 top-1/2 -translate-y-1/2 text-muted/30 hover:text-accent-rose"
               >
-                <X className="w-4 h-4" />
+                <Search className="w-4 h-4" />
               </button>
             )}
           </div>
