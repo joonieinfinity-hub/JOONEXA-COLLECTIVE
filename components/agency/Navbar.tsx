@@ -75,17 +75,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-accent-rose/20 shadow-xl shadow-accent-rose/10 bg-white p-0.5"
+              className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-accent-rose/30 shadow-2xl shadow-accent-rose/10 bg-white p-0.5 group-hover:border-accent-rose/60 transition-colors duration-500"
             >
+              <div className="absolute inset-0 bg-gradient-to-tr from-accent-rose/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
                 src={siteData.logoUrl} 
                 alt={siteData.name} 
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full object-cover rounded-full relative z-10"
                 referrerPolicy="no-referrer"
               />
-              <motion.div 
-                className="absolute inset-0 bg-accent-rose/5 opacity-0 group-hover:opacity-100 transition-opacity"
-              />
+              <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(242,125,38,0.1)] group-hover:shadow-[inset_0_0_30px_rgba(242,125,38,0.2)] transition-all duration-500" />
             </motion.div>
           ) : (
             <span className="text-2xl font-display font-bold tracking-tighter text-charcoal">

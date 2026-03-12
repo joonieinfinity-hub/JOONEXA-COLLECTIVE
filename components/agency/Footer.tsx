@@ -52,9 +52,21 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           <div className="md:col-span-2">
             <button 
               onClick={() => onPageChange(Page.HOME)}
-              className="text-3xl font-display font-bold tracking-tighter text-charcoal mb-6"
+              className="flex items-center gap-4 group mb-8"
             >
-              {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+              {siteData?.logoUrl ? (
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-accent-rose/20 bg-white p-0.5 group-hover:border-accent-rose/50 transition-colors duration-500">
+                  <img 
+                    src={siteData.logoUrl} 
+                    alt={siteData.name} 
+                    className="w-full h-full object-cover rounded-full"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ) : null}
+              <span className="text-3xl font-display font-bold tracking-tighter text-charcoal group-hover:text-accent-rose transition-colors duration-500">
+                {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+              </span>
             </button>
             <p className="text-muted max-w-sm leading-relaxed mb-8 font-sans">
               {siteData?.description || 'Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi.'}
