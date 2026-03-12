@@ -87,26 +87,42 @@ const CreatorNetwork: React.FC = () => {
               key={niche.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -10 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative h-[400px] rounded-[2.5rem] overflow-hidden border border-accent-rose/5 shadow-xl shadow-accent-rose/5"
+              transition={{ 
+                delay: index * 0.1,
+                whileHover: { duration: 0.4, ease: "easeOut" }
+              }}
+              className="group relative h-[450px] rounded-[3rem] overflow-hidden border border-accent-rose/5 shadow-xl shadow-accent-rose/5 cursor-pointer"
             >
-              <img 
+              <motion.img 
                 src={niche.visual} 
                 alt={niche.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-70 group-hover:opacity-85 transition-opacity duration-500" />
               
-              <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-accent-rose transition-all duration-500">
-                  <niche.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-3xl font-display font-bold text-white mb-2 tracking-tight">{niche.name}</h3>
-                <p className="text-white/60 text-sm leading-relaxed max-w-[200px] font-sans">
-                  {niche.description}
-                </p>
+              <div className="absolute inset-0 p-12 flex flex-col justify-end">
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-accent-rose transition-all duration-500 group-hover:shadow-lg group-hover:shadow-accent-rose/30"
+                >
+                  <niche.icon className="w-7 h-7 text-white" />
+                </motion.div>
+                <motion.div
+                  initial={{ y: 10, opacity: 0.8 }}
+                  whileHover={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <h3 className="text-4xl font-display font-bold text-white mb-3 tracking-tight">{niche.name}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed max-w-[240px] font-sans group-hover:text-white transition-colors duration-300">
+                    {niche.description}
+                  </p>
+                </motion.div>
               </div>
             </motion.div>
           ))}
