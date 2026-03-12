@@ -25,8 +25,9 @@ import CreatorNetwork from './components/agency/CreatorNetwork';
 import CustomCursor from './components/CustomCursor';
 
 // New Pages
-import WorkPage from './components/portfolio/WorkPage';
-import CaseStudyPage from './components/portfolio/CaseStudyPage';
+import WorkPage from './pages/work';
+import CaseStudyPage from './pages/case-study/[slug]';
+import PricingSection from './components/PricingSection';
 import StudioEdit from './components/portfolio/StudioEdit';
 import Login from './components/admin/Login';
 import { Navigate } from 'react-router-dom';
@@ -76,6 +77,9 @@ const App: React.FC = () => {
       <CreatorNetwork />
       <div id="work">
         <Work onPageChange={handlePageChange} />
+      </div>
+      <div id="pricing">
+        <PricingSection onPageChange={handlePageChange} />
       </div>
       <div className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
@@ -161,7 +165,7 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/work" element={<WorkPage />} />
               <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
-              <Route path="/pricing" element={<Pricing onPageChange={handlePageChange} />} />
+              <Route path="/pricing" element={<PricingSection onPageChange={handlePageChange} />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/creator-network" element={<CreatorNetwork />} />
               <Route path="/login" element={<Login />} />

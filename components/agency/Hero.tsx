@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Target, FileText, Moon, Sun } from 'lucide-react';
 import { Page } from '../../types';
 
@@ -46,6 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/api/site')
@@ -176,14 +178,20 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             className="flex flex-col md:flex-row items-center justify-center gap-6"
           >
             <button 
-              onClick={() => onPageChange(Page.CONTACT)}
+              onClick={() => {
+                onPageChange(Page.CONTACT);
+                navigate('/contact');
+              }}
               className="btn-primary group"
             >
               Start Your Project
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
-              onClick={() => onPageChange(Page.WORK)}
+              onClick={() => {
+                onPageChange(Page.WORK);
+                navigate('/work');
+              }}
               className="btn-secondary group"
             >
               View Our Work
