@@ -1,6 +1,7 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Page } from '../../types';
-import { Instagram, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Mail, X, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface FooterProps {
@@ -10,7 +11,27 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   const currentYear = new Date().getFullYear();
   const [siteData, setSiteData] = React.useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [secretCode, setSecretCode] = React.useState('');
+  const [error, setError] = React.useState(false);
   const navigate = useNavigate();
+
+  const handleCopyrightClick = () => {
+    setIsModalOpen(true);
+    setSecretCode('');
+    setError(false);
+  };
+
+  const handleCodeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (secretCode === '1994RM') {
+      setIsModalOpen(false);
+      navigate('/login');
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 2000);
+    }
+  };
 
   React.useEffect(() => {
     fetch('/api/site')
@@ -79,7 +100,14 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                 </a>
               </li>
               <li className="text-muted text-sm font-sans">Founder: {siteData?.founder || 'Rimi'}</li>
-              <li className="text-muted text-sm font-sans">© {currentYear} {siteData?.name || 'Joonexa Collective'}</li>
+              <motion.li 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-muted text-sm font-sans cursor-pointer select-none hover:text-charcoal transition-colors"
+                onClick={handleCopyrightClick}
+              >
+                © {currentYear} {siteData?.name || 'Joonexa Collective'}
+              </motion.li>
             </ul>
           </div>
         </div>
@@ -89,18 +117,73 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
             Minimalist. Modern. Aesthetic.
           </p>
           <div className="flex gap-8 items-center">
-            <Link 
-              to="/login" 
-              data-cursor="Admin"
-              className="text-muted/10 hover:text-accent-teal transition-colors text-[10px] uppercase tracking-widest font-bold font-sans"
-            >
-              Founder Login
-            </Link>
             <p className="text-muted/50 text-xs font-sans">Privacy Policy</p>
             <p className="text-muted/50 text-xs font-sans">Terms of Service</p>
           </div>
         </div>
       </div>
+
+      {/* Secret Code Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/60 backdrop-blur-sm px-6"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white w-full max-w-sm rounded-[2rem] p-8 shadow-2xl relative overflow-hidden"
+            >
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-6 right-6 text-muted/30 hover:text-charcoal transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="text-center mb-8">
+                <div className="w-12 h-12 bg-accent-rose/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-6 h-6 text-accent-rose" />
+                </div>
+                <h3 className="text-xl font-display font-bold text-charcoal">Founder Access</h3>
+                <p className="text-xs text-muted font-sans mt-1">Enter your authorization code</p>
+              </div>
+
+              <form onSubmit={handleCodeSubmit} className="space-y-4">
+                <div className="relative">
+                  <input 
+                    type="password"
+                    autoFocus
+                    placeholder="••••••"
+                    value={secretCode}
+                    onChange={(e) => setSecretCode(e.target.value.toUpperCase())}
+                    className={`w-full bg-bg-soft border ${error ? 'border-accent-rose' : 'border-charcoal/5'} rounded-xl py-4 px-6 text-center text-lg tracking-[0.5em] font-mono focus:outline-none focus:border-accent-rose transition-all`}
+                  />
+                  {error && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-[10px] text-accent-rose font-bold text-center mt-2 uppercase tracking-widest"
+                    >
+                      Invalid Authorization Code
+                    </motion.p>
+                  )}
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full py-4 bg-charcoal text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-accent-rose transition-all duration-300"
+                >
+                  Verify Identity
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </footer>
   );
 };

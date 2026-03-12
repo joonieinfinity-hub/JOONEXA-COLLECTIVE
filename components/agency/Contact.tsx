@@ -8,10 +8,19 @@ const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    subject: '',
+    brand: '',
+    budget: '',
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const budgetRanges = [
+    'Under $1,000',
+    '$1,000 - $5,000',
+    '$5,000 - $10,000',
+    '$10,000 - $25,000',
+    '$25,000+',
+  ];
 
   React.useEffect(() => {
     fetch('/api/site')
@@ -26,9 +35,10 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission
+    // In a real app, this would send to rimi@joonexa-collective.com
+    console.log('Form submitted:', formState);
     setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setTimeout(() => setIsSubmitted(false), 8000);
   };
 
   return (
@@ -60,7 +70,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted/40 text-xs font-bold uppercase tracking-widest mb-1 font-sans">Business Email</p>
-                  <p className="text-charcoal font-medium font-sans">{siteData?.contactEmail || 'hello@joonexa-collective.com'}</p>
+                  <p className="text-charcoal font-medium font-sans">rimi@joonexa-collective.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -89,27 +99,49 @@ const Contact: React.FC = () => {
                   <Send className="w-10 h-10 text-accent-rose" />
                 </div>
                 <h3 className="text-3xl font-display font-bold text-charcoal mb-4 tracking-tight">Message Sent!</h3>
-                <p className="text-muted font-sans">Thank you for reaching out. We'll be in touch soon.</p>
+                <p className="text-muted font-sans max-w-xs mx-auto">Thank you! We'll review your request and respond within 24 hours.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Name</label>
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
-                    <motion.input 
-                      required
-                      type="text" 
-                      placeholder="Your Name"
-                      whileFocus={{ 
-                        scale: 1.01, 
-                        borderColor: 'var(--color-accent-teal)',
-                        boxShadow: '0 0 20px rgba(47, 127, 127, 0.1)'
-                      }}
-                      className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none transition-all font-sans"
-                      value={formState.name}
-                      onChange={(e) => setFormState({...formState, name: e.target.value})}
-                    />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Name</label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
+                      <motion.input 
+                        required
+                        type="text" 
+                        placeholder="Your Name"
+                        whileFocus={{ 
+                          scale: 1.01, 
+                          borderColor: 'var(--color-accent-teal)',
+                          boxShadow: '0 0 20px rgba(47, 127, 127, 0.1)'
+                        }}
+                        className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none transition-all font-sans"
+                        value={formState.name}
+                        onChange={(e) => setFormState({...formState, name: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Brand / Company</label>
+                    <div className="relative">
+                      <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
+                      <motion.input 
+                        required
+                        type="text" 
+                        placeholder="Company Name"
+                        whileFocus={{ 
+                          scale: 1.01, 
+                          borderColor: 'var(--color-accent-teal)',
+                          boxShadow: '0 0 20px rgba(47, 127, 127, 0.1)'
+                        }}
+                        className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none transition-all font-sans"
+                        value={formState.brand}
+                        onChange={(e) => setFormState({...formState, brand: e.target.value})}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -134,22 +166,21 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Subject</label>
+                  <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Campaign Budget Range</label>
                   <div className="relative">
-                    <Target className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
-                    <motion.input 
+                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
+                    <select 
                       required
-                      type="text" 
-                      placeholder="Subject"
-                      whileFocus={{ 
-                        scale: 1.01, 
-                        borderColor: 'var(--color-accent-teal)',
-                        boxShadow: '0 0 20px rgba(47, 127, 127, 0.1)'
-                      }}
-                      className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none transition-all font-sans"
-                      value={formState.subject}
-                      onChange={(e) => setFormState({...formState, subject: e.target.value})}
-                    />
+                      className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none transition-all font-sans appearance-none"
+                      value={formState.budget}
+                      onChange={(e) => setFormState({...formState, budget: e.target.value})}
+                    >
+                      <option value="" disabled>Select Budget Range</option>
+                      {budgetRanges.map(range => (
+                        <option key={range} value={range}>{range}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/40 pointer-events-none" />
                   </div>
                 </div>
 
@@ -160,7 +191,7 @@ const Contact: React.FC = () => {
                     <motion.textarea 
                       required
                       rows={4}
-                      placeholder="Your message..."
+                      placeholder="Tell us about your campaign goals..."
                       whileFocus={{ 
                         scale: 1.01, 
                         borderColor: 'var(--color-accent-teal)',

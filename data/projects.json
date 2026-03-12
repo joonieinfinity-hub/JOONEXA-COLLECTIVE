@@ -3,120 +3,98 @@
     {
       "id": "1",
       "brandName": "Verano",
-      "projectName": "Verano Dining Experience",
-      "category": "Web Design",
-      "serviceType": "Web Design & Development",
-      "description": "A high-end digital experience for a Mediterranean dining concept.",
-      "result": "+42% reservations",
+      "projectName": "Local Influencer Launch Campaign",
+      "category": "Influencer Campaigns",
+      "serviceType": "Influencer Marketing",
+      "description": "A hyper-local influencer campaign to drive foot traffic for a new Mediterranean restaurant launch.",
+      "result": "+150% Bookings",
       "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop",
-      "video": "",
-      "slug": "verano-dining-experience",
-      "type": "Client Project",
+      "slug": "verano-restaurant-launch",
+      "type": "Featured Case Study",
       "caseStudy": {
         "overview": {
           "industry": "Hospitality",
-          "services": ["Web Design", "UI/UX Strategy", "SEO Optimization"]
+          "services": ["Influencer Sourcing", "Event Management", "Content Strategy"]
         },
-        "problem": "Verano needed a digital presence that matched their exquisite physical atmosphere.",
-        "strategy": "We focused on visual storytelling and a seamless booking process.",
+        "problem": "Launch the new location with maximum local buzz and ensure a fully booked opening week in a competitive market.",
+        "strategy": "We identified and partnered with 15 high-engagement local food and lifestyle influencers for exclusive pre-launch tasting events, creating a 'fear of missing out' effect.",
         "execution": [
           {
-            "title": "Visual Identity",
-            "content": "Capturing the essence of Mediterranean luxury through photography.",
+            "title": "Influencer Vetting",
+            "content": "Strict selection of creators with >80% local audience concentration and proven engagement in the dining niche."
+          },
+          {
+            "title": "The Tasting Event",
+            "content": "Coordinated a multi-day exclusive tasting experience designed for high-quality content creation.",
             "media": [
-              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "Homepage Design" }
+              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "Influencer Tasting Event" }
             ]
           }
         ],
         "results": [
-          { "label": "Reservations", "value": "+42%", "icon": "Calendar" }
+          { "label": "Opening Week Bookings", "value": "+150%", "icon": "Calendar" },
+          { "label": "Local Impressions", "value": "2M+", "icon": "Users" },
+          { "label": "Table Occupancy", "value": "100%", "icon": "CheckCircle2" }
         ]
       }
     },
     {
       "id": "2",
-      "brandName": "Creator Studio",
-      "projectName": "Creator Growth Studio",
+      "brandName": "Glow & Co",
+      "projectName": "Micro-Influencer Awareness Campaign",
       "category": "Influencer Campaigns",
       "serviceType": "Influencer Marketing",
-      "description": "Empowering creators with data-driven growth strategies.",
-      "result": "3.2x Engagement",
-      "image": "https://images.unsplash.com/photo-1593642532400-2682810df593?q=80&w=2070&auto=format&fit=crop",
-      "slug": "creator-growth-studio",
-      "type": "Client Project",
+      "description": "Scaling brand awareness through a curated network of micro-influencers in the clean beauty space.",
+      "result": "4.8x ROI",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+      "slug": "dtc-skincare-awareness",
+      "type": "Featured Case Study",
       "caseStudy": {
         "overview": {
-          "industry": "Creator Economy",
-          "services": ["Growth Strategy", "Content Optimization"]
+          "industry": "Beauty / DTC",
+          "services": ["Micro-Influencer Sourcing", "Campaign Management", "ROI Tracking"]
         },
-        "problem": "Creators struggled to scale their audience consistently.",
-        "strategy": "Data-backed content pillars and engagement loops.",
+        "problem": "A new clean beauty brand needed to break through the noise and drive direct-to-consumer sales without a massive celebrity budget.",
+        "strategy": "Leveraged a network of 50+ micro-influencers (10k-50k followers) with high trust scores to create authentic 'Get Ready With Me' content.",
         "execution": [
           {
-            "title": "Strategy Phase",
-            "content": "Analyzing audience behavior to identify growth opportunities."
+            "title": "Community Building",
+            "content": "Focusing on creators who already used similar products to ensure genuine advocacy."
           }
         ],
         "results": [
-          { "label": "Engagement", "value": "3.2x", "icon": "TrendingUp" }
+          { "label": "Campaign ROI", "value": "4.8x", "icon": "TrendingUp" },
+          { "label": "Organic Views", "value": "500k+", "icon": "BarChart" }
         ]
       }
     },
     {
       "id": "3",
-      "brandName": "FlowMetrics",
-      "projectName": "FlowMetrics Dashboard",
-      "category": "Web Design",
-      "serviceType": "UI/UX Design",
-      "description": "A complex data visualization dashboard for enterprise analytics.",
-      "result": "+220% Reach",
-      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
-      "slug": "flowmetrics-dashboard",
-      "type": "Client Project",
-      "caseStudy": {
-        "overview": {
-          "industry": "Tech / SaaS",
-          "services": ["UI/UX Design", "Data Visualization"]
-        },
-        "problem": "Complex data was difficult for users to interpret.",
-        "strategy": "Simplifying information hierarchy and interactive charts.",
-        "execution": [
-          {
-            "title": "UI Design",
-            "content": "Creating a clean, intuitive interface for data exploration."
-          }
-        ],
-        "results": [
-          { "label": "User Reach", "value": "+220%", "icon": "Users" }
-        ]
-      }
-    },
-    {
-      "id": "4",
-      "brandName": "Aurielle",
-      "projectName": "Aurielle Skincare",
+      "brandName": "L'Avenue",
+      "projectName": "Seasonal Collection Launch",
       "category": "Marketing Campaigns",
-      "serviceType": "Brand Strategy",
-      "description": "Rebranding a luxury skincare line for a younger demographic.",
-      "result": "4.5x ROAS",
-      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
-      "slug": "aurielle-skincare",
-      "type": "Client Project",
+      "serviceType": "Creative Direction & Influencer Strategy",
+      "description": "A high-fashion digital campaign for the Autumn/Winter collection launch.",
+      "result": "Sold Out",
+      "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop",
+      "slug": "fashion-label-launch",
+      "type": "Featured Case Study",
       "caseStudy": {
         "overview": {
-          "industry": "Beauty",
-          "services": ["Branding", "Digital Marketing"]
+          "industry": "Fashion",
+          "services": ["Creative Direction", "Influencer Partnerships", "Launch Strategy"]
         },
-        "problem": "The brand felt outdated to the Gen Z market.",
-        "strategy": "Vibrant visuals and influencer-led storytelling.",
+        "problem": "Drive immediate sell-through of a limited seasonal collection while elevating brand prestige.",
+        "strategy": "High-production creative direction paired with strategic Tier-1 fashion influencer partnerships and exclusive early-access windows.",
         "execution": [
           {
-            "title": "Rebranding",
-            "content": "New visual language and tone of voice."
+            "title": "Creative Direction",
+            "content": "Developing a cinematic visual language that influencers could adapt to their own styles."
           }
         ],
         "results": [
-          { "label": "ROAS", "value": "4.5x", "icon": "BarChart" }
+          { "label": "Sell-through Time", "value": "48 Hours", "icon": "Clock" },
+          { "label": "Web Traffic Increase", "value": "300%", "icon": "TrendingUp" }
         ]
       }
     }

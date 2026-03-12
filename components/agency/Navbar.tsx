@@ -12,10 +12,16 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [siteData, setSiteData] = useState<any>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    fetch('/api/site')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error("Error fetching site data:", err));
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -60,9 +66,32 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
         <Link 
           to="/"
           onClick={() => onPageChange(Page.HOME)}
-          className="text-2xl font-display font-bold tracking-tighter text-charcoal hover:opacity-80 transition-opacity flex items-center gap-1"
+          className="flex items-center gap-3 group"
         >
-          JOONEXA<span className="text-accent-rose">.</span>
+          {siteData?.logoUrl ? (
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 3 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-accent-rose/20 shadow-xl shadow-accent-rose/10 bg-white p-0.5"
+            >
+              <img 
+                src={siteData.logoUrl} 
+                alt={siteData.name} 
+                className="w-full h-full object-cover rounded-full"
+                referrerPolicy="no-referrer"
+              />
+              <motion.div 
+                className="absolute inset-0 bg-accent-rose/5 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </motion.div>
+          ) : (
+            <span className="text-2xl font-display font-bold tracking-tighter text-charcoal">
+              {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+            </span>
+          )}
         </Link>
 
         {/* Desktop Nav */}
