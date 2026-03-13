@@ -41,7 +41,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   };
 
   return (
-    <footer className="bg-white border-t border-accent-rose/10 py-24 px-6">
+    <footer className="bg-white border-t border-accent-rose py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="md:col-span-2">
@@ -63,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                 {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
               </span>
             </button>
-            <p className="text-muted max-w-sm leading-relaxed mb-8 font-sans">
+            <p className="text-charcoal/70 max-w-sm leading-relaxed mb-8 font-sans">
               {siteData?.description || 'Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi.'}
             </p>
             <div className="flex gap-4">
@@ -88,29 +88,29 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           <div>
             <h4 className="text-charcoal font-bold mb-6 uppercase tracking-widest text-xs font-sans">Navigation</h4>
             <ul className="space-y-4">
-              <li><button onClick={() => handleNavClick(Page.HOME, '/')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Home</button></li>
-              <li><button onClick={() => handleNavClick(Page.ABOUT, '/about')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">About</button></li>
-              <li><button onClick={() => handleNavClick(Page.SERVICES, '/#services')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Services</button></li>
-              <li><button onClick={() => handleNavClick(Page.WORK, '/work')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Work</button></li>
-              <li><button onClick={() => handleNavClick(Page.CREATOR_NETWORK, '/creator-network')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Creator Network</button></li>
-              <li><button onClick={() => handleNavClick(Page.PRICING, '/pricing')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Pricing</button></li>
-              <li><button onClick={() => handleNavClick(Page.CONTACT, '/contact')} className="text-muted hover:text-accent-rose transition-colors text-sm font-sans">Contact</button></li>
+              <li><button onClick={() => handleNavClick(Page.HOME, '/')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Home</button></li>
+              <li><button onClick={() => handleNavClick(Page.ABOUT, '/about')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">About</button></li>
+              <li><button onClick={() => handleNavClick(Page.SERVICES, '/#services')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Services</button></li>
+              <li><button onClick={() => handleNavClick(Page.WORK, '/work')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Work</button></li>
+              <li><button onClick={() => handleNavClick(Page.CREATOR_NETWORK, '/creator-network')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Creator Network</button></li>
+              <li><button onClick={() => handleNavClick(Page.PRICING, '/pricing')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Pricing</button></li>
+              <li><button onClick={() => handleNavClick(Page.CONTACT, '/contact')} className="text-charcoal/70 hover:text-accent-rose transition-colors text-sm font-sans">Contact</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-charcoal font-bold mb-6 uppercase tracking-widest text-xs font-sans">Contact</h4>
             <ul className="space-y-4">
-              <li className="text-muted text-sm font-sans">
+              <li className="text-charcoal/70 text-sm font-sans">
                 <a href={`mailto:${siteData?.contactEmail || 'rimi@joonexa-collective.com'}`} className="hover:text-accent-rose transition-colors">
                   {siteData?.contactEmail || 'rimi@joonexa-collective.com'}
                 </a>
               </li>
-              <li className="text-muted text-sm font-sans">Founder: {siteData?.founder || 'Rimi'}</li>
+              <li className="text-charcoal/70 text-sm font-sans">Founder: {siteData?.founder || 'Rimi'}</li>
               <motion.li 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="text-muted text-sm font-sans cursor-pointer select-none hover:text-charcoal transition-colors"
+                className="text-charcoal/70 text-sm font-sans cursor-pointer select-none hover:text-charcoal transition-colors"
                 onClick={handleCopyrightClick}
               >
                 © {currentYear} {siteData?.name || 'Joonexa Collective'}
@@ -119,13 +119,13 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-charcoal/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-muted/50 text-[10px] font-sans uppercase tracking-widest">
+        <div className="pt-12 border-t border-charcoal/20 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-charcoal/40 text-[10px] font-sans uppercase tracking-widest">
             Minimalist. Modern. Aesthetic.
           </p>
           <div className="flex gap-8 items-center">
-            <p className="text-muted/50 text-xs font-sans">Privacy Policy</p>
-            <p className="text-muted/50 text-xs font-sans">Terms of Service</p>
+            <p className="text-charcoal/40 text-xs font-sans">Privacy Policy</p>
+            <p className="text-charcoal/40 text-xs font-sans">Terms of Service</p>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
             >
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-6 right-6 text-muted/30 hover:text-charcoal transition-colors"
+                className="absolute top-6 right-6 text-charcoal/30 hover:text-charcoal transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -157,7 +157,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                   <Shield className="w-6 h-6 text-accent-rose" />
                 </div>
                 <h3 className="text-xl font-display font-bold text-charcoal">Founder Access</h3>
-                <p className="text-xs text-muted font-sans mt-1">Enter your authorization code</p>
+                <p className="text-xs text-charcoal/60 font-sans mt-1">Enter your authorization code</p>
               </div>
 
               <form onSubmit={handleCodeSubmit} className="space-y-4">
@@ -168,7 +168,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                     placeholder="••••••"
                     value={secretCode}
                     onChange={(e) => setSecretCode(e.target.value.toUpperCase())}
-                    className={`w-full bg-bg-soft border ${error ? 'border-accent-rose' : 'border-charcoal/5'} rounded-xl py-4 px-6 text-center text-lg tracking-[0.5em] font-mono focus:outline-none focus:border-accent-rose transition-all`}
+                    className={`w-full bg-bg-soft border ${error ? 'border-accent-rose' : 'border-charcoal/20'} rounded-xl py-4 px-6 text-center text-lg tracking-[0.5em] font-mono focus:outline-none focus:border-accent-rose transition-all`}
                   />
                   {error && (
                     <motion.p 
