@@ -29,15 +29,10 @@ const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
-const About: React.FC = () => {
-  const [siteData, setSiteData] = React.useState<any>(null);
+import siteDataJson from '../../data/site.json';
 
-  React.useEffect(() => {
-    fetch('/api/site')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error("Error fetching site data:", err));
-  }, []);
+const About: React.FC = () => {
+  const [siteData, setSiteData] = React.useState<any>(siteDataJson);
 
   return (
     <section id="about" className="py-32 px-6 bg-bg-soft">

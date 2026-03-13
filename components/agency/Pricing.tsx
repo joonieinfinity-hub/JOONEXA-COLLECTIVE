@@ -3,19 +3,14 @@ import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { PricingTier, Page } from '../../types';
 
+import pricingData from '../../data/pricing.json';
+
 interface PricingProps {
   onPageChange: (page: Page) => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
-  const [pricingData, setPricingData] = React.useState<PricingTier[]>([]);
-
-  React.useEffect(() => {
-    fetch('/api/pricing')
-      .then(res => res.json())
-      .then(data => setPricingData(data.pricing || []))
-      .catch(err => console.error("Error fetching pricing data:", err));
-  }, []);
+  const [pricingDataState, setPricingDataState] = React.useState<PricingTier[]>(pricingData.pricing as any || []);
 
   return (
     <section id="pricing" className="py-32 px-6 bg-bg-soft">
@@ -50,7 +45,7 @@ const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-          {pricingData.map((tier, index) => (
+          {pricingDataState.map((tier, index) => (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}

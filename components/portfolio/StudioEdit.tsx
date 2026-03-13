@@ -21,6 +21,9 @@ import {
   Mail
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import projectsData from '../../data/projects.json';
+import pricingData from '../../data/pricing.json';
+import siteDataJson from '../../data/site.json';
 
 interface SiteData {
   name: string;
@@ -56,17 +59,9 @@ const StudioEdit: React.FC = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [projectsRes, pricingRes, siteRes] = await Promise.all([
-        fetch('/api/projects'),
-        fetch('/api/pricing'),
-        fetch('/api/site')
-      ]);
-      const pData = await projectsRes.json();
-      const prData = await pricingRes.json();
-      const sData = await siteRes.json();
-      setProjects(pData.projects);
-      setPricing(prData.pricing);
-      setSiteData(sData);
+      setProjects(projectsData.projects as Project[]);
+      setPricing(pricingData.pricing as PricingTier[]);
+      setSiteData(siteDataJson as SiteData);
     } catch (err) {
       console.error("Error fetching data:", err);
     } finally {
@@ -83,58 +78,31 @@ const StudioEdit: React.FC = () => {
     e.preventDefault();
     if (!siteData) return;
     setSaveStatus('saving');
-    try {
-      const res = await fetch('/api/site', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(siteData)
-      });
-      if (res.ok) {
-        setSaveStatus('success');
-        setTimeout(() => setSaveStatus('idle'), 2000);
-      }
-    } catch (err) {
-      console.error("Error saving site data:", err);
-      setSaveStatus('idle');
-    }
+    console.log('Saving site data (local only):', siteData);
+    setTimeout(() => {
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    }, 1000);
   };
 
   const handleSaveProjects = async (updatedProjects: Project[]) => {
     setSaveStatus('saving');
-    try {
-      const res = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ projects: updatedProjects })
-      });
-      if (res.ok) {
-        setProjects(updatedProjects);
-        setSaveStatus('success');
-        setTimeout(() => setSaveStatus('idle'), 2000);
-      }
-    } catch (err) {
-      console.error("Error saving projects:", err);
-      setSaveStatus('idle');
-    }
+    console.log('Saving projects (local only):', updatedProjects);
+    setTimeout(() => {
+      setProjects(updatedProjects);
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    }, 1000);
   };
 
   const handleSavePricing = async (updatedPricing: PricingTier[]) => {
     setSaveStatus('saving');
-    try {
-      const res = await fetch('/api/pricing', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pricing: updatedPricing })
-      });
-      if (res.ok) {
-        setPricing(updatedPricing);
-        setSaveStatus('success');
-        setTimeout(() => setSaveStatus('idle'), 2000);
-      }
-    } catch (err) {
-      console.error("Error saving pricing:", err);
-      setSaveStatus('idle');
-    }
+    console.log('Saving pricing (local only):', updatedPricing);
+    setTimeout(() => {
+      setPricing(updatedPricing);
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    }, 1000);
   };
 
   const handleDeleteProject = (id: string) => {

@@ -34,6 +34,8 @@ import { Navigate } from 'react-router-dom';
 
 import SEO from './components/SEO';
 
+import projectsData from './data/projects.json';
+
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const isAuthenticated = localStorage.getItem('isFounderAuthenticated') === 'true';
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
@@ -63,14 +65,7 @@ const App: React.FC = () => {
   };
 
   const HomePage = () => {
-    const [projects, setProjects] = useState<any[]>([]);
-
-    useEffect(() => {
-      fetch('/api/projects')
-        .then(res => res.json())
-        .then(data => setProjects(data.projects?.slice(0, 4) || []))
-        .catch(err => console.error("Error fetching projects:", err));
-    }, []);
+    const [projects, setProjects] = useState<any[]>(projectsData.projects?.slice(0, 4) || []);
 
     return (
       <>

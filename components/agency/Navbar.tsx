@@ -4,6 +4,8 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { Page } from '../../types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import siteDataJson from '../../data/site.json';
+
 interface NavbarProps {
   currentPage: Page;
   onPageChange: (page: Page) => void;
@@ -12,16 +14,11 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [siteData, setSiteData] = useState<any>(null);
+  const [siteData, setSiteData] = useState<any>(siteDataJson);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/site')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error("Error fetching site data:", err));
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };

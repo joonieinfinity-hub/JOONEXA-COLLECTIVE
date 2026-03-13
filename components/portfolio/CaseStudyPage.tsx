@@ -21,6 +21,7 @@ import {
   Award
 } from 'lucide-react';
 import SEO from '../SEO';
+import projectsData from '../../data/projects.json';
 
 const iconMap: Record<string, any> = {
   Calendar,
@@ -47,17 +48,9 @@ const CaseStudyPage: React.FC = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => {
-        const found = (data.projects as Project[]).find(p => p.slug === slug);
-        setProject(found || null);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching project:", err);
-        setLoading(false);
-      });
+    const found = (projectsData.projects as any[]).find(p => p.slug === slug);
+    setProject(found || null);
+    setLoading(false);
   }, [slug]);
 
   if (loading) {

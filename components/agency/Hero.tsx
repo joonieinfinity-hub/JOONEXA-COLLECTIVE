@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Target, FileText, Moon, Sun } from 'lucide-react';
 import { Page } from '../../types';
+import siteDataJson from '../../data/site.json';
 
 interface HeroProps {
   onPageChange: (page: Page) => void;
@@ -45,16 +46,11 @@ const TESTIMONIALS = [
 const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   const [nicheIndex, setNicheIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [siteData, setSiteData] = useState<SiteData | null>(null);
+  const [siteData, setSiteData] = useState<SiteData | null>(siteDataJson as any);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/site')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error("Error fetching site data:", err));
-
     const nicheInterval = setInterval(() => {
       setNicheIndex((prev) => (prev + 1) % NICHES.length);
     }, 2500);

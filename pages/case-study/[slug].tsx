@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import { Project } from '../../types';
 import { ArrowLeft, ArrowRight, ExternalLink, Award, Loader2, CheckCircle2, Target, Zap } from 'lucide-react';
 import SEO from '../../components/SEO';
+import projectsData from '../../data/projects.json';
 
 const CaseStudy: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -19,18 +20,10 @@ const CaseStudy: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => {
-        const found = data.projects.find((p: Project) => p.slug === slug);
-        if (found) setProject(found);
-        else navigate('/work');
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching project:", err);
-        setLoading(false);
-      });
+    const found = projectsData.projects.find((p: any) => p.slug === slug);
+    if (found) setProject(found as any);
+    else navigate('/work');
+    setLoading(false);
   }, [slug, navigate]);
 
   if (loading) {

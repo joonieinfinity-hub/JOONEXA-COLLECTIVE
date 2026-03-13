@@ -2,9 +2,11 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, User, Building, DollarSign, MessageSquare, Send, ChevronDown, Target } from 'lucide-react';
 
+import siteDataJson from '../../data/site.json';
+
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null);
-  const [siteData, setSiteData] = useState<any>(null);
+  const [siteData, setSiteData] = useState<any>(siteDataJson);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -21,13 +23,6 @@ const Contact: React.FC = () => {
     '$10,000 - $25,000',
     '$25,000+',
   ];
-
-  React.useEffect(() => {
-    fetch('/api/site')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error("Error fetching site data:", err));
-  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });

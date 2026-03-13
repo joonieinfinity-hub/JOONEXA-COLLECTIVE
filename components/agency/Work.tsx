@@ -7,19 +7,14 @@ import { ArrowRight } from 'lucide-react';
 import ProjectMedia from './ProjectMedia';
 import CaseStudies from '../CaseStudies';
 
+import projectsData from '../../data/projects.json';
+
 interface WorkProps {
   onPageChange: (page: Page) => void;
 }
 
 const Work: React.FC<WorkProps> = ({ onPageChange }) => {
-  const [projects, setProjects] = React.useState<any[]>([]);
-
-  React.useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => setProjects(data.projects || []))
-      .catch(err => console.error("Error fetching projects:", err));
-  }, []);
+  const [projects, setProjects] = React.useState<any[]>(projectsData.projects || []);
 
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">

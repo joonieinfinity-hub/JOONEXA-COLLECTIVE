@@ -4,13 +4,15 @@ import { Page } from '../../types';
 import { Instagram, Linkedin, Mail, X, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import siteDataJson from '../../data/site.json';
+
 interface FooterProps {
   onPageChange: (page: Page) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   const currentYear = new Date().getFullYear();
-  const [siteData, setSiteData] = React.useState<any>(null);
+  const [siteData, setSiteData] = React.useState<any>(siteDataJson);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [secretCode, setSecretCode] = React.useState('');
   const [error, setError] = React.useState(false);
@@ -32,13 +34,6 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
       setTimeout(() => setError(false), 2000);
     }
   };
-
-  React.useEffect(() => {
-    fetch('/api/site')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error("Error fetching site data:", err));
-  }, []);
 
   const handleNavClick = (page: Page, path: string) => {
     onPageChange(page);
