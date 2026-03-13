@@ -4,7 +4,7 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { Page } from '../../types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 interface NavbarProps {
   currentPage: Page;
@@ -14,7 +14,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [siteData, setSiteData] = useState<any>(siteDataJson);
+  const [siteData, setSiteData] = useState<any>(siteSettingsJson);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -24,6 +24,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Fetch settings to ensure we have the latest
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error('Error fetching settings:', err));
   }, []);
 
   const navLinks = [
@@ -65,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
           onClick={() => onPageChange(Page.HOME)}
           className="flex items-center gap-3 group"
         >
-          {siteData?.logoUrl ? (
+          {siteData?.logo ? (
             <motion.div
               whileHover={{ scale: 1.05, rotate: 3 }}
               whileTap={{ scale: 0.95 }}
@@ -76,8 +84,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-accent-rose/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
-                src={siteData.logoUrl} 
-                alt={siteData.name} 
+                src={siteData.logo} 
+                alt={siteData.agencyName} 
                 className="w-full h-full object-cover rounded-full relative z-10"
                 referrerPolicy="no-referrer"
               />
@@ -85,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             </motion.div>
           ) : (
             <span className="text-2xl font-display font-bold tracking-tighter text-charcoal">
-              {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+              {siteData?.agencyName?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
             </span>
           )}
         </Link>
@@ -189,7 +197,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               className="p-12 border-t border-charcoal/5 flex flex-col items-center gap-4"
             >
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted/40 font-sans">
-                Joonexa Collective
+                {siteData?.agencyName || 'Joonexa Collective'}
               </p>
               <div className="flex gap-6">
                 <div className="w-1 h-1 rounded-full bg-accent-rose" />

@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Target, FileText, Moon, Sun } from 'lucide-react';
 import { Page } from '../../types';
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 interface HeroProps {
   onPageChange: (page: Page) => void;
 }
 
 interface SiteData {
-  name: string;
-  description: string;
-  founder: string;
+  agencyName: string;
+  tagline: string;
+  founderName: string;
   resumeUrl: string;
   heroImage: string;
 }
@@ -46,11 +46,17 @@ const TESTIMONIALS = [
 const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   const [nicheIndex, setNicheIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [siteData, setSiteData] = useState<SiteData | null>(siteDataJson as any);
+  const [siteData, setSiteData] = useState<SiteData | null>(siteSettingsJson as any);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch settings to ensure we have the latest
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error('Error fetching settings:', err));
+
     const nicheInterval = setInterval(() => {
       setNicheIndex((prev) => (prev + 1) % NICHES.length);
     }, 2500);
@@ -157,9 +163,9 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             transition={{ delay: 0.4 }}
             className={`text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-sans ${isDarkMode ? 'text-white/70' : 'text-muted'}`}
           >
-            {siteData?.description || (
+            {siteData?.tagline || (
               <>
-                Joonexa Collective is a premium influencer marketing agency founded by Rimi. 
+                {siteData?.agencyName || 'Joonexa Collective'} is a premium influencer marketing agency founded by {siteData?.founderName || 'Rimi'}. 
                 We bridge the gap between visionary brands and high-impact creators through 
                 <span className={`mx-1 font-medium ${isDarkMode ? 'text-accent-teal highlight-teal' : 'text-charcoal highlight-rose'}`}>data-driven strategy</span> 
                 and elegant storytelling.

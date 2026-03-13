@@ -29,10 +29,17 @@ const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 const About: React.FC = () => {
-  const [siteData, setSiteData] = React.useState<any>(siteDataJson);
+  const [siteData, setSiteData] = React.useState<any>(siteSettingsJson);
+
+  React.useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error('Error fetching settings:', err));
+  }, []);
 
   return (
     <section id="about" className="py-32 px-6 bg-bg-soft">
@@ -46,7 +53,7 @@ const About: React.FC = () => {
           >
             <img 
               src={siteData?.heroImage || "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop"} 
-              alt={siteData?.name || "Joonexa Office"}
+              alt={siteData?.agencyName || "Joonexa Office"}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -60,7 +67,7 @@ const About: React.FC = () => {
               for <span className="text-accent-rose italic">Modern</span> Brands.
             </h2>
             <p className="text-lg text-muted mb-8 leading-relaxed font-sans">
-              {siteData?.description || 'Joonexa Collective is a modern marketing and creative agency focused on helping digital brands grow with strategy, design and creator collaborations.'}
+              {siteData?.tagline || 'Joonexa Collective is a modern marketing and creative agency focused on helping digital brands grow with strategy, design and creator collaborations.'}
             </p>
             <p className="text-lg text-muted mb-12 leading-relaxed font-sans">
               We believe in the power of authentic storytelling and data-driven strategy. Our mission is to bridge the gap between brands and their audiences through innovative digital experiences.
@@ -86,7 +93,7 @@ const About: React.FC = () => {
               <div className="aspect-square rounded-full overflow-hidden border-4 border-accent-rose/20 p-2">
                 <img 
                   src={siteData?.founderImage || "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=1000&auto=format&fit=crop"} 
-                  alt={`${siteData?.founder || 'Rimi'} - Founder`}
+                  alt={`${siteData?.founderName || 'Rimi'} - Founder`}
                   className="w-full h-full object-cover rounded-full"
                   referrerPolicy="no-referrer"
                 />
@@ -94,12 +101,12 @@ const About: React.FC = () => {
             </div>
             <div className="md:col-span-2">
               <span className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-4 inline-block">The Founder</span>
-              <h3 className="text-3xl md:text-5xl font-display font-bold text-charcoal mb-6">{siteData?.founder || 'Rimi'}</h3>
+              <h3 className="text-3xl md:text-5xl font-display font-bold text-charcoal mb-6">{siteData?.founderName || 'Rimi'}</h3>
               <p className="text-xl text-muted font-medium mb-8 italic">
-                "{siteData?.founder || 'Rimi'} founded {siteData?.name || 'Joonexa Collective'} to help modern brands scale with powerful design, smart marketing, and authentic creator partnerships."
+                "{siteData?.founderName || 'Rimi'} founded {siteData?.agencyName || 'Joonexa Collective'} to help modern brands scale with powerful design, smart marketing, and authentic creator partnerships."
               </p>
               <p className="text-muted/60 leading-relaxed font-sans">
-                With a background in digital strategy and high-end design, {siteData?.founder || 'Rimi'} has spent the last decade working with startups and established brands to redefine their digital presence. {siteData?.name || 'Joonexa'} is the culmination of that experience—a collective of creators dedicated to excellence.
+                With a background in digital strategy and high-end design, {siteData?.founderName || 'Rimi'} has spent the last decade working with startups and established brands to redefine their digital presence. {siteData?.agencyName || 'Joonexa'} is the culmination of that experience—a collective of creators dedicated to excellence.
               </p>
             </div>
           </div>

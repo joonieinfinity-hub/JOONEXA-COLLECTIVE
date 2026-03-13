@@ -96,3 +96,21 @@ export enum Page {
   CONTACT = 'contact',
   CREATOR_NETWORK = 'creator-network',
 }
+
+export interface SiteSettings {
+  agencyName: string;
+  founderName: string;
+  contactEmail: string;
+  contactPhone: string;
+  address: string;
+  tagline: string;
+  logo: string;
+  social: {
+    instagram: string;
+    linkedin: string;
+  };
+  creatorOnboardingLink: string;
+  brandPartnershipEmail: string;
+  heroImage: string;
+  founderImage: string;
+}

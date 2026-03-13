@@ -23,16 +23,16 @@ import {
 import { useNavigate } from 'react-router-dom';
 import projectsData from '../../data/projects.json';
 import pricingData from '../../data/pricing.json';
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 interface SiteData {
-  name: string;
-  description: string;
-  founder: string;
+  agencyName: string;
+  tagline: string;
+  founderName: string;
   resumeUrl: string;
   heroImage: string;
   contactEmail: string;
-  socials: {
+  social: {
     instagram: string;
     linkedin: string;
   };
@@ -61,7 +61,15 @@ const StudioEdit: React.FC = () => {
     try {
       setProjects(projectsData.projects as Project[]);
       setPricing(pricingData.pricing as PricingTier[]);
-      setSiteData(siteDataJson as SiteData);
+      
+      // Fetch from API to get latest
+      const settingsRes = await fetch('/api/settings');
+      if (settingsRes.ok) {
+        const settingsData = await settingsRes.json();
+        setSiteData(settingsData);
+      } else {
+        setSiteData(siteSettingsJson as any);
+      }
     } catch (err) {
       console.error("Error fetching data:", err);
     } finally {
@@ -70,7 +78,7 @@ const StudioEdit: React.FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isFounderAuthenticated');
+    localStorage.removeItem('founderAuth');
     navigate('/login');
   };
 
@@ -78,11 +86,24 @@ const StudioEdit: React.FC = () => {
     e.preventDefault();
     if (!siteData) return;
     setSaveStatus('saving');
-    console.log('Saving site data (local only):', siteData);
-    setTimeout(() => {
-      setSaveStatus('success');
-      setTimeout(() => setSaveStatus('idle'), 2000);
-    }, 1000);
+    
+    try {
+      const response = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(siteData),
+      });
+      
+      if (response.ok) {
+        setSaveStatus('success');
+        setTimeout(() => setSaveStatus('idle'), 2000);
+      } else {
+        throw new Error('Failed to save settings');
+      }
+    } catch (err) {
+      console.error('Error saving settings:', err);
+      setSaveStatus('idle');
+    }
   };
 
   const handleSaveProjects = async (updatedProjects: Project[]) => {
@@ -374,8 +395,8 @@ const StudioEdit: React.FC = () => {
                     <input 
                       type="text" 
                       className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-6 focus:outline-none focus:border-deep-teal transition-all font-sans"
-                      value={siteData.name}
-                      onChange={(e) => setSiteData({...siteData, name: e.target.value})}
+                      value={siteData.agencyName}
+                      onChange={(e) => setSiteData({...siteData, agencyName: e.target.value})}
                       required
                     />
                   </div>
@@ -396,12 +417,12 @@ const StudioEdit: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-muted/50 ml-2 font-sans">Agency Description</label>
+                <label className="text-xs font-bold uppercase tracking-widest text-muted/50 ml-2 font-sans">Agency Tagline</label>
                 <textarea 
                   rows={3}
                   className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 px-6 focus:outline-none focus:border-deep-teal transition-all font-sans resize-none"
-                  value={siteData.description}
-                  onChange={(e) => setSiteData({...siteData, description: e.target.value})}
+                  value={siteData.tagline}
+                  onChange={(e) => setSiteData({...siteData, tagline: e.target.value})}
                   required
                 />
               </div>

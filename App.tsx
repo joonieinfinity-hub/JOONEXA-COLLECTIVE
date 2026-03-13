@@ -29,6 +29,7 @@ import CustomCursor from './components/CustomCursor';
 import WorkPage from './pages/work';
 import CaseStudyPage from './pages/case-study/[slug]';
 import StudioEdit from './components/portfolio/StudioEdit';
+import FounderDashboard from './pages/founder/dashboard';
 import Login from './components/admin/Login';
 import { Navigate } from 'react-router-dom';
 
@@ -37,7 +38,7 @@ import SEO from './components/SEO';
 import projectsData from './data/projects.json';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('isFounderAuthenticated') === 'true';
+  const isAuthenticated = localStorage.getItem('founderAuth') === 'true';
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
@@ -192,6 +193,14 @@ const App: React.FC = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/creator-network" element={<CreatorNetwork />} />
               <Route path="/login" element={<Login />} />
+              <Route 
+                path="/founder/dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <FounderDashboard />
+                  </ProtectedRoute>
+                } 
+              />
               <Route 
                 path="/studio-edit" 
                 element={

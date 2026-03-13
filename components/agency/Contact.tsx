@@ -1,12 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, User, Building, DollarSign, MessageSquare, Send, ChevronDown, Target } from 'lucide-react';
 
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null);
-  const [siteData, setSiteData] = useState<any>(siteDataJson);
+  const [siteData, setSiteData] = useState<any>(siteSettingsJson);
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => setSiteData(data))
+      .catch(err => console.error('Error fetching settings:', err));
+  }, []);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -65,7 +72,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted/40 text-xs font-bold uppercase tracking-widest mb-1 font-sans">Business Email</p>
-                  <p className="text-charcoal font-medium font-sans">rimi@joonexa-collective.com</p>
+                  <p className="text-charcoal font-medium font-sans">{siteData?.contactEmail || 'hello@joonexa-collective.com'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -74,7 +81,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted/40 text-xs font-bold uppercase tracking-widest mb-1 font-sans">Founder Contact</p>
-                  <p className="text-charcoal font-medium font-sans">{siteData?.founder || 'Rimi'} – Founder, {siteData?.name || 'Joonexa Collective'}</p>
+                  <p className="text-charcoal font-medium font-sans">{siteData?.founderName || 'Rimi'} – Founder, {siteData?.agencyName || 'Joonexa Collective'}</p>
                 </div>
               </div>
             </div>

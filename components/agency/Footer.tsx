@@ -4,7 +4,7 @@ import { Page } from '../../types';
 import { Instagram, Linkedin, Mail, X, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import siteDataJson from '../../data/site.json';
+import siteSettingsJson from '../../data/siteSettings.json';
 
 interface FooterProps {
   onPageChange: (page: Page) => void;
@@ -12,7 +12,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   const currentYear = new Date().getFullYear();
-  const [siteData, setSiteData] = React.useState<any>(siteDataJson);
+  const [siteData, setSiteData] = React.useState<any>(siteSettingsJson);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [secretCode, setSecretCode] = React.useState('');
   const [error, setError] = React.useState(false);
@@ -27,8 +27,9 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   const handleCodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (secretCode === '1994RM') {
+      localStorage.setItem('founderAuth', 'true');
       setIsModalOpen(false);
-      navigate('/login');
+      navigate('/founder/dashboard');
     } else {
       setError(true);
       setTimeout(() => setError(false), 2000);
@@ -49,31 +50,31 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
               onClick={() => onPageChange(Page.HOME)}
               className="flex items-center gap-4 group mb-8"
             >
-              {siteData?.logoUrl ? (
+              {siteData?.logo ? (
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border border-accent-rose/20 bg-white p-0.5 group-hover:border-accent-rose/50 transition-colors duration-500">
                   <img 
-                    src={siteData.logoUrl} 
-                    alt={siteData.name} 
+                    src={siteData.logo} 
+                    alt={siteData.agencyName} 
                     className="w-full h-full object-cover rounded-full"
                     referrerPolicy="no-referrer"
                   />
                 </div>
               ) : null}
               <span className="text-3xl font-display font-bold tracking-tighter text-charcoal group-hover:text-accent-rose transition-colors duration-500">
-                {siteData?.name?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+                {siteData?.agencyName?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
               </span>
             </button>
             <p className="text-charcoal/70 max-w-sm leading-relaxed mb-8 font-sans">
-              {siteData?.description || 'Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi.'}
+              {siteData?.tagline || 'Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi.'}
             </p>
             <div className="flex gap-4">
-              {siteData?.socials?.instagram && (
-                <a href={siteData.socials.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
+              {siteData?.social?.instagram && (
+                <a href={siteData.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
-              {siteData?.socials?.linkedin && (
-                <a href={siteData.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
+              {siteData?.social?.linkedin && (
+                <a href={siteData.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center hover:bg-accent-rose hover:text-white transition-all duration-300">
                   <Linkedin className="w-5 h-5" />
                 </a>
               )}
@@ -106,14 +107,14 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                   {siteData?.contactEmail || 'rimi@joonexa-collective.com'}
                 </a>
               </li>
-              <li className="text-charcoal/70 text-sm font-sans">Founder: {siteData?.founder || 'Rimi'}</li>
+              <li className="text-charcoal/70 text-sm font-sans">Founder: {siteData?.founderName || 'Rimi'}</li>
               <motion.li 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="text-charcoal/70 text-sm font-sans cursor-pointer select-none hover:text-charcoal transition-colors"
                 onClick={handleCopyrightClick}
               >
-                © {currentYear} {siteData?.name || 'Joonexa Collective'}
+                © {currentYear} {siteData?.agencyName || 'Joonexa Collective'}
               </motion.li>
             </ul>
           </div>

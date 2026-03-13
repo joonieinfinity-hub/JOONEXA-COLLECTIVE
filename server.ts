@@ -15,6 +15,30 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
+  const settingsPath = path.join(__dirname, "data", "siteSettings.json");
+
+  // API Routes
+  app.get("/api/settings", async (req, res) => {
+    try {
+      const data = await fs.readFile(settingsPath, "utf-8");
+      res.json(JSON.parse(data));
+    } catch (error) {
+      console.error("Error reading settings:", error);
+      res.status(500).json({ error: "Failed to read settings" });
+    }
+  });
+
+  app.post("/api/settings", async (req, res) => {
+    try {
+      const settings = req.body;
+      await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2));
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      res.status(500).json({ error: "Failed to save settings" });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
