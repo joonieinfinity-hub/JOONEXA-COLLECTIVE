@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Sparkles, TrendingUp, Users, Target, FileText, Moon, Sun } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, Users, Target, Moon, Sun } from 'lucide-react';
 import { Page } from '../../types';
-import siteSettingsJson from '../../data/siteSettings.json';
+import { getSiteSettings } from '../../services/cmsService';
 
 interface HeroProps {
   onPageChange: (page: Page) => void;
@@ -15,6 +15,8 @@ interface SiteData {
   founderName: string;
   resumeUrl: string;
   heroImage: string;
+  heroHeadline?: string;
+  heroSubheadline?: string;
 }
 
 const NICHES = ['Lifestyle', 'Tech', 'Fashion', 'Beauty', 'Travel', 'Wellness'];
@@ -46,16 +48,18 @@ const TESTIMONIALS = [
 const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   const [nicheIndex, setNicheIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [siteData, setSiteData] = useState<SiteData | null>(siteSettingsJson as any);
+  const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch settings to ensure we have the latest
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error('Error fetching settings:', err));
+    const fetchData = async () => {
+      const data = await getSiteSettings();
+      if (data) {
+        setSiteData(data as SiteData);
+      }
+    };
+    fetchData();
 
     const nicheInterval = setInterval(() => {
       setNicheIndex((prev) => (prev + 1) % NICHES.length);
@@ -113,48 +117,54 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
           </motion.span>
           
           <h1 className={`text-5xl md:text-8xl font-display font-bold tracking-tight mb-8 leading-[1.1] ${isDarkMode ? 'text-white' : 'text-charcoal'}`}>
-            Connecting Brands with <br />
-            <span className="relative inline-block">
-              <span className="text-accent-teal italic">Authentic</span>
-              <motion.div 
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
-                className={`absolute -bottom-2 left-0 w-full h-1 rounded-full origin-left ${isDarkMode ? 'bg-accent-teal/30' : 'bg-accent-rose/30'}`} 
-              />
-            </span>
-            {' '}
-            <div className="h-[1.2em] inline-flex items-center overflow-hidden align-bottom">
-              <AnimatePresence mode="wait">
+            {siteData?.heroHeadline ? (
+              siteData.heroHeadline
+            ) : (
+              <>
+                Connecting Brands with <br />
+                <span className="relative inline-block">
+                  <span className="text-accent-teal italic">Authentic</span>
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 1.2, duration: 0.8 }}
+                    className={`absolute -bottom-2 left-0 w-full h-1 rounded-full origin-left ${isDarkMode ? 'bg-accent-teal/30' : 'bg-accent-rose/30'}`} 
+                  />
+                </span>
+                {' '}
+                <div className="h-[1.2em] inline-flex items-center overflow-hidden align-bottom">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={NICHES[nicheIndex]}
+                      initial={{ y: 40, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -40, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: "backOut" }}
+                      className={isDarkMode ? 'text-accent-teal' : 'text-accent-rose'}
+                    >
+                      {NICHES[nicheIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+                {' '}
                 <motion.span
-                  key={NICHES[nicheIndex]}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -40, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: "backOut" }}
-                  className={isDarkMode ? 'text-accent-teal' : 'text-accent-rose'}
+                  custom={2}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: (i: number) => ({
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.5 + i * 0.2, duration: 0.8, ease: "easeOut" }
+                    })
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  className="inline-block italic"
                 >
-                  {NICHES[nicheIndex]}
+                  Creators
                 </motion.span>
-              </AnimatePresence>
-            </div>
-            {' '}
-            <motion.span
-              custom={2}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: (i: number) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 0.5 + i * 0.2, duration: 0.8, ease: "easeOut" }
-                })
-              }}
-              initial="hidden"
-              animate="visible"
-              className="inline-block italic"
-            >
-              Creators
-            </motion.span>
+              </>
+            )}
           </h1>
 
           <motion.p 
@@ -163,7 +173,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             transition={{ delay: 0.4 }}
             className={`text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-sans ${isDarkMode ? 'text-white/70' : 'text-muted'}`}
           >
-            {siteData?.tagline || (
+            {siteData?.heroSubheadline || siteData?.tagline || (
               <>
                 {siteData?.agencyName || 'Joonexa Collective'} is a premium influencer marketing agency founded by {siteData?.founderName || 'Rimi'}. 
                 We bridge the gap between visionary brands and high-impact creators through 

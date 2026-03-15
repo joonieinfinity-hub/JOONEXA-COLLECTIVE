@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { PricingTier, Page } from '../../types';
-
-import pricingData from '../../data/pricing.json';
+import { getPricing } from '../../services/cmsService';
 
 interface PricingProps {
   onPageChange: (page: Page) => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onPageChange }) => {
-  const [pricingDataState, setPricingDataState] = React.useState<PricingTier[]>(pricingData.pricing as any || []);
+  const [pricingDataState, setPricingDataState] = useState<PricingTier[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPricing();
+      if (data && data.tiers) {
+        setPricingDataState(data.tiers);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <section id="pricing" className="py-32 px-6 bg-bg-soft">

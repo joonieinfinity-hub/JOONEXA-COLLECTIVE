@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Page } from '../../types';
 import { Link } from 'react-router-dom';
@@ -6,15 +6,22 @@ import { ArrowRight } from 'lucide-react';
 
 import ProjectMedia from './ProjectMedia';
 import CaseStudies from '../CaseStudies';
-
-import projectsData from '../../data/projects.json';
+import { getPortfolio } from '../../services/cmsService';
 
 interface WorkProps {
   onPageChange: (page: Page) => void;
 }
 
 const Work: React.FC<WorkProps> = ({ onPageChange }) => {
-  const [projects, setProjects] = React.useState<any[]>(projectsData.projects || []);
+  const [projects, setProjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const data = await getPortfolio();
+      setProjects(data);
+    };
+    fetchProjects();
+  }, []);
 
   return (
     <section id="work" className="py-32 px-6 bg-bg-soft">

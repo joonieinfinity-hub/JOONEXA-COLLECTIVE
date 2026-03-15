@@ -9,6 +9,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Routes, Route, useLocation, useNavigate, Link } from 'react-router-dom';
 import { Page } from './types';
 import { ArrowRight } from 'lucide-react';
+import { auth } from './firebase';
+import { onAuthStateChanged, User } from 'firebase/auth';
 
 // Components
 import Navbar from './components/agency/Navbar';
@@ -38,9 +40,32 @@ import SEO from './components/SEO';
 import projectsData from './data/projects.json';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('founderAuth') === 'true';
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // Only allow founder email
+      if (currentUser && (currentUser.email === "propeciodraws@gmail.com" || currentUser.email === "rimi@joonexa-collective.com")) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) return (
+    <div className="min-h-screen bg-bg-soft flex items-center justify-center">
+      <div className="w-12 h-12 border-4 border-accent-rose/20 border-t-accent-rose rounded-full animate-spin" />
+    </div>
+  );
+
+  return user ? <>{children}</> : <Navigate to="/login" replace />;
 };
+
+import { getPortfolio } from './services/cmsService';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.HOME);
@@ -66,7 +91,15 @@ const App: React.FC = () => {
   };
 
   const HomePage = () => {
-    const [projects, setProjects] = useState<any[]>(projectsData.projects?.slice(0, 4) || []);
+    const [projects, setProjects] = useState<any[]>([]);
+
+    useEffect(() => {
+      const fetchProjects = async () => {
+        const data = await getPortfolio();
+        setProjects(data.slice(0, 4));
+      };
+      fetchProjects();
+    }, []);
 
     return (
       <>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Testimonial } from '../../types';
+import { getSiteSettings } from '../../services/cmsService';
 
 const TESTIMONIALS: Testimonial[] = [
   {
@@ -29,16 +30,17 @@ const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
-import siteSettingsJson from '../../data/siteSettings.json';
-
 const About: React.FC = () => {
-  const [siteData, setSiteData] = React.useState<any>(siteSettingsJson);
+  const [siteData, setSiteData] = useState<any>(null);
 
-  React.useEffect(() => {
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error('Error fetching settings:', err));
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getSiteSettings();
+      if (data) {
+        setSiteData(data);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -52,7 +54,7 @@ const About: React.FC = () => {
             className="relative aspect-square rounded-[3rem] overflow-hidden border border-accent-rose/10 shadow-2xl shadow-accent-rose/5"
           >
             <img 
-              src={siteData?.heroImage || "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop"} 
+              src={siteData?.aboutImage || siteData?.heroImage || "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop"} 
               alt={siteData?.agencyName || "Joonexa Office"}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
@@ -67,7 +69,7 @@ const About: React.FC = () => {
               for <span className="text-accent-rose italic">Modern</span> Brands.
             </h2>
             <p className="text-lg text-muted mb-8 leading-relaxed font-sans">
-              {siteData?.tagline || 'Joonexa Collective is a modern marketing and creative agency focused on helping digital brands grow with strategy, design and creator collaborations.'}
+              {siteData?.aboutText || siteData?.tagline || 'Joonexa Collective is a modern marketing and creative agency focused on helping digital brands grow with strategy, design and creator collaborations.'}
             </p>
             <p className="text-lg text-muted mb-12 leading-relaxed font-sans">
               We believe in the power of authentic storytelling and data-driven strategy. Our mission is to bridge the gap between brands and their audiences through innovative digital experiences.
@@ -75,11 +77,11 @@ const About: React.FC = () => {
             
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <h4 className="text-4xl font-display font-bold text-charcoal mb-2">50+</h4>
+                <h4 className="text-4xl font-display font-bold text-charcoal mb-2">{siteData?.analytics?.brands || '50+'}</h4>
                 <p className="text-muted/40 text-xs font-bold uppercase tracking-widest font-sans">Brands Scaled</p>
               </div>
               <div>
-                <h4 className="text-4xl font-display font-bold text-charcoal mb-2">10M+</h4>
+                <h4 className="text-4xl font-display font-bold text-charcoal mb-2">{siteData?.analytics?.reach || '10M+'}</h4>
                 <p className="text-muted/40 text-xs font-bold uppercase tracking-widest font-sans">Reach Generated</p>
               </div>
             </div>

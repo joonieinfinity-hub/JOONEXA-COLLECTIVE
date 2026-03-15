@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Mail, ArrowRight, Loader2, Eye, EyeOff } from 'lucide-react';
+import { auth } from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -16,18 +18,22 @@ const Login: React.FC = () => {
     setLoading(true);
     setError('');
 
-    // Simulated login based on user requirements
-    if (email === 'rimi@joonexa-collective.com' && password === 'RimiK@21839') {
-      setTimeout(() => {
-        localStorage.setItem('isFounderAuthenticated', 'true');
-        navigate('/studio-edit');
-        setLoading(false);
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        setError('Invalid credentials. Please try again.');
-        setLoading(false);
-      }, 1000);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      // Check if it's the founder email
+      if (user.email === "propeciodraws@gmail.com" || user.email === "rimi@joonexa-collective.com") {
+        navigate('/founder/dashboard');
+      } else {
+        setError('Unauthorized access. Only the founder can log in.');
+        await auth.signOut();
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError('Invalid credentials. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Project, ProjectCategory } from '../types';
 import { Loader2, Search, X, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import CaseStudies from '../components/CaseStudies';
-import projectsData from '../data/projects.json';
+import { getPortfolio } from '../services/cmsService';
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects', icon: '✨' },
@@ -19,11 +19,18 @@ const CATEGORIES = [
 const Work: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [projects, setProjects] = useState<Project[]>(projectsData.projects as any || []);
-  const [loading, setLoading] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
+    const fetchProjects = async () => {
+      setLoading(true);
+      const data = await getPortfolio();
+      setProjects(data as Project[]);
+      setLoading(false);
+    };
+    fetchProjects();
   }, []);
 
   const filteredProjects = useMemo(() => {

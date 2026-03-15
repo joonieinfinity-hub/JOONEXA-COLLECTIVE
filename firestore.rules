@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isFounder() {
+      return isAuthenticated() && request.auth.token.email == "propeciodraws@gmail.com";
+    }
+
+    // Site Settings
+    match /siteSettings/{document} {
+      allow read: if true;
+      allow write: if isFounder();
+    }
+
+    // Portfolio
+    match /portfolio/{document} {
+      allow read: if true;
+      allow write: if isFounder();
+    }
+
+    // Pricing
+    match /pricing/{document} {
+      allow read: if true;
+      allow write: if isFounder();
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

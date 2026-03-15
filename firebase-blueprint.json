@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "Site Settings",
+      "description": "Global website configuration and content",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "heroHeadline": { "type": "string" },
+        "heroSubtext": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "founderEmail": { "type": "string" },
+        "phone": { "type": "string" },
+        "aboutHeadline": { "type": "string" },
+        "aboutDescription": { "type": "string" },
+        "creators": { "type": "number" },
+        "brands": { "type": "number" },
+        "campaigns": { "type": "number" },
+        "reach": { "type": "string" },
+        "heroImage": { "type": "string" },
+        "aboutImage": { "type": "string" }
+      },
+      "required": ["siteName", "heroHeadline"]
+    },
+    "PortfolioItem": {
+      "title": "Portfolio Item",
+      "description": "A campaign or project in the portfolio",
+      "type": "object",
+      "properties": {
+        "brandName": { "type": "string" },
+        "campaignType": { "type": "string" },
+        "description": { "type": "string" },
+        "results": { "type": "string" },
+        "imageURL": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["brandName", "imageURL"]
+    },
+    "Pricing": {
+      "title": "Pricing Settings",
+      "description": "Pricing tiers and features",
+      "type": "object",
+      "properties": {
+        "starterPrice": { "type": "string" },
+        "growthPrice": { "type": "string" },
+        "premiumPrice": { "type": "string" },
+        "starterFeatures": { "type": "array", "items": { "type": "string" } },
+        "growthFeatures": { "type": "array", "items": { "type": "string" } },
+        "premiumFeatures": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "firestore": {
+    "/siteSettings/main": {
+      "schema": "SiteSettings",
+      "description": "Main site configuration"
+    },
+    "/portfolio/{itemId}": {
+      "schema": "PortfolioItem",
+      "description": "Collection of portfolio projects"
+    },
+    "/pricing/main": {
+      "schema": "Pricing",
+      "description": "Pricing configuration"
+    }
+  }
+}

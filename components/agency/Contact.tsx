@@ -1,18 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, User, Building, DollarSign, MessageSquare, Send, ChevronDown, Target } from 'lucide-react';
-
-import siteSettingsJson from '../../data/siteSettings.json';
+import { Mail, User, Building, DollarSign, MessageSquare, Send, ChevronDown } from 'lucide-react';
+import { getSiteSettings } from '../../services/cmsService';
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null);
-  const [siteData, setSiteData] = useState<any>(siteSettingsJson);
+  const [siteData, setSiteData] = useState<any>(null);
 
   useEffect(() => {
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => setSiteData(data))
-      .catch(err => console.error('Error fetching settings:', err));
+    const fetchData = async () => {
+      const data = await getSiteSettings();
+      if (data) {
+        setSiteData(data);
+      }
+    };
+    fetchData();
   }, []);
   const [formState, setFormState] = useState({
     name: '',
