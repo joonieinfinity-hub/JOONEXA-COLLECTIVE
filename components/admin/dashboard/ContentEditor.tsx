@@ -5,6 +5,8 @@ import { Save, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import ImageUploader from './ImageUploader';
 
+import { handleFirestoreError, OperationType } from '../../../services/errorService';
+
 const ContentEditor: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -23,6 +25,7 @@ const ContentEditor: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const path = 'siteSettings/main';
       try {
         const docRef = doc(db, 'siteSettings', 'main');
         const docSnap = await getDoc(docRef);
@@ -30,7 +33,7 @@ const ContentEditor: React.FC = () => {
           setData(docSnap.data() as any);
         }
       } catch (error) {
-        console.error('Error fetching site settings:', error);
+        handleFirestoreError(error, OperationType.GET, path);
         toast.error('Failed to load settings');
       } finally {
         setLoading(false);
@@ -42,12 +45,13 @@ const ContentEditor: React.FC = () => {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    const path = 'siteSettings/main';
     try {
       const docRef = doc(db, 'siteSettings', 'main');
       await setDoc(docRef, data, { merge: true });
       toast.success('Content updated successfully');
     } catch (error) {
-      console.error('Error saving settings:', error);
+      handleFirestoreError(error, OperationType.WRITE, path);
       toast.error('Failed to save changes');
     } finally {
       setSaving(false);
