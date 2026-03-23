@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Testimonial } from '../../types';
 import { getSiteSettings } from '../../services/cmsService';
 
@@ -32,6 +32,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 const About: React.FC = () => {
   const [siteData, setSiteData] = useState<any>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +42,21 @@ const About: React.FC = () => {
       }
     };
     fetchData();
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  const nextTestimonial = () => {
+    setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
 
   return (
     <section id="about" className="py-32 px-6 bg-bg-soft">
@@ -123,47 +138,80 @@ const About: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-10 rounded-[2.5rem] border border-accent-rose/10 shadow-lg shadow-accent-rose/5 flex flex-col"
-              >
-                <div className="mb-8">
-                  <div className="flex gap-1 mb-4">
+          <div className="relative max-w-4xl mx-auto">
+            <div className="overflow-hidden px-4 py-12">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="bg-white p-12 md:p-20 rounded-[3rem] border border-accent-rose/10 shadow-2xl shadow-accent-rose/5 text-center"
+                >
+                  <div className="flex justify-center gap-1 mb-10">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-accent-rose fill-current" viewBox="0 0 20 20">
+                      <svg key={i} className="w-5 h-5 text-accent-rose fill-current" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
-                  <p className="text-charcoal text-lg leading-relaxed font-sans italic">
-                    "{testimonial.quote}"
-                  </p>
-                </div>
-                
-                <div className="mt-auto flex items-center gap-4">
-                  {testimonial.image && (
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  )}
-                  <div>
-                    <h4 className="text-charcoal font-bold text-sm tracking-tight">{testimonial.name}</h4>
-                    <p className="text-muted/60 text-[10px] font-bold uppercase tracking-widest">
-                      {testimonial.title}, {testimonial.company}
+                  
+                  <blockquote className="text-2xl md:text-3xl text-charcoal leading-relaxed font-display italic mb-12">
+                    "{TESTIMONIALS[currentIndex].quote}"
+                  </blockquote>
+                  
+                  <div className="flex flex-col items-center">
+                    {TESTIMONIALS[currentIndex].image && (
+                      <img 
+                        src={TESTIMONIALS[currentIndex].image} 
+                        alt={TESTIMONIALS[currentIndex].name}
+                        className="w-20 h-20 rounded-full object-cover mb-6 border-4 border-accent-rose/10"
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
+                    <h4 className="text-charcoal font-bold text-xl tracking-tight mb-1">{TESTIMONIALS[currentIndex].name}</h4>
+                    <p className="text-muted/60 text-xs font-bold uppercase tracking-widest">
+                      {TESTIMONIALS[currentIndex].title}, {TESTIMONIALS[currentIndex].company}
                     </p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-center items-center gap-8 mt-12">
+              <button 
+                onClick={prevTestimonial}
+                className="w-14 h-14 rounded-full border border-accent-rose/20 flex items-center justify-center text-accent-rose hover:bg-accent-rose hover:text-white transition-all duration-300"
+                aria-label="Previous testimonial"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <div className="flex gap-2">
+                {TESTIMONIALS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentIndex(i)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-accent-rose w-8' : 'bg-accent-rose/20'}`}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button 
+                onClick={nextTestimonial}
+                className="w-14 h-14 rounded-full border border-accent-rose/20 flex items-center justify-center text-accent-rose hover:bg-accent-rose hover:text-white transition-all duration-300"
+                aria-label="Next testimonial"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>

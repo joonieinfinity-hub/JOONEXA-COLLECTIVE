@@ -29,9 +29,15 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
   useEffect(() => {
     // Fetch settings to ensure we have the latest
     fetch('/api/settings')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
       .then(data => setSiteData(data))
-      .catch(err => console.error('Error fetching settings:', err));
+      .catch(err => {
+        // Silent fail as we have siteSettingsJson as initial state
+        console.warn('Could not refresh settings from API, using local data:', err.message);
+      });
   }, []);
 
   const navLinks = [
@@ -63,8 +69,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-bg-soft/80 backdrop-blur-xl py-4 border-b border-accent-rose/10 shadow-sm' : 'bg-transparent py-8'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-xl py-3 border-b border-accent-rose/10 shadow-sm nav-light' 
+          : 'bg-[#050506]/30 backdrop-blur-md py-5 nav-dark'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -80,7 +88,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-accent-rose/30 shadow-2xl shadow-accent-rose/10 bg-white p-0.5 group-hover:border-accent-rose/60 transition-colors duration-500"
+              className={`relative rounded-full overflow-hidden border border-accent-rose/30 shadow-2xl shadow-accent-rose/10 bg-white p-0.5 group-hover:border-accent-rose/60 transition-all duration-300 ${
+                isScrolled ? 'w-10 h-10' : 'w-12 h-12 md:w-14 md:h-14'
+              }`}
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-accent-rose/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
@@ -92,20 +102,22 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(242,125,38,0.1)] group-hover:shadow-[inset_0_0_30px_rgba(242,125,38,0.2)] transition-all duration-500" />
             </motion.div>
           ) : (
-            <span className="text-2xl font-display font-bold tracking-tighter text-charcoal">
+            <span className={`font-display font-bold tracking-tighter text-inherit transition-all duration-300 ${
+              isScrolled ? 'text-xl' : 'text-2xl'
+            }`}>
               {siteData?.agencyName?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
             </span>
           )}
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <button
               key={link.page}
               onClick={() => handleLinkClick(link.page, link.path)}
               className={`text-sm font-medium tracking-wide uppercase transition-all hover:text-accent-rose font-sans relative group ${
-                currentPage === link.page ? 'text-charcoal' : 'text-muted'
+                currentPage === link.page ? 'text-inherit' : 'text-inherit opacity-70 hover:opacity-100'
               }`}
             >
               {link.name}
@@ -116,7 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
           ))}
           <button 
             onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-            className="btn-primary text-sm"
+            className="btn-nav-cta text-sm"
           >
             Start Your Project
           </button>
@@ -124,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-charcoal"
+          className="md:hidden text-inherit"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -181,7 +193,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               >
                 <button 
                   onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-                  className="w-full btn-primary text-xl py-5 shadow-xl shadow-accent-rose/20"
+                  className="w-full btn-nav-cta text-xl py-5 shadow-xl shadow-accent-rose/20"
                 >
                   Start Your Project
                 </button>

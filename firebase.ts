@@ -14,7 +14,9 @@ export const db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId)
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
-// Initialize Analytics only in browser environment
-export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+// Initialize Analytics only in browser environment and if measurementId is present
+export const analytics = typeof window !== 'undefined' && firebaseConfig.measurementId 
+  ? getAnalytics(app) 
+  : null;
 
 export default app;
