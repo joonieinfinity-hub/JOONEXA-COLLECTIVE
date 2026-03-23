@@ -49,6 +49,10 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ projects, layout = 'grid' }) 
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200&auto=format&fit=crop';
+                  }}
                 />
                 <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:bg-charcoal/60 group-hover:backdrop-blur-[8px] z-10">
                   <div className="btn-case-study transform scale-90 group-hover:scale-100 transition-all duration-700 shadow-2xl">

@@ -98,6 +98,10 @@ const CaseStudyPage: React.FC = () => {
           alt={project.projectName}
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200&auto=format&fit=crop';
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent" />
         
@@ -278,6 +282,10 @@ const CaseStudyPage: React.FC = () => {
                             alt={item.caption || step.title}
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200&auto=format&fit=crop';
+                            }}
                           />
                         </div>
                         {item.caption && (

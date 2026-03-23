@@ -8,7 +8,7 @@
       "serviceType": "Influencer Marketing",
       "description": "A hyper-local influencer campaign to drive foot traffic for a new Mediterranean restaurant launch.",
       "result": "+150% Bookings",
-      "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop",
+      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop",
       "slug": "verano-restaurant-launch",
       "type": "Featured Case Study",
       "caseStudy": {
@@ -20,14 +20,24 @@
         "strategy": "We identified and partnered with 15 high-engagement local food and lifestyle influencers for exclusive pre-launch tasting events, creating a 'fear of missing out' effect.",
         "execution": [
           {
-            "title": "Influencer Vetting",
-            "content": "Strict selection of creators with >80% local audience concentration and proven engagement in the dining niche."
+            "title": "Creative Direction",
+            "content": "Developing a cinematic visual language for the restaurant that influencers could adapt to their own styles, focusing on the Mediterranean aesthetic.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1200&auto=format&fit=crop", "caption": "Visual Storytelling & Content Creation" }
+            ]
           },
           {
-            "title": "The Tasting Event",
-            "content": "Coordinated a multi-day exclusive tasting experience designed for high-quality content creation.",
+            "title": "Influencer Strategy",
+            "content": "Strict selection of creators with >80% local audience concentration and proven engagement in the dining niche.",
             "media": [
-              { "type": "image", "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop", "caption": "Influencer Tasting Event" }
+              { "type": "image", "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop", "caption": "Strategic Creator Partnerships" }
+            ]
+          },
+          {
+            "title": "Digital Deployment",
+            "content": "Coordinated a multi-day exclusive tasting experience designed for high-quality content creation and immediate booking conversion.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop", "caption": "Campaign Performance Tracking" }
             ]
           }
         ],
@@ -46,7 +56,7 @@
       "serviceType": "Influencer Marketing",
       "description": "Scaling brand awareness through a curated network of micro-influencers in the clean beauty space.",
       "result": "4.8x ROI",
-      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1200&auto=format&fit=crop",
       "slug": "dtc-skincare-awareness",
       "type": "Featured Case Study",
       "caseStudy": {
@@ -58,8 +68,25 @@
         "strategy": "Leveraged a network of 50+ micro-influencers (10k-50k followers) with high trust scores to create authentic 'Get Ready With Me' content.",
         "execution": [
           {
-            "title": "Community Building",
-            "content": "Focusing on creators who already used similar products to ensure genuine advocacy."
+            "title": "Creative Direction",
+            "content": "Crafting a 'clean girl' aesthetic for all campaign assets, ensuring consistency across 50+ different creator styles.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop", "caption": "Aesthetic Product Direction" }
+            ]
+          },
+          {
+            "title": "Influencer Strategy",
+            "content": "Focusing on creators who already used similar products to ensure genuine advocacy and high conversion rates.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop", "caption": "Creator Vetting & Onboarding" }
+            ]
+          },
+          {
+            "title": "Digital Deployment",
+            "content": "Implementing a multi-channel tracking system to attribute sales directly to influencer content in real-time.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop", "caption": "Real-time ROI Analytics" }
+            ]
           }
         ],
         "results": [
@@ -76,7 +103,7 @@
       "serviceType": "Creative Direction & Influencer Strategy",
       "description": "A high-fashion digital campaign for the Autumn/Winter collection launch.",
       "result": "Sold Out",
-      "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop",
+      "image": "https://images.unsplash.com/photo-1445205170230-053b830c6050?q=80&w=1200&auto=format&fit=crop",
       "slug": "fashion-label-launch",
       "type": "Featured Case Study",
       "caseStudy": {
@@ -89,7 +116,24 @@
         "execution": [
           {
             "title": "Creative Direction",
-            "content": "Developing a cinematic visual language that influencers could adapt to their own styles."
+            "content": "Developing a cinematic visual language that influencers could adapt to their own styles, emphasizing luxury and exclusivity.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop", "caption": "Cinematic Fashion Direction" }
+            ]
+          },
+          {
+            "title": "Influencer Strategy",
+            "content": "Partnering with elite fashion creators for high-impact lookbooks and 'unboxing' experiences that drove massive pre-launch hype.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop", "caption": "Tier-1 Fashion Partnerships" }
+            ]
+          },
+          {
+            "title": "Digital Deployment",
+            "content": "Optimizing the e-commerce journey for mobile-first users arriving from social platforms, ensuring a frictionless checkout.",
+            "media": [
+              { "type": "image", "url": "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=1200&auto=format&fit=crop", "caption": "Mobile-First Conversion Optimization" }
+            ]
           }
         ],
         "results": [

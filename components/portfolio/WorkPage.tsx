@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project, ProjectCategory } from '../../types';
-import { ExternalLink, ArrowRight, Loader2, Search, Filter, X } from 'lucide-react';
+import { ArrowRight, Loader2, Search, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../SEO';
-import projectsData from '../../data/projects.json';
+import { getPortfolio } from '../../services/cmsService';
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects', icon: '✨' },
@@ -18,11 +18,24 @@ const CATEGORIES = [
 const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [projects, setProjects] = useState<Project[]>(projectsData.projects as any || []);
-  const [loading, setLoading] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const data = await getPortfolio();
+        console.log('WorkPage: Fetched projects:', data);
+        setProjects(data as Project[]);
+      } catch (error) {
+        console.error('WorkPage: Error fetching projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
   }, []);
 
   const filteredProjects = useMemo(() => {

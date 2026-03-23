@@ -12,25 +12,25 @@ service cloud.firestore {
          request.auth.token.email == "rimi@joonexa-collective.com");
     }
 
-    // Site Settings
-    match /siteSettings/{document} {
+    // Site Settings - Publicly readable, only founders can edit
+    match /siteSettings/main {
       allow read: if true;
       allow write: if isFounder();
     }
 
-    // Portfolio
-    match /portfolio/{document} {
+    // Portfolio - Publicly readable, only founders can edit
+    match /portfolio/{itemId} {
       allow read: if true;
       allow write: if isFounder();
     }
 
-    // Pricing
-    match /pricing/{document} {
+    // Pricing - Publicly readable, only founders can edit
+    match /pricing/main {
       allow read: if true;
       allow write: if isFounder();
     }
     
-    // Default deny
+    // Default deny for everything else
     match /{document=**} {
       allow read, write: if false;
     }

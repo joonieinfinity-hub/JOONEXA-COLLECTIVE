@@ -1,9 +1,10 @@
 {
-  "apiKey": "AIzaSyAzGzz6evMD606rLDWG7FzsjZ-5YOjFV7U",
-  "authDomain": "joonexa-c-final.firebaseapp.com",
-  "projectId": "joonexa-c-final",
-  "storageBucket": "joonexa-c-final.firebasestorage.app",
-  "messagingSenderId": "676741187314",
-  "appId": "1:676741187314:web:732472839cbdffc46cf26b",
-  "measurementId": "G-VWD4SMYRFV"
+  "projectId": "gen-lang-client-0502403846",
+  "appId": "1:839556086346:web:1bf767adfd815a4432c4b3",
+  "apiKey": "AIzaSyC08C5-PgD0ayBDieGBcUEg_zygfdPY2bU",
+  "authDomain": "gen-lang-client-0502403846.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-6e0d989e-9918-4c23-bfb4-f2ae24d28627",
+  "storageBucket": "gen-lang-client-0502403846.firebasestorage.app",
+  "messagingSenderId": "839556086346",
+  "measurementId": ""
 }

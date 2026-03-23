@@ -25,10 +25,17 @@ const Work: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchProjects = async () => {
-      setLoading(true);
-      const data = await getPortfolio();
-      setProjects(data as Project[]);
-      setLoading(false);
+      try {
+        setLoading(true);
+        console.log('WorkPage: Fetching portfolio data...');
+        const data = await getPortfolio();
+        console.log('WorkPage: Fetched projects:', data);
+        setProjects(data as Project[]);
+      } catch (error) {
+        console.error('WorkPage: Error fetching projects:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchProjects();
   }, []);

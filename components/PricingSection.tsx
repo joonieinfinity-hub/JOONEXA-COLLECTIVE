@@ -13,7 +13,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onPageChange }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('PricingSection: Fetching pricing data...');
       const data = await getPricing();
+      console.log('PricingSection: Received data:', data);
       if (data && data.tiers) {
         setPricingDataState(data.tiers);
       }

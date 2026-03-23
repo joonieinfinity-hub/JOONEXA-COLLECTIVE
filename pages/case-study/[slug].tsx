@@ -62,6 +62,10 @@ const CaseStudy: React.FC = () => {
             alt={project.projectName}
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200&auto=format&fit=crop';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/20 to-bg-soft" />
         </motion.div>
@@ -210,8 +214,24 @@ const CaseStudy: React.FC = () => {
           </div>
 
           <div className="space-y-40">
-            {[1, 2, 3].map((step, i) => (
-              <div key={step} className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-20 items-center`}>
+            {(project.caseStudy?.execution || [
+              {
+                title: 'Creative Direction',
+                content: 'We developed a unique visual language that resonates with the target demographic, ensuring every touchpoint feels premium and authentic.',
+                media: [{ url: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1200&auto=format&fit=crop' }]
+              },
+              {
+                title: 'Influencer Strategy',
+                content: 'By identifying high-impact creators who genuinely align with the brand values, we generated organic buzz and trust.',
+                media: [{ url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop' }]
+              },
+              {
+                title: 'Digital Deployment',
+                content: 'The final deployment focused on high-conversion landing pages and seamless user journeys that turn interest into action.',
+                media: [{ url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop' }]
+              }
+            ]).map((step: any, i: number) => (
+              <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-20 items-center`}>
                 <motion.div 
                   initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -219,17 +239,13 @@ const CaseStudy: React.FC = () => {
                   className="flex-1"
                 >
                   <div className="flex items-center gap-6 mb-8">
-                    <span className="text-8xl font-display font-bold text-accent-rose/10 leading-none">0{step}</span>
+                    <span className="text-8xl font-display font-bold text-accent-rose/10 leading-none">0{i + 1}</span>
                     <h3 className="text-3xl md:text-5xl font-display font-bold text-charcoal tracking-tight">
-                      {i === 0 ? 'Creative Direction' : i === 1 ? 'Influencer Strategy' : 'Digital Deployment'}
+                      {step.title}
                     </h3>
                   </div>
                   <p className="text-xl text-muted leading-relaxed font-sans opacity-80 mb-8">
-                    {i === 0 
-                      ? 'We developed a unique visual language that resonates with the target demographic, ensuring every touchpoint feels premium and authentic.'
-                      : i === 1
-                      ? 'By identifying high-impact creators who genuinely align with the brand values, we generated organic buzz and trust.'
-                      : 'The final deployment focused on high-conversion landing pages and seamless user journeys that turn interest into action.'}
+                    {step.content}
                   </p>
                   <ul className="space-y-4">
                     {['Strategic Alignment', 'Visual Storytelling', 'Performance Tracking'].map((item, idx) => (
@@ -248,10 +264,14 @@ const CaseStudy: React.FC = () => {
                 >
                   <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl group">
                     <img 
-                      src={`https://images.unsplash.com/photo-${1550000000000 + (step * 1000)}?q=80&w=1200&auto=format&fit=crop`}
-                      alt="Process"
+                      src={step.media?.[0]?.url || `https://images.unsplash.com/photo-${1550000000000 + ((i + 1) * 1000)}?q=80&w=1200&auto=format&fit=crop`}
+                      alt={step.title}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1200&auto=format&fit=crop';
+                      }}
                     />
                     <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>

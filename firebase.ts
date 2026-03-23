@@ -3,23 +3,14 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAzGzz6evMD606rLDWG7FzsjZ-5YOjFV7U",
-  authDomain: "joonexa-c-final.firebaseapp.com",
-  projectId: "joonexa-c-final",
-  storageBucket: "joonexa-c-final.firebasestorage.app",
-  messagingSenderId: "676741187314",
-  appId: "1:676741187314:web:732472839cbdffc46cf26b",
-  measurementId: "G-VWD4SMYRFV"
-};
+import firebaseConfig from './firebase-applet-config.json';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Initialize Services
-export const db = getFirestore(app);
+// Use firestoreDatabaseId if available in the config
+export const db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
