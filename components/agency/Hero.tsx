@@ -76,30 +76,41 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 overflow-hidden bg-luxury-dark text-[#F5F5F3] hero-fade-out">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 overflow-hidden bg-hero-luxury text-[#F5F5F3] hero-fade-out">
       {/* Rose Gold Glow */}
-      <div className="absolute inset-0 z-0 rose-gold-glow pointer-events-none" />
+      <motion.div 
+        animate={{ 
+          opacity: [0.8, 1, 0.8],
+          scale: [1, 1.05, 1]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 z-0 rose-gold-glow pointer-events-none" 
+      />
       
-      {/* Teal Radial Overlay */}
-      <div className="absolute inset-0 z-0 teal-radial-overlay pointer-events-none" />
-
-      {/* Dark Overlay for Readability */}
-      <div className="absolute inset-0 z-0 bg-[#050506]/40 pointer-events-none" />
-
+      {/* Teal Radial Depth */}
+      <motion.div 
+        animate={{ 
+          opacity: [0.7, 1, 0.7],
+          scale: [1, 1.03, 1]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute inset-0 z-0 teal-radial-depth pointer-events-none" 
+      />
+      
       {/* Editorial Background (Subtle Accents) */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         {/* Soft Blurred Abstract Shapes */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.1, scale: 1 }}
+          animate={{ opacity: 0.15, scale: 1 }}
           transition={{ duration: 3, ease: "easeOut" }}
           className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full blur-[120px] bg-accent-rose/20"
         />
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.05, scale: 1 }}
+          animate={{ opacity: 0.1, scale: 1 }}
           transition={{ duration: 3, delay: 0.5, ease: "easeOut" }}
-          className="absolute -bottom-40 -left-20 w-[800px] h-[800px] rounded-full blur-[150px] bg-accent-teal/20"
+          className="absolute -bottom-40 -left-20 w-[800px] h-[800px] rounded-full blur-[150px] bg-accent-rose/10"
         />
       </div>
 
@@ -127,7 +138,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 text-white/60 bg-white/5 text-xs font-bold uppercase tracking-widest mb-8"
           >
-            <Sparkles className="w-3 h-3 text-accent-teal" />
+            <Sparkles className="w-3 h-3 text-accent-rose" />
             Empowering the Next Generation of Creators
           </motion.span>
           
@@ -138,12 +149,12 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
               <>
                 Connecting Brands with <br />
                 <span className="relative inline-block">
-                  <span className="text-accent-teal italic">Authentic</span>
+                  <span className="text-accent-rose italic">Authentic</span>
                   <motion.div 
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ delay: 1.2, duration: 0.8 }}
-                    className="absolute -bottom-2 left-0 w-full h-1 rounded-full origin-left bg-accent-teal/30" 
+                    className="absolute -bottom-2 left-0 w-full h-1 rounded-full origin-left bg-accent-rose/30" 
                   />
                 </span>
                 {' '}
@@ -155,7 +166,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -40, opacity: 0 }}
                       transition={{ duration: 0.5, ease: "backOut" }}
-                      className="text-accent-teal"
+                      className="text-accent-rose"
                     >
                       {NICHES[nicheIndex]}
                     </motion.span>
@@ -186,13 +197,13 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-sans text-white/70"
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-sans text-[#F5F5F3]/75"
           >
             {siteData?.heroSubheadline || siteData?.tagline || (
               <>
                 {siteData?.agencyName || 'Joonexa Collective'} is a premium influencer marketing agency founded by {siteData?.founderName || 'Rimi'}. 
                 We bridge the gap between visionary brands and high-impact creators through 
-                <span className="mx-1 font-medium text-accent-teal highlight-teal">data-driven strategy</span> 
+                <span className="mx-1 font-medium text-accent-rose highlight-rose">data-driven strategy</span> 
                 and elegant storytelling.
               </>
             )}
@@ -209,7 +220,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                 onPageChange(Page.CONTACT);
                 navigate('/contact');
               }}
-              className="btn-primary group shadow-xl shadow-accent-rose/20 hover:shadow-accent-rose/40 transition-all duration-500"
+              className="btn-primary group shadow-xl shadow-accent-teal/20 hover:shadow-accent-teal/40 transition-all duration-500"
             >
               Start Your Project
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -219,7 +230,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                 onPageChange(Page.WORK);
                 navigate('/work');
               }}
-              className="btn-secondary group border-white/20 text-white hover:bg-white/10 hover:border-white/40 shadow-lg transition-all duration-500"
+              className="btn-secondary group shadow-lg shadow-accent-rose/10 hover:shadow-accent-rose/20 transition-all duration-500"
             >
               View Our Work
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />

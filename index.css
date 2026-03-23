@@ -32,7 +32,7 @@
 
 @layer components {
   .btn-primary {
-    background-color: #BE6A7A !important;
+    background-color: #1A5F5F !important;
     color: white !important;
     border-radius: 22px !important;
     padding: 12px 28px !important;
@@ -49,9 +49,9 @@
   }
   
   .btn-primary:hover {
-    background-color: #A95C6B !important;
+    background-color: #2E7D79 !important;
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(190, 106, 122, 0.25), 0 10px 10px -5px rgba(190, 106, 122, 0.1) !important;
+    box-shadow: 0 20px 25px -5px rgba(46, 125, 121, 0.25), 0 10px 10px -5px rgba(46, 125, 121, 0.1) !important;
   }
 
   .btn-case-study {
@@ -101,8 +101,8 @@
 
   .btn-secondary {
     background-color: transparent !important;
-    color: #BE6A7A !important;
-    border: 2px solid #BE6A7A !important;
+    color: #E8A9A9 !important;
+    border: 2px solid #E8A9A9 !important;
     border-radius: 22px !important;
     padding: 12px 28px !important;
     font-weight: 600 !important;
@@ -116,10 +116,10 @@
   }
 
   .btn-secondary:hover {
-    background-color: #BE6A7A !important;
+    background-color: #E8A9A9 !important;
     color: white !important;
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 10px 15px -3px rgba(232, 169, 169, 0.2), 0 4px 6px -2px rgba(232, 169, 169, 0.1) !important;
   }
 }
 
@@ -166,7 +166,7 @@
     @apply -translate-y-2 shadow-2xl;
   }
 
-  .bg-luxury-dark {
+  .bg-hero-luxury {
     background: linear-gradient(
       135deg,
       #050506 0%,
@@ -181,16 +181,16 @@
   .rose-gold-glow {
     background: radial-gradient(
       circle at 100% 100%,
-      rgba(207, 165, 141, 0.25),
+      rgba(207, 165, 141, 0.12),
       transparent 60%
     );
   }
 
-  .teal-radial-overlay {
+  .teal-radial-depth {
     background: radial-gradient(
-      circle at 40% 50%,
-      rgba(31, 95, 91, 0.25),
-      transparent 65%
+      circle at 30% 50%,
+      rgba(46, 125, 121, 0.1),
+      transparent 60%
     );
   }
 
@@ -203,7 +203,7 @@
     height: 140px;
     background: linear-gradient(
       to bottom,
-      rgba(15, 61, 62, 0),
+      rgba(5, 5, 6, 0),
       #FAF9F7
     );
     pointer-events: none;
