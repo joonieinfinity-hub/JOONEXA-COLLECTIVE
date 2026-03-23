@@ -45,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
     <footer className="bg-transparent border-t border-accent-rose/10 py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
             <button 
               onClick={() => onPageChange(Page.HOME)}
               className="flex items-center gap-4 group mb-8"
@@ -120,7 +120,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-charcoal/20 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-12 border-t border-charcoal/20 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
           <p className="text-charcoal/40 text-[10px] font-sans uppercase tracking-widest">
             Minimalist. Modern. Aesthetic.
           </p>

@@ -57,7 +57,7 @@ const Trust: React.FC = () => {
               We've helped over 50+ brands redefine their digital presence and achieve sustainable growth through data-driven creativity and influencer partnerships.
             </p>
             
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
               <div className="relative">
                 <div className="text-5xl font-display font-bold text-charcoal mb-2">98%</div>
                 <p className="text-muted/60 text-xs font-bold uppercase tracking-widest font-sans">Client Satisfaction</p>
@@ -98,7 +98,7 @@ const Trust: React.FC = () => {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-6 mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                 <div className="p-6 rounded-[2rem] bg-gradient-to-br from-white to-bg-soft border border-charcoal/5 relative overflow-hidden group shadow-sm hover-lift">
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                     <Users className="w-12 h-12 text-accent-teal" />
@@ -262,7 +262,7 @@ const Trust: React.FC = () => {
           <p className="text-center text-muted/40 text-[11px] font-bold uppercase tracking-[0.5em] mb-16 font-sans">
             Global Enterprise Partners
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 opacity-40 grayscale hover:grayscale-0 transition-all duration-1000">
+          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-16 md:gap-32 opacity-40 grayscale hover:grayscale-0 transition-all duration-1000">
             {brands.map((brand, i) => (
               <motion.div 
                 key={i}

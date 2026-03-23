@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white/40 backdrop-blur-sm shadow-2xl shadow-accent-rose/5"
+            className="p-6 md:p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white/40 backdrop-blur-sm shadow-2xl shadow-accent-rose/5"
           >
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20">

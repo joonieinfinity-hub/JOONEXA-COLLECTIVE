@@ -106,7 +106,7 @@ const CreatorNetwork: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent opacity-70 group-hover:opacity-85 transition-opacity duration-500" />
               
-              <div className="absolute inset-0 p-12 flex flex-col justify-end">
+              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-accent-rose transition-all duration-500 group-hover:shadow-lg group-hover:shadow-accent-rose/30"

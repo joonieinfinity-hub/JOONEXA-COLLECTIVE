@@ -39,8 +39,8 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ projects, layout = 'grid' }) 
           >
             <Link to={`/case-studies/${project.slug}`} className="block">
               <div className={layout === 'featured' 
-                ? "relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-8 border border-black/5 shadow-lg shadow-black/5 group-hover:shadow-accent-rose/20 transition-all duration-700"
-                : "relative aspect-[16/10] rounded-[4rem] overflow-hidden mb-12 border border-black/5 shadow-2xl shadow-black/5 group-hover:shadow-[0_32px_64px_-16px_rgba(242,125,38,0.2)] transition-all duration-700"
+                ? "relative aspect-[16/10] rounded-3xl md:rounded-[2.5rem] overflow-hidden mb-6 md:mb-8 border border-black/5 shadow-lg shadow-black/5 group-hover:shadow-accent-rose/20 transition-all duration-700"
+                : "relative aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden mb-8 md:mb-12 border border-black/5 shadow-2xl shadow-black/5 group-hover:shadow-[0_32px_64px_-16px_rgba(242,125,38,0.2)] transition-all duration-700"
               }>
                 <motion.img 
                   src={project.image} 
@@ -71,13 +71,13 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ projects, layout = 'grid' }) 
                 </div>
               </div>
               
-              <div className={layout === 'featured' ? "px-4" : "px-10"}>
+              <div className={layout === 'featured' ? "px-2 md:px-4" : "px-4 md:px-10"}>
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex-1">
                     <p className="text-accent-teal text-[10px] font-black uppercase tracking-[0.3em] mb-3 font-sans">{project.brandName}</p>
                     <h3 className={layout === 'featured' 
-                      ? "text-2xl md:text-3xl font-display font-bold text-charcoal tracking-tight group-hover:text-accent-rose transition-colors duration-500"
-                      : "text-4xl lg:text-6xl font-display font-bold text-charcoal tracking-tighter group-hover:text-accent-rose transition-colors duration-500 leading-[0.9]"
+                      ? "text-xl md:text-3xl font-display font-bold text-charcoal tracking-tight group-hover:text-accent-rose transition-colors duration-500"
+                      : "text-2xl sm:text-4xl lg:text-6xl font-display font-bold text-charcoal tracking-tighter group-hover:text-accent-rose transition-colors duration-500 leading-tight md:leading-[0.9]"
                     }>
                       {project.projectName}
                     </h3>

@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 overflow-hidden bg-hero-luxury text-[#F5F5F3] hero-fade-out">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 md:pt-32 overflow-hidden bg-hero-luxury text-[#F5F5F3] hero-fade-out">
       {/* Rose Gold Glow */}
       <motion.div 
         animate={{ 
@@ -142,7 +142,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
             Empowering the Next Generation of Creators
           </motion.span>
           
-          <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tight mb-8 leading-[1.1] text-[#F5F5F3]">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl font-display font-bold tracking-tight mb-8 leading-[1.1] text-[#F5F5F3]">
             {siteData?.heroHeadline ? (
               siteData.heroHeadline
             ) : (
@@ -289,17 +289,17 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
           className="relative max-w-5xl mx-auto"
         >
           <div className={`relative aspect-[16/9] rounded-[3rem] overflow-hidden border backdrop-blur-sm p-8 transition-colors duration-700 ${isDarkMode ? 'bg-white/5 border-white/10 shadow-accent-teal/10' : 'bg-white/80 border-accent-rose/10 shadow-accent-rose/10 shadow-2xl'}`}>
-            <div className={`w-full h-full rounded-2xl overflow-hidden relative grid grid-cols-12 gap-6 p-6 ${isDarkMode ? 'bg-charcoal/50' : 'bg-bg-soft/50'}`}>
+            <div className={`w-full h-full rounded-2xl overflow-hidden relative grid grid-cols-1 md:grid-cols-12 gap-6 p-4 md:p-6 ${isDarkMode ? 'bg-charcoal/50' : 'bg-bg-soft/50'}`}>
               
               {/* Main Dashboard Area */}
-              <div className="col-span-8 space-y-6">
-                <div className={`h-48 rounded-3xl shadow-sm border p-6 relative overflow-hidden transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
+              <div className="md:col-span-8 space-y-6">
+                <div className={`h-auto md:h-48 rounded-3xl shadow-sm border p-4 md:p-6 relative overflow-hidden transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isDarkMode ? 'bg-accent-teal/20' : 'bg-accent-teal/10'}`}>
                         <TrendingUp className="w-5 h-5 text-accent-teal" />
                       </div>
-                      <div>
+                      <div className="text-left">
                         <div className={`text-[10px] font-bold uppercase tracking-widest ${isDarkMode ? 'text-white/40' : 'text-muted/50'}`}>Campaign Reach</div>
                         <div className={`text-xl font-display font-bold ${isDarkMode ? 'text-white' : 'text-charcoal'}`}>1.2M+ Views</div>
                       </div>
@@ -309,7 +309,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                       <div className="w-2 h-2 rounded-full bg-accent-teal/30" />
                     </div>
                   </div>
-                  <div className="h-24 flex items-end gap-2">
+                  <div className="h-20 md:h-24 flex items-end gap-1.5 md:gap-2">
                     {[40, 70, 45, 90, 65, 80, 55, 95, 75, 85].map((h, i) => (
                       <motion.div 
                         key={i}
@@ -322,8 +322,8 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                  <div className={`h-40 rounded-3xl shadow-sm border p-6 transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className={`h-auto md:h-40 rounded-3xl shadow-sm border p-6 transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
                     <div className="flex items-center gap-3 mb-4">
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-accent-rose/20' : 'bg-accent-rose/10'}`}>
                         <Users className="w-4 h-4 text-accent-rose" />
@@ -347,7 +347,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                       />
                     </div>
                   </div>
-                  <div className={`h-40 rounded-3xl shadow-sm border p-6 transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
+                  <div className={`h-auto md:h-40 rounded-3xl shadow-sm border p-6 transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
                     <div className="flex items-center gap-3 mb-4">
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-accent-teal/20' : 'bg-accent-teal/10'}`}>
                         <Target className="w-4 h-4 text-accent-teal" />
@@ -364,7 +364,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
               </div>
 
               {/* Sidebar Area */}
-              <div className="col-span-4 space-y-6">
+              <div className="md:col-span-4 space-y-6">
                 <div className={`h-full rounded-3xl border p-6 flex flex-col justify-between transition-colors duration-700 ${isDarkMode ? 'bg-accent-teal/10 border-accent-teal/20' : 'bg-accent-teal/5 border-accent-teal/10'}`}>
                   <div>
                     <div className="text-xs font-bold text-accent-teal uppercase tracking-widest mb-6">Live Feed</div>
@@ -380,7 +380,7 @@ const Hero: React.FC<HeroProps> = ({ onPageChange }) => {
                       ))}
                     </div>
                   </div>
-                  <div className={`p-4 rounded-2xl shadow-sm border transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
+                  <div className={`p-4 rounded-2xl shadow-sm border mt-6 transition-colors duration-700 ${isDarkMode ? 'bg-charcoal border-white/5' : 'bg-white border-accent-rose/5'}`}>
                     <div className={`text-[10px] font-bold mb-2 ${isDarkMode ? 'text-white/40' : 'text-muted'}`}>ROI Prediction</div>
                     <div className="text-lg font-display font-bold text-accent-rose">4.2x</div>
                   </div>

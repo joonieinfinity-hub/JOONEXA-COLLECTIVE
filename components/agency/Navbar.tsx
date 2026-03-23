@@ -147,37 +147,36 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-bg-soft/98 backdrop-blur-2xl md:hidden flex flex-col"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] bg-white md:hidden flex flex-col"
           >
-            {/* Close button area - to match navbar height */}
-            <div className="h-24 flex items-center justify-end px-6">
+            {/* Mobile Nav Header */}
+            <div className="h-20 flex items-center justify-between px-6 border-b border-charcoal/5">
+              <span className="font-display font-bold tracking-tighter text-xl text-charcoal">
+                {siteData?.agencyName?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
+              </span>
               <button 
                 className="text-charcoal p-2 hover:text-accent-rose transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <X size={32} />
+                <X size={28} />
               </button>
             </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6">
+            <div className="flex-1 flex flex-col items-start justify-center gap-2 px-10">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.page}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ 
-                    delay: i * 0.08,
-                    type: "spring",
-                    damping: 20,
-                    stiffness: 100
-                  }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ delay: i * 0.05 }}
                   onClick={() => handleLinkClick(link.page, link.path)}
-                  className={`text-5xl font-display font-bold uppercase tracking-tighter py-3 px-8 w-full text-center transition-all active:scale-95 ${
-                    currentPage === link.page ? 'text-accent-rose' : 'text-charcoal hover:text-accent-teal'
+                  className={`text-4xl font-display font-bold uppercase tracking-tighter py-2 w-full text-left transition-all active:scale-95 ${
+                    currentPage === link.page ? 'text-accent-rose' : 'text-charcoal'
                   }`}
                 >
                   {link.name}
@@ -185,15 +184,15 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               ))}
               
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ delay: navLinks.length * 0.08 + 0.1 }}
-                className="mt-12 w-full max-w-xs"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: navLinks.length * 0.05 + 0.1 }}
+                className="mt-10 w-full"
               >
                 <button 
                   onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-                  className="w-full btn-nav-cta text-xl py-5 shadow-xl shadow-accent-rose/20"
+                  className="w-full btn-nav-cta text-lg py-4 shadow-xl shadow-accent-rose/10"
                 >
                   Start Your Project
                 </button>
@@ -201,22 +200,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             </div>
 
             {/* Mobile Menu Footer */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.6 }}
-              className="p-12 border-t border-charcoal/5 flex flex-col items-center gap-4"
-            >
+            <div className="p-10 border-t border-charcoal/5 flex flex-col items-start gap-4">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted/40 font-sans">
-                {siteData?.agencyName || 'Joonexa Collective'}
+                {siteData?.contactEmail || 'hello@joonexa-collective.com'}
               </p>
-              <div className="flex gap-6">
-                <div className="w-1 h-1 rounded-full bg-accent-rose" />
-                <div className="w-1 h-1 rounded-full bg-accent-teal" />
-                <div className="w-1 h-1 rounded-full bg-charcoal/20" />
+              <div className="flex gap-4">
+                <div className="w-8 h-8 rounded-full bg-bg-soft flex items-center justify-center text-charcoal/40 hover:text-accent-rose transition-colors">
+                  <ChevronRight size={14} />
+                </div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

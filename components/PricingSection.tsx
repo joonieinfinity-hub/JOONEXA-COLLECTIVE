@@ -40,7 +40,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onPageChange }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-8xl font-display font-bold tracking-tight text-charcoal mb-8"
+            className="text-4xl sm:text-6xl md:text-8xl font-display font-bold tracking-tight text-charcoal mb-8"
           >
             Invest in your <span className="text-accent-rose italic">Growth</span>
           </motion.h2>
@@ -63,9 +63,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onPageChange }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`p-10 rounded-[3rem] border transition-all duration-700 flex flex-col relative overflow-hidden ${
+              className={`p-8 md:p-10 rounded-[3rem] border transition-all duration-700 flex flex-col relative overflow-hidden ${
                 index === 1 
-                  ? 'bg-charcoal border-accent-rose scale-105 z-10 shadow-3xl shadow-accent-rose/10' 
+                  ? 'bg-charcoal border-accent-rose md:scale-105 z-10 shadow-3xl shadow-accent-rose/10' 
                   : 'bg-white border-charcoal/5 hover:border-accent-rose/20'
               }`}
             >

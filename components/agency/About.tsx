@@ -90,7 +90,7 @@ const About: React.FC = () => {
               We believe in the power of authentic storytelling and data-driven strategy. Our mission is to bridge the gap between brands and their audiences through innovative digital experiences.
             </p>
             
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div>
                 <h4 className="text-4xl font-display font-bold text-charcoal mb-2">{siteData?.analytics?.brands || '50+'}</h4>
                 <p className="text-muted/40 text-xs font-bold uppercase tracking-widest font-sans">Brands Scaled</p>
