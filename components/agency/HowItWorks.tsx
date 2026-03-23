@@ -35,7 +35,7 @@ const STEPS = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section id="how-it-works" className="py-32 px-6 bg-white">
+    <section id="how-it-works" className="py-32 px-6 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <span className="text-accent-teal text-xs font-bold uppercase tracking-widest mb-4 inline-block">The Process</span>

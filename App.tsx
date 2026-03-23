@@ -4,7 +4,7 @@
 */
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Routes, Route, useLocation, useNavigate, Link } from 'react-router-dom';
 import { Page } from './types';
@@ -15,7 +15,10 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 // Components
 import Navbar from './components/agency/Navbar';
 import Footer from './components/agency/Footer';
-import Hero from './components/agency/Hero';
+
+// Lazy loaded components
+const Hero = lazy(() => import('./components/agency/Hero'));
+
 import Trust from './components/agency/Trust';
 import Services from './components/agency/Services';
 import Work from './components/agency/Work';
@@ -107,7 +110,13 @@ const App: React.FC = () => {
           title="Joonexa Collective | Premium Influencer Marketing Agency"
           description="Elevating brands through strategic influencer partnerships and high-conversion digital experiences. Founded by Rimi."
         />
-        <Hero onPageChange={handlePageChange} />
+        <Suspense fallback={
+          <div className="min-h-screen bg-bg-soft flex items-center justify-center">
+            <div className="w-12 h-12 border-4 border-accent-rose/20 border-t-accent-rose rounded-full animate-spin" />
+          </div>
+        }>
+          <Hero onPageChange={handlePageChange} />
+        </Suspense>
         <Trust />
         <HowItWorks />
         <div id="services">
@@ -205,6 +214,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-bg-soft text-charcoal selection:bg-accent-rose selection:text-white">
+      <div className="grain-overlay" />
       <CustomCursor />
       <Navbar currentPage={currentPage} onPageChange={handlePageChange} />
       

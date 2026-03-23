@@ -42,7 +42,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   };
 
   return (
-    <footer className="bg-white border-t border-accent-rose py-24 px-6">
+    <footer className="bg-transparent border-t border-accent-rose/10 py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="md:col-span-2">
@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
                   <img 
                     src={siteData.logo} 
                     alt={siteData.agencyName} 
-                    className="w-full h-full object-cover rounded-full"
+                    className="w-full h-full object-contain"
                     referrerPolicy="no-referrer"
                   />
                 </div>

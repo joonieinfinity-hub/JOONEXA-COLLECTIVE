@@ -80,7 +80,7 @@ const ServiceCard: React.FC<{ service: Service; index: number; onPageChange: (pa
         y: { duration: 0.8, ease: "easeOut" }
       }}
       onClick={() => onPageChange(Page.SERVICES)}
-      className="group p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white hover:bg-white hover:border-accent-rose/40 hover:shadow-[0_30px_60px_-12px_rgba(232,169,169,0.15)] transition-all duration-500 cursor-pointer relative z-10"
+      className="group p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white/40 backdrop-blur-sm hover:bg-white/60 hover:border-accent-rose/40 hover:shadow-[0_30px_60px_-12px_rgba(232,169,169,0.15)] transition-all duration-500 cursor-pointer relative z-10"
     >
       <div className="w-14 h-14 rounded-2xl bg-accent-rose/10 flex items-center justify-center mb-8 group-hover:bg-accent-rose group-hover:text-white transition-all duration-500">
         <Icon className="w-7 h-7 text-accent-rose group-hover:text-white transition-all duration-500" />

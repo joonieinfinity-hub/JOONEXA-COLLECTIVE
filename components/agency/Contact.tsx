@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-8">
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-accent-rose/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm border border-accent-rose/10 flex items-center justify-center">
                   <Mail className="w-5 h-5 text-accent-rose" />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-accent-rose/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm border border-accent-rose/10 flex items-center justify-center">
                   <User className="w-5 h-5 text-accent-rose" />
                 </div>
                 <div>
@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white shadow-2xl shadow-accent-rose/5"
+            className="p-10 rounded-[2.5rem] border border-accent-rose/10 bg-white/40 backdrop-blur-sm shadow-2xl shadow-accent-rose/5"
           >
             {isSubmitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20">

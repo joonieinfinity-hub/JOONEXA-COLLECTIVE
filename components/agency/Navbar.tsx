@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               <img 
                 src={siteData.logo} 
                 alt={siteData.agencyName} 
-                className="w-full h-full object-cover rounded-full relative z-10"
+                className="w-full h-full object-contain relative z-10"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(242,125,38,0.1)] group-hover:shadow-[inset_0_0_30px_rgba(242,125,38,0.2)] transition-all duration-500" />

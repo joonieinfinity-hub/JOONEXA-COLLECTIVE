@@ -89,7 +89,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Founder Section */}
-        <div className="bg-white border border-accent-rose/10 rounded-[3rem] p-12 md:p-20 shadow-xl shadow-accent-rose/5 mb-32">
+        <div className="bg-white/40 backdrop-blur-sm border border-accent-rose/10 rounded-[3rem] p-12 md:p-20 shadow-xl shadow-accent-rose/5 mb-32">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-center">
             <div className="md:col-span-1">
               <div className="aspect-square rounded-full overflow-hidden border-4 border-accent-rose/20 p-2">
