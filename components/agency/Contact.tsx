@@ -39,8 +39,15 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send to rimi@joonexa-collective.com
-    console.log('Form submitted:', formState);
+    const subject = encodeURIComponent(`New Project Inquiry from ${formState.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formState.name}\n` +
+      `Email: ${formState.email}\n` +
+      `Brand: ${formState.brand}\n` +
+      `Budget: ${formState.budget}\n\n` +
+      `Message:\n${formState.message}`
+    );
+    window.location.href = `mailto:hello@joonexa-collective.com?subject=${subject}&body=${body}`;
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 8000);
   };

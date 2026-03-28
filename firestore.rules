@@ -8,8 +8,7 @@ service cloud.firestore {
     
     function isFounder() {
       return isAuthenticated() && 
-        (request.auth.token.email == "propeciodraws@gmail.com" || 
-         request.auth.token.email == "rimi@joonexa-collective.com");
+        request.auth.token.email == "rimi@joonexa-collective.com";
     }
 
     // Site Settings - Publicly readable, only founders can edit

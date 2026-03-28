@@ -116,7 +116,13 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onPageChange }) => {
               </div>
 
               <button 
-                onClick={() => onPageChange(Page.CONTACT)}
+                onClick={() => {
+                  if (tier.cta === 'Book a Strategy Call') {
+                    window.location.href = 'mailto:hello@joonexa-collective.com?subject=Strategy Call Inquiry';
+                  } else {
+                    onPageChange(Page.CONTACT);
+                  }
+                }}
                 className={`w-full ${index === 1 ? 'btn-primary' : 'btn-secondary'}`}
               >
                 {tier.cta} <ArrowRight className="w-4 h-4" />

@@ -1,37 +1,42 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Lock, ArrowRight, Loader2 } from 'lucide-react';
+import { Lock, ArrowRight, Loader2, Mail, Key } from 'lucide-react';
 import { auth } from '../../firebase';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleGoogleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoading(true);
     setError('');
 
+    // Strict check for the specified founder email
+    if (email !== "rimi@joonexa-collective.com") {
+      setError('Unauthorized access. Only the founder can log in.');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      const user = userCredential.user;
-      
-      // Check if it's the founder email
-      if (user.email === "propeciodraws@gmail.com" || user.email === "rimi@joonexa-collective.com") {
-        navigate('/founder/dashboard');
-      } else {
-        setError('Unauthorized access. Only the founder can log in.');
-        await auth.signOut();
-      }
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/founder/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
       if (err.code === 'auth/operation-not-allowed') {
-        setError('Google Sign-In is not enabled in the Firebase Console. Please enable it under Authentication > Sign-in method.');
+        setError('Email/Password login is not enabled in the Firebase Console. Please enable it under Authentication > Sign-in method.');
+      } else if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        setError('Invalid email or password. Please check your credentials.');
+      } else if (err.code === 'auth/too-many-requests') {
+        setError('Too many failed attempts. Please try again later.');
       } else {
-        setError('Authentication failed. Please try again.');
+        setError('Authentication failed. Please ensure your account is set up in Firebase.');
       }
     } finally {
       setLoading(false);
@@ -53,10 +58,36 @@ const Login: React.FC = () => {
           <p className="text-muted font-sans text-sm">Access the Joonexa Collective Studio</p>
         </div>
 
-        <div className="space-y-6">
-          <p className="text-center text-muted text-sm font-sans mb-6">
-            Please sign in with your authorized Google account to access the dashboard.
-          </p>
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Founder ID</label>
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
+              <input 
+                required
+                type="email" 
+                placeholder="rimi@joonexa-collective.com"
+                className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none focus:border-accent-teal transition-all font-sans"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-muted/40 ml-2 font-sans">Password</label>
+            <div className="relative">
+              <Key className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/20" />
+              <input 
+                required
+                type="password" 
+                placeholder="••••••••"
+                className="w-full bg-bg-soft border border-charcoal/5 rounded-2xl py-4 pl-12 pr-4 text-charcoal focus:outline-none focus:border-accent-teal transition-all font-sans"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
 
           {error && (
             <motion.p 
@@ -69,7 +100,7 @@ const Login: React.FC = () => {
           )}
 
           <button 
-            onClick={handleGoogleLogin}
+            type="submit"
             disabled={loading}
             className="w-full btn-primary flex items-center justify-center gap-3"
           >
@@ -77,12 +108,11 @@ const Login: React.FC = () => {
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
               <>
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-                Sign In with Google <ArrowRight className="w-4 h-4" />
+                Sign In to Studio <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
-        </div>
+        </form>
       </motion.div>
     </div>
   );

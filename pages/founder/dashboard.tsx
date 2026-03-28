@@ -32,7 +32,7 @@ const FounderDashboard: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && (currentUser.email === "propeciodraws@gmail.com" || currentUser.email === "rimi@joonexa-collective.com")) {
+      if (currentUser && currentUser.email === "rimi@joonexa-collective.com") {
         setUser(currentUser);
       } else {
         navigate('/login');

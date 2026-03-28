@@ -32,7 +32,7 @@
 
 @layer components {
   .btn-primary {
-    background-color: #1A5F5F !important;
+    background-color: #E8A9A9 !important;
     color: white !important;
     border-radius: 22px !important;
     padding: 12px 28px !important;
@@ -43,15 +43,15 @@
     justify-content: center;
     gap: 0.6rem;
     border: none !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 4px 14px 0 rgba(232, 169, 169, 0.3) !important;
     cursor: pointer;
     font-family: var(--font-sans);
   }
   
   .btn-primary:hover {
-    background-color: #2E7D79 !important;
+    background-color: #BE6A7A !important;
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(46, 125, 121, 0.25), 0 10px 10px -5px rgba(46, 125, 121, 0.1) !important;
+    box-shadow: 0 20px 30px rgba(232, 169, 169, 0.4) !important;
   }
 
   .btn-case-study {
@@ -219,12 +219,12 @@
   }
 
   .btn-nav-cta {
-    background-color: #CFA58D !important;
-    color: #050506 !important;
+    background-color: #E8A9A9 !important;
+    color: white !important;
     border-radius: 9999px !important;
     padding: 8px 20px !important;
     font-weight: 600 !important;
-    box-shadow: 0 4px 14px 0 rgba(207, 165, 141, 0.3) !important;
+    box-shadow: 0 4px 14px 0 rgba(232, 169, 169, 0.3) !important;
     transition: all 0.3s ease !important;
     border: none !important;
     display: inline-flex;
@@ -235,9 +235,9 @@
   }
 
   .btn-nav-cta:hover {
-    background-color: #e2c1ad !important;
+    background-color: #BE6A7A !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(207, 165, 141, 0.4) !important;
+    box-shadow: 0 6px 20px 0 rgba(232, 169, 169, 0.4) !important;
   }
 
   .grain-overlay {

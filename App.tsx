@@ -49,7 +49,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // Only allow founder email
-      if (currentUser && (currentUser.email === "propeciodraws@gmail.com" || currentUser.email === "rimi@joonexa-collective.com")) {
+      if (currentUser && currentUser.email === "rimi@joonexa-collective.com") {
         setUser(currentUser);
       } else {
         setUser(null);
