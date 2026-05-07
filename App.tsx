@@ -43,16 +43,22 @@ import SEO from './components/SEO';
 import projectsData from './data/projects.json';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check localStorage first for the secret code bypass
+    const isFounderAuth = localStorage.getItem('founderAuth') === 'true';
+    
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // Only allow founder email
-      if (currentUser && currentUser.email === "rimi@joonexa-collective.com") {
-        setUser(currentUser);
+      // Allow if Firebase user matches OR if secret code is present
+      if (
+        (currentUser && currentUser.email === "rimi@joonexa-collective.com") || 
+        isFounderAuth
+      ) {
+        setAuthorized(true);
       } else {
-        setUser(null);
+        setAuthorized(false);
       }
       setLoading(false);
     });
@@ -65,7 +71,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     </div>
   );
 
-  return user ? <>{children}</> : <Navigate to="/login" replace />;
+  return authorized ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
 import { getPortfolio } from './services/cmsService';
@@ -85,8 +91,10 @@ const App: React.FC = () => {
     else if (path === '/contact') setCurrentPage(Page.CONTACT);
     else if (path === '/creator-network') setCurrentPage(Page.CREATOR_NETWORK);
     
-    // Scroll to top on route change
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top on route change if no hash is present
+    if (!location.hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [location]);
 
   const handlePageChange = (page: Page) => {

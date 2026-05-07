@@ -26,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
 
   const handleCodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (secretCode === '1994RM') {
+    if (secretCode === 'RM1994') {
       localStorage.setItem('founderAuth', 'true');
       setIsModalOpen(false);
       navigate('/founder/dashboard');

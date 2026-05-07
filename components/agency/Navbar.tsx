@@ -49,20 +49,52 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
     { name: 'Contact', page: Page.CONTACT, path: '/contact' },
   ];
 
-  const handleLinkClick = (page: Page, path: string) => {
-    setIsMobileMenuOpen(false);
-    if (path.startsWith('/#')) {
-      if (location.pathname === '/') {
-        const id = path.substring(2);
+  useEffect(() => {
+    // Handle cross-page hash scrolling
+    if (location.pathname === '/' && location.hash) {
+      const id = location.hash.substring(1);
+      // Use a small timeout to ensure the DOM has rendered if we just navigated
+      setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, [location]);
+
+  const handleLinkClick = (page: Page, path: string) => {
+    setIsMobileMenuOpen(false);
+    
+    // Always navigate/update state
+    onPageChange(page);
+    
+    if (path.startsWith('/#')) {
+      const id = path.substring(2);
+      if (location.pathname === '/') {
+        // Smooth scroll if already on home
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
       } else {
         navigate(path);
       }
     } else {
-      onPageChange(page);
       navigate(path);
     }
   };

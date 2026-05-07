@@ -43,7 +43,7 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ projects, layout = 'grid' }) 
                 : "relative aspect-[16/10] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden mb-8 md:mb-12 border border-black/5 shadow-2xl shadow-black/5 group-hover:shadow-[0_32px_64px_-16px_rgba(242,125,38,0.2)] transition-all duration-700"
               }>
                 <motion.img 
-                  src={project.image} 
+                  src={project.image || null} 
                   alt={project.projectName}
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.1 }}

@@ -39,8 +39,16 @@ const CaseStudy: React.FC = () => {
   return (
     <div className="bg-bg-soft min-h-screen">
       <SEO 
-        title={`${project.projectName} | Case Study`}
+        title={`${project.projectName} | ${project.category} Case Study`}
         description={project.description}
+        keywords={[
+          project.projectName.toLowerCase(),
+          project.brandName.toLowerCase(),
+          project.category.toLowerCase(),
+          'case study',
+          'influencer marketing',
+          'digital strategy'
+        ]}
       />
       
       {/* Scroll Progress Bar */}
