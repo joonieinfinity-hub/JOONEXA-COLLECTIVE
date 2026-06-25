@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { Page } from '../../types';
@@ -17,6 +17,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
   const [siteData, setSiteData] = useState<any>(siteSettingsJson);
   const location = useLocation();
   const navigate = useNavigate();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const prevIsMobileMenuOpen = useRef(isMobileMenuOpen);
+
+  useEffect(() => {
+    // Return focus to the menu button when the mobile menu closes
+    if (prevIsMobileMenuOpen.current && !isMobileMenuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevIsMobileMenuOpen.current = isMobileMenuOpen;
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,8 +113,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/80 backdrop-blur-xl py-3 border-b border-accent-rose/10 shadow-sm nav-light' 
-          : 'bg-[#050506]/30 backdrop-blur-md py-5 nav-dark'
+          ? 'bg-white/80 backdrop-blur-xl py-2 md:py-3 border-b border-accent-rose/10 shadow-sm nav-light' 
+          : 'bg-[#050506]/30 backdrop-blur-md py-3 md:py-5 nav-dark'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -121,7 +131,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
               className={`relative rounded-full overflow-hidden border border-accent-rose/30 shadow-2xl shadow-accent-rose/10 bg-white p-0.5 group-hover:border-accent-rose/60 transition-all duration-300 ${
-                isScrolled ? 'w-10 h-10' : 'w-12 h-12 md:w-14 md:h-14'
+                isScrolled ? 'w-8 h-8 md:w-10 md:h-10' : 'w-10 h-10 md:w-14 md:h-14'
               }`}
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-accent-rose/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -168,10 +178,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-inherit"
+          ref={menuButtonRef}
+          className="md:hidden text-inherit p-1.5 focus:outline-none focus:ring-2 focus:ring-accent-rose focus:ring-offset-2 rounded-lg transition-all"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -183,22 +196,22 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[100] bg-white md:hidden flex flex-col"
+            className="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-2xl md:hidden flex flex-col"
           >
             {/* Mobile Nav Header */}
-            <div className="h-20 flex items-center justify-between px-6 border-b border-charcoal/5">
-              <span className="font-display font-bold tracking-tighter text-xl text-charcoal">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-white/5">
+              <span className="font-display font-bold tracking-tighter text-xl text-white">
                 {siteData?.agencyName?.toUpperCase() || 'JOONEXA'}<span className="text-accent-rose">.</span>
               </span>
               <button 
-                className="text-charcoal p-2 hover:text-accent-rose transition-colors"
+                className="text-white/60 p-2 hover:text-accent-rose transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <X size={28} />
+                <X size={24} />
               </button>
             </div>
 
-            <div className="flex-1 flex flex-col items-start justify-center gap-2 px-10">
+            <div className="flex-1 flex flex-col items-start justify-center gap-1 px-8">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.page}
@@ -207,8 +220,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
                   exit={{ opacity: 0, x: 10 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => handleLinkClick(link.page, link.path)}
-                  className={`text-4xl font-display font-bold uppercase tracking-tighter py-2 w-full text-left transition-all active:scale-95 ${
-                    currentPage === link.page ? 'text-accent-rose' : 'text-charcoal'
+                  className={`text-3xl font-display font-bold uppercase tracking-tighter py-3 w-full text-left transition-all active:scale-95 ${
+                    currentPage === link.page ? 'text-accent-rose' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -220,11 +233,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ delay: navLinks.length * 0.05 + 0.1 }}
-                className="mt-10 w-full"
+                className="mt-8 w-full"
               >
                 <button 
                   onClick={() => handleLinkClick(Page.CONTACT, '/contact')}
-                  className="w-full btn-nav-cta text-lg py-4 shadow-xl shadow-accent-rose/10"
+                  className="w-full btn-nav-cta text-base py-3.5 shadow-2xl shadow-accent-rose/20"
                 >
                   Start Your Project
                 </button>
@@ -232,12 +245,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onPageChange }) => {
             </div>
 
             {/* Mobile Menu Footer */}
-            <div className="p-10 border-t border-charcoal/5 flex flex-col items-start gap-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted/40 font-sans">
+            <div className="p-8 border-t border-white/5 flex flex-col items-start gap-3">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/20 font-sans">
                 {siteData?.contactEmail || 'hello@joonexa-collective.com'}
               </p>
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-bg-soft flex items-center justify-center text-charcoal/40 hover:text-accent-rose transition-colors">
+                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/20 hover:text-accent-teal transition-colors">
                   <ChevronRight size={14} />
                 </div>
               </div>
